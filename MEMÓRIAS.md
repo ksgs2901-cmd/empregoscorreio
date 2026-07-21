@@ -1,3 +1,3 @@
 # Bugs rastreados
 
-- 2026-07-21 — Páginas principais: scripts e layouts inválidos quebravam interações, responsividade e o formulário, que selecionava o elemento errado e redirecionava dados para destinos ausentes — https://github.com/ksgs2901-cmd/empregoscorreio/pull/1 — aberto
+- 2026-07-21 — Projeto estático: scripts, assets, layouts e formulário inválidos quebravam runtime e não havia build reproduzível nem validação do artefato de deploy — https://github.com/ksgs2901-cmd/empregoscorreio/pull/1 — aberto

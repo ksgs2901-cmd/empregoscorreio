@@ -7,7 +7,7 @@ import {
   rmSync,
   writeFileSync
 } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { dirname, relative, resolve, join, sep } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = resolve('.');
@@ -88,8 +88,12 @@ function rewriteCssFontReferences(directory) {
       rewriteCssFontReferences(path);
     } else if (entry.isFile() && entry.name.endsWith('.css')) {
       const source = readFileSync(path, 'utf8');
+      const fontPrefix = relative(dirname(path), fontDirectory).split(sep).join('/') || '.';
       const updated = source
-        .replace(/\/fonts\/(rawline-(?:400i?|500|600|700|900))\.woff2/g, '/fonts/$1.woff')
+        .replace(
+          /\/fonts\/(rawline-(?:400i?|500|600|700|900))\.woff2/g,
+          `${fontPrefix}/$1.woff`
+        )
         .replace(/format\\((['\"])woff2\\1\\)/g, 'format(\"woff\")');
       if (updated !== source) writeFileSync(path, updated);
     }

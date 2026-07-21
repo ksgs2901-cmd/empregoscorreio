@@ -14,7 +14,6 @@
     <script src="../jquery-3.6.0.min.js"></script>
     <!-- External CSS -->
     <script src="../npm/qrcode%401.5.0/build/qrcode.min.js"></script>
-    <link rel="stylesheet" href="../ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="../ajax/libs/font-awesome/5.15.3/css/all.min.css">
  <script type="text/javascript">
         // Verifica o dispositivo e redireciona antes de carregar outros recursos
@@ -23,21 +22,6 @@
         }
     </script>
 
-<script>
-  window.pixelId = "68900408c79a2a1bfd8089b8";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
-  <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         tailwind.config = {
@@ -501,6 +485,16 @@
 $(document).ready(function () {
     let transactionId = null;
     let paymentCheckInterval = null;
+    const paymentApiBase = typeof window.PAYMENT_API_BASE === 'string'
+        ? window.PAYMENT_API_BASE.replace(/\/+$/, '')
+        : '';
+
+    if (!paymentApiBase) {
+        $("#area-pagamento-pix").html(
+            "<p>A integração de pagamento não está configurada neste build estático.</p>"
+        );
+        return;
+    }
 
     // ⭐ INÍCIO: FUNÇÕES AUXILIARES PARA CAPTURA DE UTMs
     function getCookie(name) {
@@ -559,7 +553,7 @@ $(document).ready(function () {
 
     // --- 2. CHAMADA AJAX PARA CRIAR O PAGAMENTO PIX ---
     $.ajax({
-        url: "/pagamento/pagamento-pix/getPayment.php",
+        url: `${paymentApiBase}/getPayment.php`,
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(pagueXPayload),
@@ -589,7 +583,7 @@ $(document).ready(function () {
                 
                 console.log('✅ Enviando payload de LEAD para utmify-pendente.php:', payloadPendente);
                 $.ajax({
-                    url: "/pagamento/pagamento-pix/utmify-pendente.php",
+                    url: `${paymentApiBase}/utmify-pendente.php`,
                     method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(payloadPendente),
@@ -615,7 +609,7 @@ $(document).ready(function () {
             if (!transactionId) return;
 
             $.ajax({
-                url: `/pagamento/pagamento-pix/verifyPayment.php?id=${transactionId}`,
+                url: `${paymentApiBase}/verifyPayment.php?id=${transactionId}`,
                 method: "GET",
                 success: function (response) {
                     const status = response.status ? response.status.toLowerCase() : '';
@@ -637,7 +631,7 @@ $(document).ready(function () {
 
                         console.log('✅ Enviando payload de CONVERSÃO para utmify.php:', payloadConfirmado);
                         $.ajax({
-                            url: "/pagamento/pagamento-pix/utmify.php",
+                            url: `${paymentApiBase}/utmify.php`,
                             method: "POST",
                             contentType: "application/json",
                             data: JSON.stringify(payloadConfirmado),

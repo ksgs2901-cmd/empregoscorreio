@@ -16,6 +16,11 @@ criados pelo processo de build.
 Sem esses serviços, a página estática deve apresentar seu tratamento de erro e
 não consegue criar ou confirmar transações.
 
+Para habilitar uma implementação fornecida pelo proprietário, defina
+`window.PAYMENT_API_BASE` antes do script da página com a URL-base que expõe os
+quatro arquivos acima. Sem essa configuração, nenhuma requisição é iniciada e a
+página informa que a integração está indisponível.
+
 ## Cadastro
 
 `cadastro/index.html` contém uma integração opcional com

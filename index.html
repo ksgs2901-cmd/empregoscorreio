@@ -1409,7 +1409,7 @@
             // Verificar se é fim de semana E data futura
             if (this.isWeekend(date) && this.isFutureDate(date)) {
               dayCell.classList.add('available');
-              dayCell.addEventListener('click', () => this.selectDate(day));
+              dayCell.addEventListener('click', (event) => this.selectDate(day, event.currentTarget));
             } else {
               dayCell.classList.add('disabled');
             }
@@ -1434,14 +1434,14 @@
           return dayCell;
         }
 
-        selectDate(day) {
+        selectDate(day, dayCell) {
           // Remove seleção anterior
           document.querySelectorAll('.day-cell.selected').forEach(cell => {
             cell.classList.remove('selected');
           });
 
           // Adiciona seleção atual
-          event.target.classList.add('selected');
+          dayCell.classList.add('selected');
 
           this.selectedDate = new Date(this.currentYear, this.currentMonth, day);
 

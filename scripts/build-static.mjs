@@ -1,4 +1,12 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync
+} from 'node:fs';
 import { resolve, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
@@ -28,6 +36,17 @@ for (const entry of readdirSync(root, { withFileTypes: true })) {
 
 writeFileSync(join(output, '.nojekyll'), '');
 
+const fontDirectory = join(output, 'fonts');
+mkdirSync(fontDirectory, { recursive: true });
+for (const font of ['400', '400i', '500', '600', '700', '900']) {
+  cpSync(
+    join(root, 's', '19714', `rawline-${font}.woff`),
+    join(fontDirectory, `rawline-${font}.woff`)
+  );
+}
+
+rewriteCssFontReferences(output);
+
 const validation = spawnSync(
   process.execPath,
   [join(root, 'scripts', 'check-static.mjs'), output],
@@ -47,3 +66,18 @@ if (!existsSync(join(output, 'index.html'))) {
 }
 
 console.log('Static production artifact created in dist/.');
+
+function rewriteCssFontReferences(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) {
+      rewriteCssFontReferences(path);
+    } else if (entry.isFile() && entry.name.endsWith('.css')) {
+      const source = readFileSync(path, 'utf8');
+      const updated = source
+        .replace(/\/fonts\/(rawline-(?:400i?|500|600|700|900))\.woff2/g, '/fonts/$1.woff')
+        .replace(/format\\((['\"])woff2\\1\\)/g, 'format(\"woff\")');
+      if (updated !== source) writeFileSync(path, updated);
+    }
+  }
+}

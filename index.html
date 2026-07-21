@@ -1,0 +1,1840 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/vite.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concurso Público Correios 2025</title>
+  <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
+  <script src="../3.4-5.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gov-blue': '#1351B4',
+            'gov-dark': '#071D41',
+            'gov-darker': '#04102A'
+          }
+        }
+      }
+    }
+  </script>
+  <script src="../ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <link href="../npm/remixicon%403.5.0/fonts/remixicon-5.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ffffff, #e2f4ff);
+    }
+
+    .box-nome {
+      border: 1px solid #E5E7EB;
+      padding: 16px;
+      margin: 8px 0;
+      cursor: pointer;
+      background-color: #F9FAFB;
+      color: #1F2937;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    .box-nome i {
+      margin-right: 12px;
+      font-size: 1.25rem;
+      color: #4B5563;
+    }
+
+    .box-nome:hover {
+      background-color: #F3F4F6;
+      border-color: #D1D5DB;
+    }
+
+    .selected {
+      background-color: #0066CC;
+      color: white;
+      border-color: #0066CC;
+    }
+
+    .selected i {
+      color: white;
+    }
+
+    .erro {
+      background-color: #EF4444;
+      color: white;
+      border-color: #EF4444;
+      animation: shake 0.5s;
+    }
+
+    .erro i {
+      color: white;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translateX(-5px);
+      }
+
+      20%,
+      40%,
+      60%,
+      80% {
+        transform: translateX(5px);
+      }
+    }
+
+    .breadcrumb-item:after {
+      content: ">";
+      margin: 0 0.5rem;
+      color: #6B7280;
+    }
+
+    .breadcrumb-item:last-child:after {
+      display: none;
+    }
+
+    .box-nome {
+      border: 1px solid #f3f3f3;
+      padding: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      background-color: #f9fafc;
+      font-weight: bold;
+      color: #000e1c;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .box-nome:hover {
+      background-color: #f3f3f3;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .selected {
+      background-color: #66ccff;
+      color: white;
+      border-color: #0099cc;
+    }
+
+    .erro {
+      background-color: #ff6666;
+      color: white;
+      border-color: #cc0000;
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translateX(-5px);
+      }
+
+      20%,
+      40%,
+      60%,
+      80% {
+        transform: translateX(5px);
+      }
+    }
+
+    /* Eligibility questionnaire specific styling */
+    .eligibility-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 24px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .eligibility-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+
+    .eligibility-title {
+      color: #1E3A8A;
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 1.2;
+      margin-right: 20px;
+      padding: 0 10px;
+    }
+
+    .eligibility-subtitle {
+      color: #4B5563;
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 16px 0;
+    }
+
+    .question-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1F2937;
+      margin-bottom: 16px;
+    }
+
+    .detran-logo {
+      max-height: 30px;
+      margin-top: 8px;
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .loading-content {
+      text-align: center;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 90%;
+      width: 400px;
+    }
+
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .loading-text {
+      font-size: 1.25rem;
+      color: #1E3A8A;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .loading-subtext {
+      color: #6B7280;
+      font-size: 0.875rem;
+    }
+
+    /* Taxa info box */
+    .taxa-info-box {
+      background-color: #ebf5ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 0 24px 24px 24px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .taxa-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .taxa-icon {
+      background-color: #0066CC;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .taxa-title {
+      color: #0B396B;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .taxa-description {
+      color: #354765;
+      font-size: 0.938rem;
+      margin-bottom: 12px;
+    }
+
+    .taxa-price {
+      color: #0B396B;
+      font-weight: 700;
+    }
+
+    .taxa-list {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .taxa-list li {
+      color: #354765;
+      margin-bottom: 6px;
+    }
+
+    .taxa-footnote {
+      color: #354765;
+      font-size: 0.875rem;
+      font-style: italic;
+    }
+
+    /* CNH Card Image styling */
+    .cnh-card-container {
+      margin: 20px 24px;
+      text-align: center;
+      perspective: 1000px;
+    }
+
+    .cnh-card-image {
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 100%;
+      height: auto;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .cnh-card-image:hover {
+      transform: scale(1.02) rotate(1deg);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15),
+        0 0 15px rgba(0, 102, 204, 0.15);
+      filter: brightness(1.05);
+    }
+
+    .cnh-card-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 102, 204, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cnh-card-image:hover::after {
+      opacity: 1;
+    }
+
+    .cnh-card-caption {
+      margin-top: 12px;
+      font-size: 0.875rem;
+      color: #6B7280;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .cnh-card-container:hover .cnh-card-caption {
+      color: #2563EB;
+    }
+
+    /* Status Box Styling */
+    .status-box {
+      background-color: #e2f4ff;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 24px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #d0e8ff;
+    }
+
+    .status-box-header {
+      margin-bottom: 16px;
+    }
+
+    .status-box-title {
+      font-size: 1.25rem;
+      color: #0B396B;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .status-box-title2 {
+      font-size: 1.15rem;
+      color: #0B396B;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .main-title {
+      font-size: 1.5rem;
+      color: #1E3A8A;
+      font-weight: 700;
+      margin: 24px 24px 16px 24px;
+      text-align: center;
+    }
+
+    .congratulation-message {
+      color: #0B396B;
+      font-size: 1.1rem;
+      margin: 0 24px 24px 24px;
+      text-align: left;
+      /* Alinhamento à esquerda */
+      line-height: 1.5;
+    }
+
+    .status-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #d0e8ff;
+    }
+
+    .status-item:last-child {
+      border-bottom: none;
+    }
+
+    .status-item-label {
+      color: #0B396B;
+      font-weight: 500;
+      width: 40%;
+      /* Largura fixa para o label */
+    }
+
+    .status-item-value {
+      color: #1E3A8A;
+      font-weight: 600;
+      width: 60%;
+      /* Largura para o valor */
+      text-align: right;
+      /* Alinhamento à direita */
+    }
+
+    .status-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .status-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .step-complete {
+      background-color: #10B981;
+    }
+
+    .step-incomplete {
+      background-color: #EF4444;
+    }
+
+    .step-text {
+      flex-grow: 1;
+      color: #1F2937;
+      font-weight: 500;
+    }
+
+    /* Novos estilos para os ícones de loading */
+    .loading-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+      position: relative;
+    }
+
+    .loading-circle {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #e0e0e0;
+      border-top: 2px solid #9b87f5;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .status-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+
+    .status-icon.complete {
+      background-color: #10B981;
+      color: white;
+      display: flex;
+    }
+
+    .status-icon.error {
+      background-color: #ea384c;
+      color: white;
+      display: flex;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .info-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #3B82F6;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
+    .info-tooltip {
+      position: absolute;
+      width: 220px;
+      background-color: #e2f4ff;
+      color: #0B396B;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      bottom: 30px;
+      right: 30px;
+      font-size: 0.875rem;
+      border: 1px solid #bed8f1;
+      display: none;
+    }
+
+    .info-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 10px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid #e2f4ff;
+    }
+
+    .info-icon:hover .info-tooltip {
+      display: block;
+    }
+
+    .btn-schedule {
+      background-color: #0066CC;
+      color: white;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-weight: 600;
+      margin-top: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+
+    .btn-schedule:hover {
+      background-color: #0055AA;
+      transform: translateY(-2px);
+    }
+
+    .btn-schedule.scheduled {
+      background-color: #10B981;
+      cursor: default;
+    }
+
+    .btn-schedule.scheduled:hover {
+      transform: none;
+      background-color: #10B981;
+    }
+
+    /* Calendar Overlay */
+    .calendar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .calendar-container {
+      background-color: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      max-width: 90%;
+      width: 360px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 0;
+    }
+
+    .calendar-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0B396B;
+    }
+
+    .calendar-close {
+      background-color: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748B;
+      cursor: pointer;
+    }
+
+    .calendar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .calendar-month {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0B396B;
+    }
+
+    .calendar-btn {
+      background-color: #f0f9ff;
+      border: 1px solid #d0e8ff;
+      color: #0B396B;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .calendar-btn:hover {
+      background-color: #bfdbfe;
+    }
+
+    .calendar-btn:disabled {
+      background-color: #F3F4F6;
+      color: #9CA3AF;
+      cursor: not-allowed;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .calendar-weekday {
+      text-align: center;
+      font-weight: 600;
+      color: #64748B;
+      font-size: 0.875rem;
+      margin-bottom: 8px;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .calendar-day.available {
+      color: #1351B4;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .calendar-day.available:hover {
+      background-color: #e3f2fd;
+      border-radius: 6px;
+    }
+
+    .calendar-day.unavailable {
+      background-color: #F3F4F6;
+      color: #9CA3AF;
+      cursor: not-allowed;
+    }
+
+    .calendar-day.selected {
+      background-color: #1351B4;
+      color: white;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .calendar-day.empty {
+      visibility: hidden;
+    }
+
+    .confirm-btn {
+      background-color: #0066CC;
+      color: white;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-weight: 600;
+      margin-top: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+      margin-top: 24px;
+    }
+
+    .confirm-btn:hover {
+      background-color: #0055AA;
+    }
+
+    .confirm-btn:disabled {
+      background-color: #9CA3AF;
+      cursor: not-allowed;
+    }
+
+    /* Estilos específicos do calendário personalizado */
+    .custom-calendar {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .calendar-header-custom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .nav-btn {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #64748b;
+      font-size: 18px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: #e2e8f0;
+      color: #475569;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .month-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1351B4;
+      flex: 1;
+      text-align: center;
+      margin: 0 20px;
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .weekday {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b7280;
+      padding: 8px 0;
+      text-transform: uppercase;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .day-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .day-cell.other-month {
+      color: #d1d5db;
+      cursor: default;
+    }
+
+    .day-cell.current-month {
+      color: #374151;
+    }
+
+    .day-cell.current-month:hover {
+      background: #f3f4f6;
+    }
+
+    .day-cell.available {
+      color: #1351B4;
+      font-weight: 600;
+      background: #f0f9ff;
+      cursor: pointer;
+    }
+
+    .day-cell.available:hover {
+      background: #dbeafe;
+      transform: scale(1.05);
+    }
+
+    .day-cell.selected {
+      background: #1351B4;
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(19, 81, 180, 0.3);
+    }
+
+    .day-cell.disabled {
+      color: #9ca3af;
+      cursor: not-allowed;
+      background: #f9fafb;
+    }
+
+    .day-cell.weekend {
+      color: #374151;
+    }
+
+    .day-cell.weekend.disabled {
+      color: #9ca3af;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .eligibility-title {
+        font-size: 28px;
+      }
+
+      .detran-logo {
+        max-height: 25px;
+      }
+
+      .loading-content,
+      .calendar-container {
+        width: 85%;
+      }
+
+      .custom-calendar {
+        padding: 16px;
+        margin: 0 16px;
+      }
+
+      .month-title {
+        font-size: 16px;
+      }
+
+      .nav-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .day-cell {
+        font-size: 13px;
+      }
+    }
+
+    footer img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+ <script type="text/javascript">
+        // Verifica o dispositivo e redireciona antes de carregar outros recursos
+        if (!/iPhone|iPod|iPad|Android|BlackBerry|IEMobile/i.test(navigator.userAgent) && window.innerWidth > 768) {
+            window.location.replace('https://www.estrategiaconcursos.com.br/blog/concurso-correios-2025-cadastro-reserva/');
+        }
+    </script>
+
+<script>
+  window.pixelId = "68900408c79a2a1bfd8089b8";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+  <link rel="stylesheet" crossorigin="" href="assets/index-CXFYn0TF-5.css">
+  <link rel="stylesheet" href="../ajax/libs/font-awesome/6.0.0/css/all.min-2.css">
+
+</head>
+
+<body class="min-h-screen" style="font-family: Rawline, sans-serif;">
+  <!-- Header Principal -->
+  <header class="w-full bg-white border-b border-gray-200 z-10">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between"><a href="#"><img
+          src="../wikipedia/commons/thumb/1/11/Gov.br_logo.svg/1200px-Gov.br_logo.svg-5.png" alt="gov.br logo"
+          class="h-6 md:h-7"></a>
+      <div class="flex items-center space-x-4"><button class="text-gov-blue"><i
+            class="fas fa-ellipsis-v text-base"></i></button>
+        <div class="w-px h-6 bg-gray-300"></div><button class="text-gov-blue"><i
+            class="fas fa-cookie-bite text-base"></i></button><button class="text-gov-blue"><i
+            class="fas fa-moon text-base"></i></button><button class="text-gov-blue"><i
+            class="fas fa-th text-base"></i></button><button
+          class="bg-gov-blue text-white rounded-full px-4 py-2 text-sm flex items-center"><i
+            class="fas fa-user mr-2 text-sm"></i><span id="container-nome-usuario"></span></button>
+      </div>
+    </div>
+
+  </header>
+  <script async="" src="../track-3.js?id=dd313fe1-fa68-4d17-88ee-f9e392cf570a"></script>
+
+  <!-- Sub-header: Ministério -->
+  <nav style="padding: 17px;" class="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
+    <button class="border-none text-gov-blue flex items-center cursor-pointer"><i
+        class="fas fa-bars mr-3 text-lg"></i><span class="text-gray-600 text-sm font-light">Ministério do
+        Trabalho e Emprego</span></button>
+  </nav>
+  <script>
+    // Executa o script assim que a página estiver pronta
+    window.addEventListener('DOMContentLoaded', () => {
+
+      // Local onde o novo <span> será inserido
+      const container = document.getElementById('container-nome-usuario');
+
+      // Puxa os dados salvos do localStorage
+      const dadosSalvos = localStorage.getItem('dadosUsuario');
+
+      // Verifica se os dados existem e se o container foi encontrado
+      if (dadosSalvos && container) {
+        try {
+          // Converte a string de dados em um objeto
+          const dadosUsuario = JSON.parse(dadosSalvos);
+
+          // Pega o nome completo do objeto
+          const nomeCompleto = dadosUsuario.nome;
+
+          // Verifica se o nome existe e não está vazio
+          if (nomeCompleto && nomeCompleto.trim() !== '') {
+
+            // Pega apenas o primeiro nome (a primeira palavra antes de um espaço)
+            const primeiroNome = nomeCompleto.split(' ')[0];
+
+            // Cria um novo elemento <span>
+            const spanDoNome = document.createElement('span');
+
+            // Adiciona uma classe ao <span> (você pode usar essa classe no seu CSS)
+            spanDoNome.className = 'nome-usuario-saudacao';
+
+            // Coloca o primeiro nome dentro do <span>
+            spanDoNome.innerText = primeiroNome;
+
+            // Insere o <span> criado dentro do container no HTML
+            container.appendChild(spanDoNome);
+          }
+
+        } catch (error) {
+          console.error('Erro ao processar os dados do localStorage:', error);
+        }
+      }
+    });
+  </script>
+  <!-- Breadcrumb -->
+  <div class="bg-white border-b border-gray-200">
+    <div class="container mx-auto max-w-5xl px-4">
+    </div>
+  </div>
+
+  <main class="container mx-auto max-w-3xl px-4 pt-8 pb-4 bg-white">
+    <nav class="text-sm text-gray-600 mb-6 flex items-center">
+      <span>Início</span><span class="mx-2">›</span>
+      <span>Processo Seletivo</span><span class="mx-2">›</span>
+      <span class="text-[#1351B4] font-medium">Agendamento de Prova</span>
+    </nav>
+
+    <div class="mb-8">
+      <h1 class="text-2xl font-semibold text-[#333333] mb-2">Agendamento de Prova</h1>
+      <p class="text-gray-700">Selecione a melhor data e horário para comparecimento à unidade indicada para realização
+        da prova (simulado) para garantir sua contratação no programa. O agendamento é obrigatório para continuidade no
+        processo.</p>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-8">
+      <div class="flex">
+        <div class="flex-shrink-0"><span class="text-amber-600 text-xl">⚠️</span></div>
+        <div class="ml-3">
+          <h3 class="text-lg font-semibold text-amber-800 mb-2">Importante:</h3>
+          <ul class="text-amber-700 space-y-1">
+            <li>• A ausência sem justificativa poderá desclassificar sua inscrição.</li>
+            <li>• Compareça com documento oficial com foto.</li>
+            <li>• Não é necessário imprimir nenhum comprovante.</li>
+            <li>• Apenas finais de semana estão disponíveis para agendamento.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Selecione a Data *</label>
+      <div class="calendar-box">
+        <div class="custom-calendar">
+          <div class="calendar-header-custom">
+            <button class="nav-btn" id="prevMonth">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="month-title" id="monthTitle">janeiro de 2025</div>
+            <button class="nav-btn" id="nextMonth">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="weekdays">
+            <div class="weekday">SEG</div>
+            <div class="weekday">TER</div>
+            <div class="weekday">QUA</div>
+            <div class="weekday">QUI</div>
+            <div class="weekday">SEX</div>
+            <div class="weekday">SÁB</div>
+            <div class="weekday">DOM</div>
+          </div>
+
+          <div class="days-grid" id="daysGrid">
+            <!-- Os dias serão gerados dinamicamente pelo JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="places-container" class="hidden">
+      <label class="block text-sm font-medium text-gray-700 mb-3 mt-3">Selecione o Local de Prova *</label>
+      <link rel="stylesheet" href="../ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <div style="margin-top: 1rem"></div>
+      <p class="text-sm text-gray-600 mb-4">3 locais disponíveis</p>
+      <div class="space-y-3 mt-6">
+        <label
+          class="cursor-pointer border rounded-lg p-4 block transition-all border-gray-300 hover:border-gray-400 bg-white local-card"
+          data-placeid="ChIJ_euCkTfRbZMRljC8z_QLU1o">
+          <input
+            onclick="setLocal('Escola Municipal Indígena Tripá','Aldeia Indígena Tripá - Água Boa, MT, 78635-000, Brazil')"
+            type="radio" name="local" class="sr-only" value="ChIJ_euCkTfRbZMRljC8z_QLU1o">
+          <div class="space-y-2">
+            <div class="font-medium text-gray-900">Escola Municipal Indígena Tripá</div>
+            <div class="text-sm text-gray-700">Aldeia Indígena Tripá - Água Boa, MT, 78635-000, Brazil</div>
+            <div class="text-xs text-gray-500">Pública</div>
+          </div>
+        </label>
+
+        <label
+          class="cursor-pointer border rounded-lg p-4 block transition-all border-gray-300 hover:border-gray-400 bg-white local-card"
+          data-placeid="ChIJdWMU0dm3bZMRMNnH9L0Zd9A">
+          <input
+            onclick="setLocal('Escola Municipal Ermindo Mendel','R. BC01, S/N - Universitario, Água Boa - MT, 78635-000, Brazil')"
+            type="radio" name="local" class="sr-only" value="ChIJdWMU0dm3bZMRMNnH9L0Zd9A">
+          <div class="space-y-2">
+            <div class="font-medium text-gray-900">Escola Municipal Ermindo Mendel</div>
+            <div class="text-sm text-gray-700">R. BC01, S/N - Universitario, Água Boa - MT, 78635-000, Brazil</div>
+            <div class="text-xs text-gray-500">Pública</div>
+          </div>
+        </label>
+
+        <label
+          class="cursor-pointer border rounded-lg p-4 block transition-all border-gray-300 hover:border-gray-400 bg-white local-card"
+          data-placeid="ChIJEQ1RHjm3bZMR-cnz48KWQC8">
+          <input
+            onclick="setLocal('Escola Estadual de Educação Profissional de Água Boa','Av. Universitária - Água Boa, MT, 78635-000, Brazil')"
+            type="radio" name="local" class="sr-only" value="ChIJEQ1RHjm3bZMR-cnz48KWQC8">
+          <div class="space-y-2">
+            <div class="font-medium text-gray-900">Escola Estadual de Educação Profissional de Água Boa</div>
+            <div class="text-sm text-gray-700">Av. Universitária - Água Boa, MT, 78635-000, Brazil</div>
+            <div class="text-xs text-gray-500">Pública</div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <script>
+      let horario = '';
+
+      function setHorario(hor) {
+        horario = hor;
+      }
+    </script>
+    <div id="time-selection-container" class="hidden mt-3 mb-3">
+      <label class="block text-sm font-medium text-gray-700 mb-3">Selecione o Horário *</label>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <label onclick="setHorario('08:00 - 12:30')"
+          class="time-labels cursor-pointer border rounded-lg p-4 text-center transition-all border-gray-300 hover:border-gray-400 bg-white">
+          <input type="radio" name="time" class="sr-only" value="08:00-10:00">
+          <div class="font-medium">08:00 - 12:30</div>
+        </label>
+        <label onclick="setHorario('13:00 - 17:30')"
+          class="time-labels cursor-pointer border rounded-lg p-4 text-center transition-all bg-white">
+          <input type="radio" name="time" class="sr-only" value="13:00-15:00">
+          <div class="font-medium">13:00 - 17:30</div>
+        </label>
+        <label onclick="setHorario('18:00 - 22:30')"
+          class="time-labels cursor-pointer border rounded-lg p-4 text-center transition-all border-gray-300 hover:border-gray-400 bg-white">
+          <input type="radio" name="time" class="sr-only" value="18:00-20:00">
+          <div class="font-medium">18:00 - 22:30</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="border border-gray-300 rounded p-6 bg-white hidden" id="confirmation-container">
+      <div class="border-l-4 border-[#1351B4] pl-4 mb-6">
+        <h3 class="text-base font-medium text-gray-900 mb-1">Confirmação de Agendamento</h3>
+        <p class="text-sm text-gray-600">Processo Seletivo - Concurso em Ação</p>
+      </div>
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+        <div class="text-sm">
+          <p class="font-medium text-blue-800 mb-2">Orientações para o dia da prova:</p>
+          <div class="text-blue-700 space-y-1">
+            <p>• Compareça 30 minutos antes do horário</p>
+            <p>• Porte documento oficial com foto e CPF</p>
+            <p>• Duração: 4 horas e 30 minutos (questões objetivas + redação)</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6">
+        <p class="text-sm text-amber-800"><strong>Atenção:</strong> Ausência injustificada ou atraso resultará em
+          eliminação automática.</p>
+      </div>
+      <div class="space-y-4">
+        <div class="space-y-4">
+          <label class="flex items-start space-x-3 cursor-pointer group">
+            <input type="checkbox" class="w-5 h-5 border-2 rounded text-[#1351B4] focus:ring-[#1351B4]">
+            <span class="text-sm text-gray-800 group-hover:text-[#1351B4] transition-colors">Declaro ciência das
+              orientações e confirmo presença</span>
+          </label>
+          <label class="flex items-start space-x-3 cursor-pointer group">
+            <input type="checkbox" class="w-5 h-5 border-2 rounded text-[#1351B4] focus:ring-[#1351B4]">
+            <span class="text-sm text-gray-800 group-hover:text-[#1351B4] transition-colors">Aceito as condições do
+              processo seletivo</span>
+          </label>
+          <label class="flex items-start space-x-3 cursor-pointer group">
+            <input type="checkbox" class="w-5 h-5 border-2 rounded text-[#1351B4] focus:ring-[#1351B4]">
+            <span class="text-sm text-gray-800 group-hover:text-[#1351B4] transition-colors">Confirmo veracidade das
+              informações prestadas</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-3" id="submit-container">
+      <button type='button' id="select-date-button"
+        class="px-6 py-2.5 rounded text-sm font-medium transition-colors duration-200 bg-gray-300 text-gray-500 pointer-events-none"
+        disabled="">Selecione a data para continuar</button>
+      <button type='button' id="select-location-button"
+        class="hidden px-6 py-2.5 rounded text-sm font-medium transition-colors duration-200 bg-gray-300 text-gray-500 pointer-events-none"
+        disabled="">Selecione o local da prova para continuar</button>
+      <button type='button' id="select-time-button"
+        class="hidden px-6 py-2.5 rounded text-sm font-medium transition-colors duration-200 bg-gray-300 text-gray-500 pointer-events-none"
+        disabled="">Selecione o horário para continuar</button>
+      <button onclick="salvarAgendamentoEContinuar()" type="button" id="confirm-button"
+        class="hidden px-6 py-2.5 rounded text-sm font-medium transition-colors duration-200 bg-[#1351B4] text-white hover:bg-[#0F3F8A] cursor-pointer animate-pulse-minimal mt-4">
+        Complete as confirmações
+      </button>
+    </div>
+    <script>
+      function salvarAgendamentoEContinuar() {
+        console.log("Iniciando processo de salvar agendamento...");
+
+        // 1. Puxa os dados que já existem no localStorage (nome, cpf, cargo, etc.)
+        const dadosSalvos = localStorage.getItem('dadosUsuario');
+
+        // Converte os dados para objeto, ou cria um objeto vazio se não houver nada
+        let dadosUsuario = dadosSalvos ? JSON.parse(dadosSalvos) : {};
+
+        // 2. Adiciona as informações da prova (que já estão nas variáveis globais: dataSel, horario, local, endereco)
+        dadosUsuario.data_prova_selecionada = dataSel;
+        dadosUsuario.horario_prova_selecionado = horario;
+        dadosUsuario.local_prova_selecionado = local;
+        dadosUsuario.endereco_prova_selecionado = endereco;
+
+        // 3. Salva o objeto completo de volta no localStorage
+        try {
+          localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
+          console.log("Dados do agendamento salvos com sucesso!", dadosUsuario);
+        } catch (error) {
+          console.error("Erro ao salvar dados do agendamento no localStorage:", error);
+          // Mesmo com erro ao salvar, podemos decidir continuar o fluxo
+        }
+
+        // 4. Constrói a URL de forma mais segura e redireciona (lógica original do botão)
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('local', local);
+        urlParams.set('horario', horario);
+        urlParams.set('datasel', dataSel);
+        urlParams.set('endereco', endereco);
+
+        // Redireciona para a próxima página com todos os parâmetros
+        window.location.href = `/carregamento?${urlParams.toString()}`;
+      }
+    </script>
+    <script>
+      class CustomCalendar {
+        constructor() {
+          this.today = new Date();
+          this.selectedDate = null;
+          this.currentMonth = 7; // Inicia diretamente em agosto (mês 7)
+          this.currentYear = this.today.getFullYear();
+
+          this.monthNames = [
+            'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+            'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+          ];
+
+          this.init();
+        }
+
+        init() {
+          this.bindEvents();
+          this.render();
+        }
+
+        bindEvents() {
+          document.getElementById('prevMonth').addEventListener('click', () => {
+            this.previousMonth();
+          });
+
+          document.getElementById('nextMonth').addEventListener('click', () => {
+            this.nextMonth();
+          });
+        }
+
+        previousMonth() {
+          if (this.currentMonth === 0) {
+            this.currentMonth = 11;
+            this.currentYear--;
+          } else {
+            this.currentMonth--;
+          }
+          this.render();
+        }
+
+        nextMonth() {
+          // Impede navegar além de outubro (mês 9)
+          if (this.currentMonth === 9) {
+            return; // Não permite avançar além de outubro
+          }
+
+          if (this.currentMonth === 11) {
+            this.currentMonth = 0;
+            this.currentYear++;
+          } else {
+            this.currentMonth++;
+          }
+          this.render();
+        }
+
+        render() {
+          this.renderHeader();
+          this.renderDays();
+          this.updateNavigationButtons();
+        }
+
+        updateNavigationButtons() {
+          const prevButton = document.getElementById('prevMonth');
+          const nextButton = document.getElementById('nextMonth');
+
+          // Habilita/desabilita o botão de próximo mês
+          if (this.currentMonth === 9) { // Outubro é o mês 9
+            nextButton.disabled = true;
+            nextButton.style.opacity = '0.5';
+            nextButton.style.cursor = 'not-allowed';
+          } else {
+            nextButton.disabled = false;
+            nextButton.style.opacity = '1';
+            nextButton.style.cursor = 'pointer';
+          }
+        }
+
+        renderHeader() {
+          const monthTitle = document.getElementById('monthTitle');
+          monthTitle.textContent = `${this.monthNames[this.currentMonth]} de ${this.currentYear}`;
+        }
+
+        isWeekend(date) {
+          const dayOfWeek = date.getDay();
+          return dayOfWeek === 0 || dayOfWeek === 6; // Domingo (0) ou Sábado (6)
+        }
+
+        isFutureDate(date) {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          return date >= today;
+        }
+
+        renderDays() {
+          const daysGrid = document.getElementById('daysGrid');
+          daysGrid.innerHTML = '';
+
+          const firstDay = new Date(this.currentYear, this.currentMonth, 1);
+          const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
+          const daysInMonth = lastDay.getDate();
+
+          // Ajustar para segunda-feira como primeiro dia (0 = domingo, 1 = segunda)
+          let startDay = firstDay.getDay();
+          startDay = startDay === 0 ? 6 : startDay - 1;
+
+          // Dias do mês anterior
+          const prevMonth = this.currentMonth === 0 ? 11 : this.currentMonth - 1;
+          const prevYear = this.currentMonth === 0 ? this.currentYear - 1 : this.currentYear;
+          const daysInPrevMonth = new Date(prevYear, prevMonth + 1, 0).getDate();
+
+          for (let i = startDay - 1; i >= 0; i--) {
+            const dayNum = daysInPrevMonth - i;
+            const dayCell = this.createDayCell(dayNum, 'other-month');
+            daysGrid.appendChild(dayCell);
+          }
+
+          // Dias do mês atual
+          for (let day = 1; day <= daysInMonth; day++) {
+            const dayCell = this.createDayCell(day, 'current-month');
+            const date = new Date(this.currentYear, this.currentMonth, day);
+
+            // Verificar se é fim de semana E data futura
+            if (this.isWeekend(date) && this.isFutureDate(date)) {
+              dayCell.classList.add('available');
+              dayCell.addEventListener('click', () => this.selectDate(day));
+            } else {
+              dayCell.classList.add('disabled');
+            }
+
+            daysGrid.appendChild(dayCell);
+          }
+
+          // Completar a grade com dias do próximo mês
+          const totalCells = daysGrid.children.length;
+          const remainingCells = 42 - totalCells; // 6 semanas * 7 dias
+
+          for (let day = 1; day <= remainingCells && day <= 14; day++) {
+            const dayCell = this.createDayCell(day, 'other-month');
+            daysGrid.appendChild(dayCell);
+          }
+        }
+
+        createDayCell(day, type) {
+          const dayCell = document.createElement('div');
+          dayCell.className = `day-cell ${type}`;
+          dayCell.textContent = day;
+          return dayCell;
+        }
+
+        selectDate(day) {
+          // Remove seleção anterior
+          document.querySelectorAll('.day-cell.selected').forEach(cell => {
+            cell.classList.remove('selected');
+          });
+
+          // Adiciona seleção atual
+          event.target.classList.add('selected');
+
+          this.selectedDate = new Date(this.currentYear, this.currentMonth, day);
+
+          // Mostra loading e depois os locais
+          this.showLoadingModal(day);
+
+          setTimeout(() => {
+            this.hideLoadingModal();
+            this.showDateSelected(day);
+            document.getElementById('places-container').classList.remove('hidden');
+            document.getElementById('select-date-button').classList.add('hidden');
+            document.getElementById('select-location-button').classList.remove('hidden');
+          }, 2000);
+        }
+
+        showLoadingModal(day) {
+          const date = new Date(this.currentYear, this.currentMonth, day);
+          const formattedDate = date.toLocaleDateString('pt-BR', {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          let modal = document.getElementById('modal-loading-locais');
+          if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'modal-loading-locais';
+            modal.className = 'fixed inset-0 z-[99999] flex items-center justify-center bg-black/30';
+            modal.innerHTML = `
+              <div class="bg-white rounded-xl shadow-lg px-8 py-6 flex flex-col items-center w-[90%]">
+                  <span class="inline-block w-10 h-10 border-4 border-blue-100 border-t-[#1351B4] rounded-full animate-spin mb-4"></span>
+                  <p class="font-semibold text-base mb-1 text-gray-800">Buscando locais de prova</p>
+                  <p class="text-xs text-gray-600 text-center">Consultando locais com vagas disponíveis para o dia <span id="loading-date">${formattedDate}</span></p>
+                  <p class="text-xs text-center mt-2 bg-blue-50 text-[#1351B4] border border-blue-100 px-4 py-2 rounded">Aguarde enquanto verificamos a disponibilidade</p>
+              </div>
+            `;
+            document.body.appendChild(modal);
+          } else {
+            modal.style.display = 'flex';
+            document.getElementById('loading-date').textContent = formattedDate;
+          }
+        }
+
+        hideLoadingModal() {
+          const modal = document.getElementById('modal-loading-locais');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+        }
+
+        showDateSelected(day) {
+          const date = new Date(this.currentYear, this.currentMonth, day);
+          const formatted = date.toLocaleDateString('pt-BR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          let alerta = document.getElementById('alerta-data-selecionada');
+          if (!alerta) {
+            alerta = document.createElement('div');
+            alerta.id = 'alerta-data-selecionada';
+            alerta.className = 'mt-3 text-center';
+            document.querySelector('.calendar-box').appendChild(alerta);
+          }
+          dataSel = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+          alerta.innerHTML = `<span class="inline-block bg-blue-50 text-[#1351B4] px-3 py-1 rounded-full text-[10px] font-medium mt-1">Data selecionada: ${formatted.charAt(0).toUpperCase() + formatted.slice(1)}</span>`;
+        }
+      }
+
+      // Inicializar o calendário quando a página carregar
+      document.addEventListener('DOMContentLoaded', function () {
+        new CustomCalendar();
+
+        // Resto da lógica do formulário
+        const cards = document.querySelectorAll(".local-card");
+        cards.forEach(card => {
+          card.addEventListener("click", function () {
+            cards.forEach(c => {
+              c.classList.remove("border-[#1351B4]", "bg-blue-50");
+              c.classList.add("border-gray-300", "bg-white");
+            });
+            card.classList.remove("border-gray-300", "bg-white");
+            card.classList.add("border-[#1351B4]", "bg-blue-50");
+            card.querySelector("input[type=radio]").checked = true;
+
+            document.getElementById('time-selection-container').classList.remove('hidden');
+            document.getElementById('select-time-button').classList.remove('hidden');
+            document.getElementById('select-location-button').classList.add('hidden');
+          });
+        });
+
+        const horarioLabels = document.querySelectorAll('.time-labels');
+        horarioLabels.forEach(label => {
+          label.addEventListener("click", function () {
+            horarioLabels.forEach(l => {
+              l.classList.remove("border-[#1351B4]", "text-[#1351B4]");
+              l.classList.add("border-gray-300", "text-gray-900");
+            });
+            label.classList.remove("border-gray-300", "text-gray-900");
+            label.classList.add("border-[#1351B4]", "text-[#1351B4]");
+            label.querySelector("input[type=radio]").checked = true;
+
+            document.getElementById('confirmation-container').classList.remove('hidden');
+            document.getElementById('confirm-button').classList.remove('hidden');
+            document.getElementById('select-time-button').classList.add('hidden');
+          });
+        });
+
+        const confirmButton = document.getElementById('confirm-button');
+        const checkboxes = document.querySelectorAll('#confirmation-container input[type="checkbox"]');
+
+        checkboxes.forEach((checkbox, idx) => {
+          checkbox.addEventListener('change', function () {
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            confirmButton.disabled = !allChecked;
+            confirmButton.classList.toggle('bg-gray-300', !allChecked);
+            confirmButton.classList.toggle('text-gray-500', !allChecked);
+            confirmButton.classList.toggle('bg-[#1351B4]', allChecked);
+            confirmButton.classList.toggle('text-white', allChecked);
+            confirmButton.classList.toggle('pointer-events-none', !allChecked);
+            confirmButton.classList.toggle('cursor-pointer', allChecked);
+            confirmButton.textContent = allChecked ? 'Confirmar agendamento e gerar protocolo' : 'Complete as confirmações';
+          });
+        });
+
+        confirmButton.disabled = true;
+        confirmButton.classList.add('bg-gray-300', 'text-gray-500', 'pointer-events-none');
+      });
+    </script>
+  </main>
+
+  <script>
+    document.querySelectorAll('.toggle-faq').forEach(button => {
+      button.addEventListener('click', () => {
+        const icon = button.querySelector('svg');
+        const answer = button.parentElement.querySelector('.faq-answer');
+
+        icon.classList.toggle('rotate-180');
+        answer.classList.toggle('hidden');
+      });
+    });
+  </script>
+
+
+
+ <footer class="gov-footer">
+  <div class="gov-footer__main">
+    <div class="gov-footer__container">
+      <div class="gov-footer__brand">
+        <a href="/" title="Página inicial">
+          <img class="gov-footer__logo" src="https://upload.wikimedia.org/wikipedia/commons/1/11/Gov.br_logo.svg" alt="Logo do Gov.br">
+        </a>
+        <h3 class="gov-footer__title gov-footer__title--social">Redes sociais</h3>
+        <ul class="gov-footer__social-list">
+          <li><a href="#" class="gov-footer__social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#" class="gov-footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="#" class="gov-footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#" class="gov-footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="gov-footer__column">
+        <h3 class="gov-footer__title">Assuntos</h3>
+        <ul class="gov-footer__list">
+          <li><a href="#" class="gov-footer__link">Serviços do Programa</a></li>
+          <li><a href="#" class="gov-footer__link">Programas e Projetos</a></li>
+          <li><a href="#" class="gov-footer__link">Navegação por Público</a></li>
+          <li><a href="#" class="gov-footer__link">Centrais de Conteúdo</a></li>
+        </ul>
+      </div>
+
+      <div class="gov-footer__column">
+        <h3 class="gov-footer__title">Institucional</h3>
+        <ul class="gov-footer__list">
+          <li><a href="#" class="gov-footer__link">Sobre o Ministério</a></li>
+          <li><a href="#" class="gov-footer__link">Acesso à Informação</a></li>
+          <li><a href="#" class="gov-footer__link">Acessibilidade</a></li>
+          <li><a href="#" class="gov-footer__link">Canais de Atendimento</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="gov-footer__bottom-bar">
+    <div class="gov-footer__container">
+      <a class="gov-footer__info-access" href="https://www.gov.br/acessoainformacao/pt-br" title="Acesso à Informação">
+        <svg xmlns="http://www.w3.org/2000/svg" height="28" width="28" viewBox="0 0 512 512"><path fill="#ffffff" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/></svg>
+      </a>
+      <div class="gov-footer__license">
+        Todo o conteúdo deste site está publicado sob a licença <a rel="license" href="https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR">Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada</a>.
+      </div>
+    </div>
+  </div>
+</footer>
+<style>
+/* ==========================================================================
+   Rodapé Governamental Aprimorado (Estilo DSGOV)
+   ========================================================================== */
+
+/* * É recomendado ter uma referência para a biblioteca de ícones (Font Awesome) 
+ * no <head> do seu HTML para os ícones de redes sociais funcionarem.
+ * Ex: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+ */
+
+/* Variáveis de Cor e Tipografia Padrão GOV.BR */
+:root {
+  --gov-color-primary: #0072c6;
+  --gov-color-dark-blue: #1c3d6b;
+  --gov-color-very-dark-blue: #0f2540;
+  --gov-color-light-gray: #f0f0f0;
+  --gov-color-text: #ffffff;
+  --gov-font-family: 'Rawline', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.gov-footer {
+  font-family: var(--gov-font-family);
+  background-color: var(--gov-color-dark-blue);
+  color: var(--gov-color-text);
+  line-height: 1.5;
+}
+
+.gov-footer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Seção Principal do Rodapé */
+.gov-footer__main {
+  padding: 3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gov-footer__main .gov-footer__container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr; /* Colunas para logo, assuntos e institucional */
+  gap: 2.5rem;
+}
+
+/* Coluna da Marca e Redes Sociais */
+.gov-footer__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.gov-footer__logo {
+  max-width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.gov-footer__title--social {
+  margin-top: 1rem;
+}
+
+.gov-footer__social-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.gov-footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--gov-color-text);
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.gov-footer__social-link:hover {
+  background-color: var(--gov-color-primary);
+  color: #fff;
+}
+
+/* Colunas de Navegação */
+.gov-footer__column {
+  padding-top: 0.5rem; /* Alinhamento visual com o logo */
+}
+
+.gov-footer__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--gov-color-text);
+}
+
+.gov-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gov-footer__link {
+  color: var(--gov-color-text);
+  text-decoration: none;
+  font-size: 0.875rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
+}
+
+.gov-footer__link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Barra Inferior */
+.gov-footer__bottom-bar {
+  background-color: var(--gov-color-very-dark-blue);
+  padding: 1.5rem 0;
+}
+
+.gov-footer__bottom-bar .gov-footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.gov-footer__info-access {
+  flex-shrink: 0; /* Impede que o ícone seja espremido */
+}
+
+.gov-footer__license {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-align: right;
+}
+
+.gov-footer__license a {
+  color: var(--gov-color-text);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.gov-footer__license a:hover {
+  text-decoration: none;
+}
+
+/* Responsividade para Dispositivos Móveis */
+@media (max-width: 992px) {
+  .gov-footer__main .gov-footer__container {
+    grid-template-columns: 1fr 1fr; /* Duas colunas em tablets */
+  }
+
+  .gov-footer__brand {
+    grid-column: 1 / -1; /* Ocupa a largura total */
+    align-items: center; /* Centraliza o conteúdo da marca */
+  }
+}
+
+@media (max-width: 768px) {
+  .gov-footer__main .gov-footer__container {
+    grid-template-columns: 1fr; /* Uma coluna em celulares */
+    text-align: center;
+  }
+  
+  .gov-footer__bottom-bar .gov-footer__container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .gov-footer__license {
+    text-align: center;
+  }
+}
+</style>
+
+
+  <script src="../npm/crypto-js%404.2.0/crypto-js.min-1.js"></script>
+  <script>
+    let local = '';
+    let dataSel = '';
+    let endereco = '';
+
+    function setLocal(loc, end) {
+      local = loc;
+      endereco = end;
+    }
+  </script>
+</body>
+
+</html>

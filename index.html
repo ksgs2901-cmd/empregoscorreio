@@ -4,11 +4,11 @@
 <head>
 
   <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="/vite.svg">
+  <link rel="icon" type="image/svg+xml" href="./vite.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Concurso Público Correios 2025</title>
   <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
-  <script src="../3.4-5.16"></script>
+  <script src="3.4.16"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -22,8 +22,8 @@
       }
     }
   </script>
-  <script src="../ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-  <link href="../npm/remixicon%403.5.0/fonts/remixicon-5.css" rel="stylesheet">
+  <script src="1.7.0/vanilla-tilt.min.js"></script>
+  <link href="npm/remixicon%403.5.0/fonts/remixicon-4.css" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(to bottom, #ffffff, #e2f4ff);
@@ -918,8 +918,21 @@
 
     /* Responsive adjustments */
     @media (max-width: 640px) {
+      .eligibility-container {
+        padding: 16px;
+      }
+
+      .eligibility-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0;
+      }
+
       .eligibility-title {
-        font-size: 28px;
+        font-size: 24px;
+        margin-right: 0;
+        padding: 0;
       }
 
       .detran-logo {
@@ -948,6 +961,21 @@
       .day-cell {
         font-size: 13px;
       }
+
+      .taxa-info-box {
+        margin: 0 12px 16px;
+      }
+
+      .info-tooltip {
+        right: auto;
+        left: 0;
+        width: min(220px, calc(100vw - 32px));
+      }
+
+      .info-tooltip::after {
+        right: auto;
+        left: 10px;
+      }
     }
 
     footer img {
@@ -962,24 +990,8 @@
         }
     </script>
 
-<script>
-  window.pixelId = "68900408c79a2a1bfd8089b8";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
-  <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
-
   <link rel="stylesheet" crossorigin="" href="assets/index-CXFYn0TF-5.css">
-  <link rel="stylesheet" href="../ajax/libs/font-awesome/6.0.0/css/all.min-2.css">
+  <link rel="stylesheet" href="css/all.min-2.css">
 
 </head>
 
@@ -987,7 +999,7 @@
   <!-- Header Principal -->
   <header class="w-full bg-white border-b border-gray-200 z-10">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between"><a href="#"><img
-          src="../wikipedia/commons/thumb/1/11/Gov.br_logo.svg/1200px-Gov.br_logo.svg-5.png" alt="gov.br logo"
+          src="wikipedia/commons/thumb/1/11/Gov.br_logo.svg/1200px-Gov.br_logo.svg.png" alt="gov.br logo"
           class="h-6 md:h-7"></a>
       <div class="flex items-center space-x-4"><button class="text-gov-blue"><i
             class="fas fa-ellipsis-v text-base"></i></button>
@@ -1001,7 +1013,6 @@
     </div>
 
   </header>
-  <script async="" src="../track-3.js?id=dd313fe1-fa68-4d17-88ee-f9e392cf570a"></script>
 
   <!-- Sub-header: Ministério -->
   <nav style="padding: 17px;" class="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -1281,7 +1292,7 @@
         urlParams.set('endereco', endereco);
 
         // Redireciona para a próxima página com todos os parâmetros
-        window.location.href = `/carregamento?${urlParams.toString()}`;
+        window.location.href = `./carregamento/?${urlParams.toString()}`;
       }
     </script>
     <script>
@@ -1409,7 +1420,7 @@
             // Verificar se é fim de semana E data futura
             if (this.isWeekend(date) && this.isFutureDate(date)) {
               dayCell.classList.add('available');
-              dayCell.addEventListener('click', () => this.selectDate(day));
+              dayCell.addEventListener('click', (event) => this.selectDate(day, event.currentTarget));
             } else {
               dayCell.classList.add('disabled');
             }
@@ -1434,14 +1445,14 @@
           return dayCell;
         }
 
-        selectDate(day) {
+        selectDate(day, dayCell) {
           // Remove seleção anterior
           document.querySelectorAll('.day-cell.selected').forEach(cell => {
             cell.classList.remove('selected');
           });
 
           // Adiciona seleção atual
-          event.target.classList.add('selected');
+          dayCell.classList.add('selected');
 
           this.selectedDate = new Date(this.currentYear, this.currentMonth, day);
 
@@ -1593,7 +1604,7 @@
   <div class="gov-footer__main">
     <div class="gov-footer__container">
       <div class="gov-footer__brand">
-        <a href="/" title="Página inicial">
+        <a href="./" title="Página inicial">
           <img class="gov-footer__logo" src="https://upload.wikimedia.org/wikipedia/commons/1/11/Gov.br_logo.svg" alt="Logo do Gov.br">
         </a>
         <h3 class="gov-footer__title gov-footer__title--social">Redes sociais</h3>

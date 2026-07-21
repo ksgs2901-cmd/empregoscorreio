@@ -8,9 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concurso Agências dos Correios</title>
     <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
-    <script src="../3.4-3.16"></script>
+    <script src="../3.4.16"></script>
     <link href="../npm/remixicon%403.5.0/fonts/remixicon-3.css" rel="stylesheet">
-    <link href="../css2-2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         .box-nome {
             border: 1px solid #f3f3f3;
@@ -252,14 +251,11 @@
         }
 
         body {
-            padding-bottom: 95vh;
+            padding-bottom: 0;
         }
 
         footer {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
             width: 100%;
             max-width: 100%;
             margin: 0;
@@ -270,8 +266,8 @@
         }
 
         footer img {
-            width: 100vw;
-            max-width: 100vw;
+            width: 100%;
+            max-width: 100%;
             height: auto;
             margin: 0;
             padding: 0;
@@ -284,31 +280,14 @@
         }
     </script>
 
-<script>
-  window.pixelId = "68900408c79a2a1bfd8089b8";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
-  <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
 </head>
 
-<body style="
-    max-height: 2692px;
-    overflow: hidden;" class="bg-white">
+<body class="bg-white">
 
     <!-- Header Principal -->
     <header class="w-full bg-white border-b border-gray-200 z-10">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between"><a href="#"><img
-                    src="../wikipedia/commons/thumb/1/11/Gov.br_logo.svg/1200px-Gov.br_logo.svg-3.png" alt="gov.br logo"
+                    src="../wikipedia/commons/thumb/1/11/Gov.br_logo.svg/1200px-Gov.br_logo.svg.png" alt="gov.br logo"
                     class="h-6 md:h-7"></a>
             <div class="flex items-center space-x-4"><button class="text-gov-blue"><i
                         class="fas fa-ellipsis-v text-base"></i></button>
@@ -405,8 +384,7 @@
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Captura de Dados Pessoais - Governo Brasileiro</title>
-                <link rel="stylesheet" href="../css2-3?family=Roboto:wght@300;400;500;700&display=swap">
-                <link rel="stylesheet" href="../ajax/libs/font-awesome/6.0.0/css/all.min.css">
+                <link rel="stylesheet" href="../css/all.min.css">
                 <link rel="stylesheet" href="cadastro-form.css">
 
                 <!-- Bootstrap CSS -->
@@ -454,8 +432,7 @@
 
                                     <!-- Campo CPF -->
                                     <div class="space-y-2">
-                                        <label class="block text-base font=" osia-70="" text-base="" font-medium"=""
-                                            for="cpf">CPF</label>
+                                        <label class="block text-base font-medium" for="cpf">CPF</label>
                                         <div class="relative">
                                             <input type="text" style="background-color: #e9e9e9ff;" value="" disabled=""
                                                 class="flex w-full bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-12 text-base border-2 border-gray-3002 focus:border-[#6a7d00] focus:ring-[#6a7d00] mainland-lg pr-12"
@@ -476,7 +453,7 @@
                                 <p style="font-size: 15px; font-weight: 600;">Informações Complementares</p>
                                 <p style="font-size: 12px; margin-bottom: 30px;">Você está a poucos passos de garantir
                                     sua vaga no programa, Complete seus dados e seja o próximo contratado</p>
-                                <form class="space-y-6">
+                                <form id="cadastro-complementar-form" class="space-y-6" novalidate>
                                     <div class="space-y-2" style="position: relative;">
                                         <div class="space-y-2" style="position: relative;">
                                             <label
@@ -502,7 +479,7 @@
                                                 Nome completo é obrigatório</p>
                                         </div>
 
-                                        <script src="../jquery-3.7.1.min-1.js"></script>
+                                        <script src="../jquery-3.6.0.min.js"></script>
                                         <script>
                                             $(function () {
                                                 const $input = $('#email-input');
@@ -754,6 +731,18 @@
                                         .selecionado {
                                             border: 2px solid #4caf50 !important;
                                         }
+
+                                        @media (max-width: 375px) {
+                                            .opcao-turno {
+                                                flex-wrap: wrap;
+                                                gap: 4px;
+                                            }
+
+                                            .badge-turno {
+                                                margin-left: 0;
+                                                white-space: normal;
+                                            }
+                                        }
                                     </style>
 
                                     <div style="margin-top: 10px;" class="seletor-turno">
@@ -881,18 +870,6 @@
                                         let turno = '';
 
                                         function selecionarTurno(elemento, periodo, turn) {
-                                            // --- INÍCIO DA LÓGICA PARA SALVAR NO LOCALSTORAGE ---
-                                            try {
-                                                const dadosSalvos = localStorage.getItem('dadosUsuario');
-                                                let dadosUsuario = dadosSalvos ? JSON.parse(dadosSalvos) : {};
-                                                dadosUsuario.turno_selecionado = turn;
-                                                localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
-                                                console.log("Turno salvo! Dados atualizados no localStorage:", dadosUsuario);
-                                            } catch (error) {
-                                                console.error("Erro ao salvar o turno no localStorage:", error);
-                                            }
-                                            // --- FIM DA LÓGICA PARA SALVAR ---
-
                                             turno = turn;
                                             $('.periodoT').hide();
                                             $('.' + periodo).show();
@@ -941,7 +918,7 @@
                                     contato e processo de inscrição no programa Concurso em Ação. *
                                 </label>
                             </div>
-                            <script src="../jquery-3.6.0.min-2.js"></script>
+                            <script src="../jquery-3.6.0.min.js"></script>
                             <script>
                                 $(document).ready(function () {
                                     $('#lgpdCheck').on('change', function () {
@@ -969,8 +946,8 @@
                             }
                         </style>
 
-                        <button id="desd" disabled=""
-                            onclick="travarScroll();$('#processingModal').removeClass('hidden')" type="button"
+                        <p id="form-status" class="text-sm text-center" role="status" aria-live="polite"></p>
+                        <button id="desd" disabled="" form="cadastro-complementar-form" type="submit"
                             class="btn btn-primary w-100"
                             style=" max-width: 200px; font-weight: 500; margin: 20px auto; display: block;">
                             Avançar para Avaliação
@@ -981,8 +958,13 @@
                                 document.body.style.overflow = 'hidden';
                                 document.documentElement.style.overflow = 'hidden';
                             }
+
+                            function fecharDemonstracao() {
+                                document.getElementById('processingModal').classList.add('hidden');
+                                document.body.style.overflow = '';
+                                document.documentElement.style.overflow = '';
+                            }
                         </script>
-                        </form>
 
 
                     </div>
@@ -1037,7 +1019,7 @@
 
                         <!-- Modal de Processamento -->
                         <div id="processingModal" class="processing-modal hidden">
-                            <div class="processing-container" style="height: 99vh; overflow: scroll;">
+                            <div class="processing-container" style="max-height: 90vh; overflow-y: auto;">
                                 <!-- Cabeçalho -->
                                 <div class="bg-[#1351B4] text-white p-4 sm:p-6 relative overflow-hidden">
                                     <div
@@ -1175,10 +1157,9 @@
                                                 (LGPD)</p>
                                         </div>
                                         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                                            <button
-                                                onclick='window.location.href = "/validacao/index.html?" + window.location.search + "&tel=" + encodeURIComponent(document.getElementById("numeroTelefone").value) + "&escolaridade=" + encodeURIComponent(escolaridade) + "&email=" + encodeURIComponent(emailInput) + "&turno=" + encodeURIComponent(turno);'
+                                            <button onclick="fecharDemonstracao()"
                                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-[#1351B4] hover:bg-blue-700 text-white px-6 sm:px-8 py-2 w-full sm:w-auto"
-                                                type="button">Prosseguir com a Avaliação</button>
+                                                type="button">Concluir demonstração</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1524,7 +1505,7 @@
         </style>
 
         <!-- Scripts -->
-        <script src="../jquery-3.7.1.min-1.js"></script>
+        <script src="../jquery-3.6.0.min.js"></script>
 
         <script>
             // Função para obter o valor de um parâmetro específico na URL
@@ -1612,6 +1593,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const cpfInput = document.querySelector('input[name="cpf"]');
                 const cpfValidoMessage = document.getElementById('cpf-valido-message');
+                if (!cpfInput || !cpfValidoMessage) return;
 
                 function validarCPF(cpf) {
                     cpf = cpf.replace(/[\D]/g, '');
@@ -1669,6 +1651,7 @@
                 const dataNascimentoInput = document.querySelector('input[name="dataAniversario"]');
                 const idadeValidaMessage = document.getElementById('idade-valida-message');
                 const idadeTexto = document.getElementById('idade-texto');
+                if (!dataNascimentoInput || !idadeValidaMessage || !idadeTexto) return;
 
                 function calcularIdade(dataNascimento) {
                     const hoje = new Date();
@@ -1703,6 +1686,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const generoSelect = document.querySelector('select[name="genero"]');
                 const programaMulheres = document.getElementById('programa-mulheres');
+                if (!generoSelect || !programaMulheres) return;
 
                 generoSelect.addEventListener('change', function () {
                     if (this.value === 'feminino') {
@@ -1721,7 +1705,8 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const emailInput = document.getElementById('email-input');
                 const suggestionsContainer = document.getElementById('email-suggestions');
-                const suggestionsList = suggestionsContainer.querySelector('div');
+                if (!emailInput || !suggestionsContainer) return;
+                const suggestionsList = suggestionsContainer;
                 let currentSuggestionIndex = -1;
 
                 function hideSuggestions() {
@@ -1737,14 +1722,14 @@
                     const errorMessage = document.querySelector('#\\:r6\\:-form-item-message');
                     if (isValid) {
                         emailInput.setAttribute('aria-invalid', 'false');
-                        errorMessage.style.display = 'none';
+                        if (errorMessage) errorMessage.style.display = 'none';
                     } else {
                         emailInput.setAttribute('aria-invalid', 'true');
-                        errorMessage.style.display = 'block';
+                        if (errorMessage) errorMessage.style.display = 'block';
                     }
                 }
 
-                const commonDomains = emailInput.getAttribute('data-suggestions').split(',');
+                const commonDomains = (emailInput.getAttribute('data-suggestions') || 'gmail.com,yahoo.com,outlook.com,hotmail.com').split(',');
                 let currentDomains = [];
 
                 emailInput.addEventListener('input', function (e) {
@@ -1872,6 +1857,8 @@
                 const bairroInput = document.querySelector('input[name="bairro"]');
                 const cidadeInput = document.querySelector('input[name="cidade"]');
                 const ufInput = document.querySelector('input[name="uf"]');
+                if (!cepInput || !cepErrorMessage || !cepLoading || !logradouroInput ||
+                    !bairroInput || !cidadeInput || !ufInput) return;
 
                 function formatarCEP(cep) {
                     cep = cep.replace(/\D/g, '');
@@ -1956,6 +1943,7 @@
             // Função para simular o processamento
             function startProcessing() {
                 const modal = document.getElementById('processingModal');
+                if (!modal) return;
                 const steps = [{
                     id: 'step1',
                     duration: 2000
@@ -1991,8 +1979,12 @@
 
                     const step = steps[stepIndex];
                     const stepElement = document.getElementById(step.id);
+                    const generalProgress = document.getElementById('generalProgress');
+                    const generalPercentage = document.getElementById('generalPercentage');
+                    if (!stepElement || !generalProgress || !generalPercentage) return;
                     const progressBar = stepElement.querySelector('.progress-fill');
                     const icon = stepElement.querySelector('.step-icon');
+                    if (!progressBar || !icon) return;
 
                     // Ativar step atual
                     stepElement.classList.add('active');
@@ -2005,8 +1997,8 @@
 
                         // Atualizar progresso geral
                         const stepProgress = (stepIndex * 100 + progress) / totalSteps;
-                        document.getElementById('generalProgress').style.width = stepProgress + '%';
-                        document.getElementById('generalPercentage').textContent = Math.round(stepProgress) + '%';
+                        generalProgress.style.width = stepProgress + '%';
+                        generalPercentage.textContent = Math.round(stepProgress) + '%';
 
                         if (progress >= 100) {
                             clearInterval(interval);
@@ -2025,49 +2017,70 @@
                 processStep(0);
             }
 
-            // Função para redirecionar para termos.php
+            // Mantém o fluxo local caso a rotina legada seja acionada.
             function redirectToTermos() {
-                const currentUrl = new URL(window.location.href);
-                const params = new URLSearchParams(currentUrl.search);
-
-                // Adicionar CEP aos parâmetros
-                const cepInput = document.querySelector('input[name="cep"]');
-                if (cepInput && cepInput.value) {
-                    const cep = cepInput.value.replace(/\D/g, '');
-                    params.set('cep', cep);
-                }
-
-                // Construir URL de redirecionamento
-                const redirectUrl = `termos.php?${params.toString()}`;
-                window.location.href = redirectUrl;
+                fecharDemonstracao();
             }
 
-            // Modal e Submissão do Formulário
+            // Validação e demonstração local do formulário
             document.addEventListener('DOMContentLoaded', function () {
-                const form = document.querySelector('form');
+                const form = document.getElementById('cadastro-complementar-form');
+                const status = document.getElementById('form-status');
+                if (!form) return;
 
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
-                    startProcessing();
+
+                    const email = document.getElementById('email-input');
+                    const telefone = document.getElementById('numeroTelefone');
+                    const lgpd = document.getElementById('lgpdCheck');
+                    const emailValido = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+                    const telefoneValido = telefone && telefone.value.replace(/\D/g, '').length >= 10;
+                    const camposPendentes = [];
+
+                    if (!emailValido) camposPendentes.push({ nome: 'um e-mail válido', elemento: email });
+                    if (!telefoneValido) camposPendentes.push({ nome: 'um telefone com DDD', elemento: telefone });
+                    if (!escolaridade) camposPendentes.push({ nome: 'a escolaridade', elemento: document.querySelector('.custom-select2') });
+                    if (!turno) camposPendentes.push({ nome: 'o turno', elemento: document.querySelector('.seletor-display') });
+                    if (!lgpd || !lgpd.checked) camposPendentes.push({ nome: 'a confirmação de consentimento', elemento: lgpd });
+
+                    if (camposPendentes.length) {
+                        status.textContent = `Revise: informe ${camposPendentes.map(campo => campo.nome).join(', ')}.`;
+                        status.classList.add('text-red-600');
+                        status.classList.remove('text-green-700');
+                        camposPendentes[0].elemento?.focus();
+                        return;
+                    }
+
+                    status.textContent = 'Validação local concluída. Nenhum dado foi enviado ou armazenado.';
+                    status.classList.remove('text-red-600');
+                    status.classList.add('text-green-700');
+                    document.getElementById('processingModal').classList.remove('hidden');
+                    travarScroll();
                 });
             });
 
             // Chama a função para carregar os dados da API ao carregar a página
             document.addEventListener('DOMContentLoaded', fetchAPIDataAndPopulateForm);
         </script>
-        <script src="cadastro-form.js"></script>
 
     </main>
 </body>
 
 </html>
-<script src="../ajax/libs/jquery.mask/1.14.16/jquery.mask.min-2.js"></script>
+<script src="../1.14.16/jquery.mask.min-2.js"></script>
 <script>
     $(document).ready(function () {
         $('#numeroTelefone').mask('(00) 00000-0000');
     });
 
     let escolaridade = '';
+
+    function toggleOptions() {
+        const options = document.getElementById('options');
+        const isOpen = options.style.display === 'block';
+        options.style.display = isOpen ? 'none' : 'block';
+    }
 
     function selectOption(element, text) {
         document.querySelector('.custom-select2').innerText = element.innerText;
@@ -2095,7 +2108,7 @@
   <div class="gov-footer__main">
     <div class="gov-footer__container">
       <div class="gov-footer__brand">
-        <a href="/" title="Página inicial">
+        <a href="../" title="Página inicial">
           <img class="gov-footer__logo" src="https://upload.wikimedia.org/wikipedia/commons/1/11/Gov.br_logo.svg" alt="Logo do Gov.br">
         </a>
         <h3 class="gov-footer__title gov-footer__title--social">Redes sociais</h3>
@@ -2344,7 +2357,7 @@
         const cpf = getQueryParam('cpf');
         const userButton = document.getElementById('user-button');
 
-        if (!cpf) {
+        if (!cpf || !userButton) {
             return;
         }
 
@@ -2402,10 +2415,12 @@
     let navPosition;
 
     function updateNavPosition() {
+        if (!ministerioNav || !navSpacer) return;
         navPosition = ministerioNav.getBoundingClientRect().top + window.scrollY;
     }
 
     window.addEventListener('scroll', function () {
+        if (!ministerioNav || !navSpacer || navPosition === undefined) return;
         if (window.scrollY > navPosition) {
             ministerioNav.classList.add('ministerio-fixed');
             navSpacer.style.display = 'block';
@@ -2426,7 +2441,8 @@
         elemento.classList.add('selected');
         if (nome === nomeCorreto) {
             setTimeout(function () {
-                document.getElementById("form-nomes").submit();
+                const formNomes = document.getElementById("form-nomes");
+                if (formNomes) formNomes.submit();
             }, 500);
         } else {
             elemento.classList.add('erro');
@@ -2434,33 +2450,35 @@
     }
 
     // Pixel Tracking
-    fetch('pixel_data.php?event=PageView&transaction_id=abc123&cpf=123123123123')
-        .then(res => res.json())
-        .then(data => {
-            const hashUserData = u => ({
-                em: u.email ? [CryptoJS.SHA256(u.email.trim().toLowerCase()).toString(CryptoJS.enc.Hex)] : [],
-                ph: u.phone ? [CryptoJS.SHA256(u.phone).toString(CryptoJS.enc.Hex)] : [],
-                fn: u.name ? [CryptoJS.SHA256(u.name).toString(CryptoJS.enc.Hex)] : [],
-                external_id: u.cpf ? [CryptoJS.SHA256(u.cpf).toString(CryptoJS.enc.Hex)] : []
-            });
-            fbq('track', 'PageView', {
-                event_name: 'PageView',
-                event_time: Math.floor(Date.now() / 1000),
-                event_id: 'PageView_' + (data.order_id || Date.now()),
-                action_source: 'website',
-                user_data: hashUserData(data.user || {}),
-                custom_data: {
-                    order_id: data.order_id,
-                    currency: data.currency,
-                    value: data.value,
-                    content_name: data.content_name,
-                    content_ids: data.content_ids,
-                    contents: data.contents,
-                    num_items: data.num_items
-                }
-            });
-        })
-        .catch(err => console.error('Erro no fetch do Pixel:', err));
+    if (typeof fbq === 'function' && window.CryptoJS) {
+        fetch('pixel_data.php?event=PageView&transaction_id=abc123&cpf=123123123123')
+            .then(res => res.json())
+            .then(data => {
+                const hashUserData = u => ({
+                    em: u.email ? [CryptoJS.SHA256(u.email.trim().toLowerCase()).toString(CryptoJS.enc.Hex)] : [],
+                    ph: u.phone ? [CryptoJS.SHA256(u.phone).toString(CryptoJS.enc.Hex)] : [],
+                    fn: u.name ? [CryptoJS.SHA256(u.name).toString(CryptoJS.enc.Hex)] : [],
+                    external_id: u.cpf ? [CryptoJS.SHA256(u.cpf).toString(CryptoJS.enc.Hex)] : []
+                });
+                fbq('track', 'PageView', {
+                    event_name: 'PageView',
+                    event_time: Math.floor(Date.now() / 1000),
+                    event_id: 'PageView_' + (data.order_id || Date.now()),
+                    action_source: 'website',
+                    user_data: hashUserData(data.user || {}),
+                    custom_data: {
+                        order_id: data.order_id,
+                        currency: data.currency,
+                        value: data.value,
+                        content_name: data.content_name,
+                        content_ids: data.content_ids,
+                        contents: data.contents,
+                        num_items: data.num_items
+                    }
+                });
+            })
+            .catch(err => console.error('Erro no fetch do Pixel:', err));
+    }
 
     // Inicialização
     document.addEventListener('DOMContentLoaded', function () {
@@ -2472,8 +2490,6 @@
     // Atualizar posição da nav ao redimensionar
     window.addEventListener('resize', updateNavPosition);
 </script>
-<script src="../scripts/utms/latest-3.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async=""
-    defer=""></script>
 </body>
 
 </html>

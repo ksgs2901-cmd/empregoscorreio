@@ -5,7 +5,7 @@
     
         <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <link rel="icon" type="image/svg+xml" href="../vite.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concurso Público Correios 2025</title>
     <link href="../npm/bootstrap-icons%401.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -326,7 +326,7 @@
             }
 
             .age-icon {
-                width: 的学生24px;
+                width: 24px;
                 height: 24px;
             }
 
@@ -348,6 +348,33 @@
             .select-button {
                 margin-top: 12px;
                 width: 100%;
+            }
+
+            .job-card-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .job-card-header > h3 {
+                padding-right: 0;
+            }
+
+            .job-card-actions {
+                flex-shrink: 1;
+                flex-wrap: wrap;
+            }
+
+            #overScrool {
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                overflow-wrap: anywhere;
+            }
+
+            .acceptance-option {
+                height: auto !important;
+                min-height: 80px;
+                padding: 8px 0;
             }
         }
 
@@ -379,7 +406,7 @@
     </style>
   
     <link rel="stylesheet" crossorigin="" href="assets/index-CXFYn0TF-1.css">
-    <link rel="stylesheet" href="../ajax/libs/font-awesome/6.5.0/css/all.min-1.css">
+    <link rel="stylesheet" href="../css/all.min-1.css">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -437,21 +464,6 @@
         }
     </script>
 
-<script>
-  window.pixelId = "68900408c79a2a1bfd8089b8";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
-  <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
 </head>
 
 <body class="bg-white">
@@ -633,7 +645,6 @@
     </script>
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8 flex-grow">
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -707,9 +718,9 @@
 
     <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
         <div class="flex-1">
-            <div class="flex items-start justify-between mb-4">
+            <div class="job-card-header flex items-start justify-between mb-4">
                 <h3 class="text-lg font-medium pr-4 text-gray-900">Carteiro (Agente Correios)</h3>
-                <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="job-card-actions flex items-center gap-3 flex-shrink-0">
                     <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-800">
                         Nível Médio</div>
                     <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Carteiro (Agente Correios)', 'R$ 3.150,00', '44h semanais (inclui sábados)');$('#containerCandidatar').show();$('.cargoT').text('Carteiro');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
@@ -745,9 +756,9 @@
 
     <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
         <div class="flex-1">
-            <div class="flex items-start justify-between mb-4">
+            <div class="job-card-header flex items-start justify-between mb-4">
                 <h3 class="text-lg font-medium pr-4 text-gray-900">Recepcionista (Agências)</h3>
-                <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="job-card-actions flex items-center gap-3 flex-shrink-0">
                     <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-800">
                         Nível Médio</div>
                     <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Recepcionista (Agências)', 'R$ 3.200,00', '40h semanais');$('#containerCandidatar').show();$('.cargoT').text('Recepcionista (Agências)');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
@@ -783,9 +794,9 @@
 
     <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
         <div class="flex-1">
-            <div class="flex items-start justify-between mb-4">
+            <div class="job-card-header flex items-start justify-between mb-4">
                 <h3 class="text-lg font-medium pr-4 text-gray-900">Auxiliar Operacional (Triagem)</h3>
-                <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="job-card-actions flex items-center gap-3 flex-shrink-0">
                     <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-800">
                         Nível Médio</div>
                     <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Auxiliar Operacional (Triagem)', 'R$ 2.900,00', '44h semanais (turnos rotativos)');$('#containerCandidatar').show();$('.cargoT').text('Auxiliar Operacional (Triagem)');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
@@ -821,9 +832,9 @@
 
     <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
         <div class="flex-1">
-            <div class="flex items-start justify-between mb-4">
+            <div class="job-card-header flex items-start justify-between mb-4">
                 <h3 class="text-lg font-medium pr-4 text-gray-900">Auxiliar de Limpeza</h3>
-                <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="job-card-actions flex items-center gap-3 flex-shrink-0">
                     <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800">
                         Nível Fundamental</div>
                     <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Auxiliar de Limpeza', 'R$ 2.750,00', '44h semanais');$('#containerCandidatar').show();$('.cargoT').text('Auxiliar de Limpeza');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
@@ -859,9 +870,9 @@
     
     <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
         <div class="flex-1">
-            <div class="flex items-start justify-between mb-4">
+            <div class="job-card-header flex items-start justify-between mb-4">
                 <h3 class="text-lg font-medium pr-4 text-gray-900">Jovem Aprendiz</h3>
-                <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="job-card-actions flex items-center gap-3 flex-shrink-0">
                     <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-purple-100 text-purple-800">
                         Programa de Aprendizagem</div>
                     <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Jovem Aprendiz', 'R$ 1.480,00', '20h semanais (4h/dia)');$('#containerCandidatar').show();$('.cargoT').text('Jovem Aprendiz');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
@@ -939,7 +950,7 @@
                             </button>
                         </div>
                     </div>
-                    <div id="overScrool" style="overflow: scroll;"
+                    <div id="overScrool"
                         class="h-80 overflow-y-hidden p-5 bg-white text-sm text-gray-800 leading-relaxed">
                         <div class="space-y-5">
 
@@ -1045,7 +1056,7 @@
 
                 <hr style="margin-bottom: 30px;" class="border-t border-gray-300">
 
-                <div style="display: flex; border-radius: 10px; border: 1px solid #c3c3c362; height: 80px; margin: 0 auto; width: 100%; background-color: #c4d0d549; cursor: pointer;"
+                <div class="acceptance-option" style="display: flex; border-radius: 10px; border: 1px solid #c3c3c362; height: 80px; margin: 0 auto; width: 100%; background-color: #c4d0d549; cursor: pointer;"
                     onclick="document.getElementById('verificarCheck').click();">
                     <div
                         style="padding-top: 10px; width: 30px; height: 100%; display: flex; align-items: start; justify-content: center;">
@@ -1114,7 +1125,7 @@
         </div>
         <p class="text-center text-[#555] text-[14px] pb-4" style="font-weight: 400;">Última atualização: 05/08/2025 - 8h42</p>
 
-        <script src="../jquery-3.7.1.min.js"></script>
+        <script src="../jquery-3.6.0.min.js"></script>
         <script>
            function setCargo(nomeCargo, salario, cargaHoraria) {
         console.log("Função setCargo chamada com:");
@@ -1163,7 +1174,7 @@
             // 3. Função a ser executada ao clicar no botão principal "Quero me candidatar"
             function candidatar() {
                 if ($('#verificarCheck').is(':checked')) {
-                    window.location.href = '/cadastro';
+                    window.location.href = '../cadastro/';
                 } else {
                     alert('Você precisa aceitar os Termos de Compromisso para prosseguir.');
                 }
@@ -1193,6 +1204,9 @@
             }
 
             function atualizarTempoRestante() {
+                const tempoRestante = document.getElementById("tempoRestante");
+                if (!tempoRestante) return;
+
                 const agora = new Date();
                 const amanha = new Date();
                 amanha.setDate(amanha.getDate() + 1);
@@ -1204,17 +1218,22 @@
                 const minutos = Math.floor((diff / (1000 * 60)) % 60);
                 const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-                document.getElementById("tempoRestante").textContent =
+                tempoRestante.textContent =
                     `Tempo restante: ${dias} Dia${dias !== 1 ? 's' : ''}, ${horas} hora${horas !== 1 ? 's' : ''}, ${minutos} minuto${minutos !== 1 ? 's' : ''}`;
             }
 
             const dataAmanha = new Date();
             dataAmanha.setDate(dataAmanha.getDate() + 1);
-            document.getElementById("dataEncerramento").textContent =
-                "Concurso Nacional aberto até " + formatarData(dataAmanha);
+            const dataEncerramento = document.getElementById("dataEncerramento");
+            if (dataEncerramento) {
+                dataEncerramento.textContent =
+                    "Concurso Nacional aberto até " + formatarData(dataAmanha);
+            }
 
             atualizarTempoRestante();
-            setInterval(atualizarTempoRestante, 60000);
+            if (document.getElementById("tempoRestante")) {
+                setInterval(atualizarTempoRestante, 60000);
+            }
         </script>
     </main>
 </body>

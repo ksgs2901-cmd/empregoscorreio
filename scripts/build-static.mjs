@@ -17,6 +17,7 @@ const excluded = new Set([
   'dist',
   'node_modules',
   'scripts',
+  'BACKEND_DEPENDENCIES.md',
   'MEMÓRIAS.md',
   'README.md',
   'webcopy-origin.txt',
@@ -58,6 +59,19 @@ if (validation.stderr) process.stderr.write(validation.stderr);
 if (validation.status !== 0) {
   rmSync(output, { recursive: true, force: true });
   process.exit(validation.status || 1);
+}
+
+const routeValidation = spawnSync(
+  process.execPath,
+  [join(root, 'scripts', 'check-routes.mjs'), output],
+  { encoding: 'utf8' }
+);
+
+if (routeValidation.stdout) process.stdout.write(routeValidation.stdout);
+if (routeValidation.stderr) process.stderr.write(routeValidation.stderr);
+if (routeValidation.status !== 0) {
+  rmSync(output, { recursive: true, force: true });
+  process.exit(routeValidation.status || 1);
 }
 
 if (!existsSync(join(output, 'index.html'))) {

@@ -4,8 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "check": "node scripts/check-static.mjs .",
+    "check": "npm run check:assets && npm run check:routes",
+    "check:assets": "node scripts/check-static.mjs .",
+    "check:routes": "node scripts/check-routes.mjs .",
     "build": "node scripts/build-static.mjs",
-    "check:dist": "node scripts/check-static.mjs dist"
+    "check:dist": "node scripts/check-static.mjs dist && node scripts/check-routes.mjs dist"
   }
 }

@@ -351,6 +351,71 @@
             min-height: calc(100vh - 200px);
             position: relative;
         }
+
+        .payment-header-content {
+            width: 100%;
+        }
+
+        #pixCode {
+            min-width: 0;
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 10px 12px;
+                overflow: visible;
+            }
+
+            header img {
+                width: 120px;
+                max-width: 40vw;
+            }
+
+            .payment-header-content {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .payment-header-actions {
+                width: 100%;
+                justify-content: space-between;
+                gap: 4px;
+            }
+
+            .payment-header-actions .mx-3 {
+                margin-left: 4px;
+                margin-right: 4px;
+            }
+
+            .payment-header-actions #user-link {
+                padding: 8px 12px;
+            }
+
+            .govbr-container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .notification-popup {
+                max-width: calc(100vw - 24px);
+            }
+
+            .notification-popup.show {
+                right: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pix-copy-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .pix-copy-row .copiarValor {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
     </style>
    
 </head>
@@ -370,13 +435,13 @@
 
     <!-- Header do gov.br -->
     <header>
-<div class="flex justify-between items-center px-4 py-3">
+<div class="payment-header-content flex justify-between items-center px-4 py-3">
             <div class="flex items-center">
                 <a href="/" class="gov-logo">
                     <img src="../logo.png" alt="gov.br" class="h-7">
                 </a>
             </div>
-            <div class="flex items-center">
+            <div class="payment-header-actions flex items-center">
                 <button class="header-btn" id="menu-btn" aria-label="Menu">
                     <i class="fas fa-ellipsis-v text-blue-900 mx-3"></i>
                 </button>
@@ -636,7 +701,7 @@ $(document).ready(function () {
                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                 Código PIX (Copiar e Colar)
                             </label>
-                            <div class="flex">
+                            <div class="pix-copy-row flex">
                                 <input type="text" id="pixCode" class="govbr-input flex-1" readonly="">
                                 <button class="govbr-button ml-2 copiarValor">
                                     Copiar

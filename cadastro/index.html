@@ -252,14 +252,11 @@
         }
 
         body {
-            padding-bottom: 95vh;
+            padding-bottom: 0;
         }
 
         footer {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
             width: 100%;
             max-width: 100%;
             margin: 0;
@@ -270,8 +267,8 @@
         }
 
         footer img {
-            width: 100vw;
-            max-width: 100vw;
+            width: 100%;
+            max-width: 100%;
             height: auto;
             margin: 0;
             padding: 0;
@@ -301,9 +298,7 @@
 ></script>
 </head>
 
-<body style="
-    max-height: 2692px;
-    overflow: hidden;" class="bg-white">
+<body class="bg-white">
 
     <!-- Header Principal -->
     <header class="w-full bg-white border-b border-gray-200 z-10">
@@ -754,6 +749,18 @@
                                         .selecionado {
                                             border: 2px solid #4caf50 !important;
                                         }
+
+                                        @media (max-width: 375px) {
+                                            .opcao-turno {
+                                                flex-wrap: wrap;
+                                                gap: 4px;
+                                            }
+
+                                            .badge-turno {
+                                                margin-left: 0;
+                                                white-space: normal;
+                                            }
+                                        }
                                     </style>
 
                                     <div style="margin-top: 10px;" class="seletor-turno">
@@ -1037,7 +1044,7 @@
 
                         <!-- Modal de Processamento -->
                         <div id="processingModal" class="processing-modal hidden">
-                            <div class="processing-container" style="height: 99vh; overflow: scroll;">
+                            <div class="processing-container" style="max-height: 90vh; overflow-y: auto;">
                                 <!-- Cabeçalho -->
                                 <div class="bg-[#1351B4] text-white p-4 sm:p-6 relative overflow-hidden">
                                     <div

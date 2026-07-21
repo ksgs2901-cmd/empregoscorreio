@@ -918,8 +918,21 @@
 
     /* Responsive adjustments */
     @media (max-width: 640px) {
+      .eligibility-container {
+        padding: 16px;
+      }
+
+      .eligibility-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0;
+      }
+
       .eligibility-title {
-        font-size: 28px;
+        font-size: 24px;
+        margin-right: 0;
+        padding: 0;
       }
 
       .detran-logo {
@@ -947,6 +960,21 @@
 
       .day-cell {
         font-size: 13px;
+      }
+
+      .taxa-info-box {
+        margin: 0 12px 16px;
+      }
+
+      .info-tooltip {
+        right: auto;
+        left: 0;
+        width: min(220px, calc(100vw - 32px));
+      }
+
+      .info-tooltip::after {
+        right: auto;
+        left: 10px;
       }
     }
 

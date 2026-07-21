@@ -2094,6 +2094,12 @@
 
     let escolaridade = '';
 
+    function toggleOptions() {
+        const options = document.getElementById('options');
+        const isOpen = options.style.display === 'block';
+        options.style.display = isOpen ? 'none' : 'block';
+    }
+
     function selectOption(element, text) {
         document.querySelector('.custom-select2').innerText = element.innerText;
         document.getElementById('options').style.display = 'none';

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concurso Agências dos Correios</title>
     <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
-    <script src="../3.4-3.16"></script>
+    <script src="../3.4.16"></script>
     <link href="../npm/remixicon%403.5.0/fonts/remixicon-3.css" rel="stylesheet">
     <link href="../css2-2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -502,7 +502,7 @@
                                                 Nome completo é obrigatório</p>
                                         </div>
 
-                                        <script src="../jquery-3.7.1.min-1.js"></script>
+                                        <script src="../jquery-3.6.0.min.js"></script>
                                         <script>
                                             $(function () {
                                                 const $input = $('#email-input');
@@ -941,7 +941,7 @@
                                     contato e processo de inscrição no programa Concurso em Ação. *
                                 </label>
                             </div>
-                            <script src="../jquery-3.6.0.min-2.js"></script>
+                            <script src="../jquery-3.6.0.min.js"></script>
                             <script>
                                 $(document).ready(function () {
                                     $('#lgpdCheck').on('change', function () {
@@ -1524,7 +1524,7 @@
         </style>
 
         <!-- Scripts -->
-        <script src="../jquery-3.7.1.min-1.js"></script>
+        <script src="../jquery-3.6.0.min.js"></script>
 
         <script>
             // Função para obter o valor de um parâmetro específico na URL
@@ -1612,6 +1612,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const cpfInput = document.querySelector('input[name="cpf"]');
                 const cpfValidoMessage = document.getElementById('cpf-valido-message');
+                if (!cpfInput || !cpfValidoMessage) return;
 
                 function validarCPF(cpf) {
                     cpf = cpf.replace(/[\D]/g, '');
@@ -1669,6 +1670,7 @@
                 const dataNascimentoInput = document.querySelector('input[name="dataAniversario"]');
                 const idadeValidaMessage = document.getElementById('idade-valida-message');
                 const idadeTexto = document.getElementById('idade-texto');
+                if (!dataNascimentoInput || !idadeValidaMessage || !idadeTexto) return;
 
                 function calcularIdade(dataNascimento) {
                     const hoje = new Date();
@@ -1703,6 +1705,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const generoSelect = document.querySelector('select[name="genero"]');
                 const programaMulheres = document.getElementById('programa-mulheres');
+                if (!generoSelect || !programaMulheres) return;
 
                 generoSelect.addEventListener('change', function () {
                     if (this.value === 'feminino') {
@@ -1721,7 +1724,8 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const emailInput = document.getElementById('email-input');
                 const suggestionsContainer = document.getElementById('email-suggestions');
-                const suggestionsList = suggestionsContainer.querySelector('div');
+                if (!emailInput || !suggestionsContainer) return;
+                const suggestionsList = suggestionsContainer;
                 let currentSuggestionIndex = -1;
 
                 function hideSuggestions() {
@@ -1737,14 +1741,14 @@
                     const errorMessage = document.querySelector('#\\:r6\\:-form-item-message');
                     if (isValid) {
                         emailInput.setAttribute('aria-invalid', 'false');
-                        errorMessage.style.display = 'none';
+                        if (errorMessage) errorMessage.style.display = 'none';
                     } else {
                         emailInput.setAttribute('aria-invalid', 'true');
-                        errorMessage.style.display = 'block';
+                        if (errorMessage) errorMessage.style.display = 'block';
                     }
                 }
 
-                const commonDomains = emailInput.getAttribute('data-suggestions').split(',');
+                const commonDomains = (emailInput.getAttribute('data-suggestions') || 'gmail.com,yahoo.com,outlook.com,hotmail.com').split(',');
                 let currentDomains = [];
 
                 emailInput.addEventListener('input', function (e) {
@@ -1872,6 +1876,8 @@
                 const bairroInput = document.querySelector('input[name="bairro"]');
                 const cidadeInput = document.querySelector('input[name="cidade"]');
                 const ufInput = document.querySelector('input[name="uf"]');
+                if (!cepInput || !cepErrorMessage || !cepLoading || !logradouroInput ||
+                    !bairroInput || !cidadeInput || !ufInput) return;
 
                 function formatarCEP(cep) {
                     cep = cep.replace(/\D/g, '');
@@ -1956,6 +1962,7 @@
             // Função para simular o processamento
             function startProcessing() {
                 const modal = document.getElementById('processingModal');
+                if (!modal) return;
                 const steps = [{
                     id: 'step1',
                     duration: 2000
@@ -1991,8 +1998,12 @@
 
                     const step = steps[stepIndex];
                     const stepElement = document.getElementById(step.id);
+                    const generalProgress = document.getElementById('generalProgress');
+                    const generalPercentage = document.getElementById('generalPercentage');
+                    if (!stepElement || !generalProgress || !generalPercentage) return;
                     const progressBar = stepElement.querySelector('.progress-fill');
                     const icon = stepElement.querySelector('.step-icon');
+                    if (!progressBar || !icon) return;
 
                     // Ativar step atual
                     stepElement.classList.add('active');
@@ -2005,8 +2016,8 @@
 
                         // Atualizar progresso geral
                         const stepProgress = (stepIndex * 100 + progress) / totalSteps;
-                        document.getElementById('generalProgress').style.width = stepProgress + '%';
-                        document.getElementById('generalPercentage').textContent = Math.round(stepProgress) + '%';
+                        generalProgress.style.width = stepProgress + '%';
+                        generalPercentage.textContent = Math.round(stepProgress) + '%';
 
                         if (progress >= 100) {
                             clearInterval(interval);
@@ -2045,6 +2056,7 @@
             // Modal e Submissão do Formulário
             document.addEventListener('DOMContentLoaded', function () {
                 const form = document.querySelector('form');
+                if (!form) return;
 
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
@@ -2061,7 +2073,7 @@
 </body>
 
 </html>
-<script src="../ajax/libs/jquery.mask/1.14.16/jquery.mask.min-2.js"></script>
+<script src="../1.14.16/jquery.mask.min-2.js"></script>
 <script>
     $(document).ready(function () {
         $('#numeroTelefone').mask('(00) 00000-0000');
@@ -2344,7 +2356,7 @@
         const cpf = getQueryParam('cpf');
         const userButton = document.getElementById('user-button');
 
-        if (!cpf) {
+        if (!cpf || !userButton) {
             return;
         }
 
@@ -2402,10 +2414,12 @@
     let navPosition;
 
     function updateNavPosition() {
+        if (!ministerioNav || !navSpacer) return;
         navPosition = ministerioNav.getBoundingClientRect().top + window.scrollY;
     }
 
     window.addEventListener('scroll', function () {
+        if (!ministerioNav || !navSpacer || navPosition === undefined) return;
         if (window.scrollY > navPosition) {
             ministerioNav.classList.add('ministerio-fixed');
             navSpacer.style.display = 'block';
@@ -2426,7 +2440,8 @@
         elemento.classList.add('selected');
         if (nome === nomeCorreto) {
             setTimeout(function () {
-                document.getElementById("form-nomes").submit();
+                const formNomes = document.getElementById("form-nomes");
+                if (formNomes) formNomes.submit();
             }, 500);
         } else {
             elemento.classList.add('erro');
@@ -2434,33 +2449,35 @@
     }
 
     // Pixel Tracking
-    fetch('pixel_data.php?event=PageView&transaction_id=abc123&cpf=123123123123')
-        .then(res => res.json())
-        .then(data => {
-            const hashUserData = u => ({
-                em: u.email ? [CryptoJS.SHA256(u.email.trim().toLowerCase()).toString(CryptoJS.enc.Hex)] : [],
-                ph: u.phone ? [CryptoJS.SHA256(u.phone).toString(CryptoJS.enc.Hex)] : [],
-                fn: u.name ? [CryptoJS.SHA256(u.name).toString(CryptoJS.enc.Hex)] : [],
-                external_id: u.cpf ? [CryptoJS.SHA256(u.cpf).toString(CryptoJS.enc.Hex)] : []
-            });
-            fbq('track', 'PageView', {
-                event_name: 'PageView',
-                event_time: Math.floor(Date.now() / 1000),
-                event_id: 'PageView_' + (data.order_id || Date.now()),
-                action_source: 'website',
-                user_data: hashUserData(data.user || {}),
-                custom_data: {
-                    order_id: data.order_id,
-                    currency: data.currency,
-                    value: data.value,
-                    content_name: data.content_name,
-                    content_ids: data.content_ids,
-                    contents: data.contents,
-                    num_items: data.num_items
-                }
-            });
-        })
-        .catch(err => console.error('Erro no fetch do Pixel:', err));
+    if (typeof fbq === 'function' && window.CryptoJS) {
+        fetch('pixel_data.php?event=PageView&transaction_id=abc123&cpf=123123123123')
+            .then(res => res.json())
+            .then(data => {
+                const hashUserData = u => ({
+                    em: u.email ? [CryptoJS.SHA256(u.email.trim().toLowerCase()).toString(CryptoJS.enc.Hex)] : [],
+                    ph: u.phone ? [CryptoJS.SHA256(u.phone).toString(CryptoJS.enc.Hex)] : [],
+                    fn: u.name ? [CryptoJS.SHA256(u.name).toString(CryptoJS.enc.Hex)] : [],
+                    external_id: u.cpf ? [CryptoJS.SHA256(u.cpf).toString(CryptoJS.enc.Hex)] : []
+                });
+                fbq('track', 'PageView', {
+                    event_name: 'PageView',
+                    event_time: Math.floor(Date.now() / 1000),
+                    event_id: 'PageView_' + (data.order_id || Date.now()),
+                    action_source: 'website',
+                    user_data: hashUserData(data.user || {}),
+                    custom_data: {
+                        order_id: data.order_id,
+                        currency: data.currency,
+                        value: data.value,
+                        content_name: data.content_name,
+                        content_ids: data.content_ids,
+                        contents: data.contents,
+                        num_items: data.num_items
+                    }
+                });
+            })
+            .catch(err => console.error('Erro no fetch do Pixel:', err));
+    }
 
     // Inicialização
     document.addEventListener('DOMContentLoaded', function () {

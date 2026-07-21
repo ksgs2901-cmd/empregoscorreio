@@ -458,7 +458,14 @@ $(document).ready(function () {
     const telefoneClean = telefoneRaw.replace(/\D/g, '');
 
     const enderecoString = localStorage.getItem('endereco');
-    const endereco = enderecoString ? JSON.parse(enderecoString) : {};
+    let endereco = {};
+    if (enderecoString) {
+        try {
+            endereco = JSON.parse(enderecoString);
+        } catch (error) {
+            console.warn('Endereço salvo inválido; usando os valores padrão.', error);
+        }
+    }
     const cepClean = (endereco.cep || "88000000").replace(/\D/g, '');
 
     const valorUpsell = 10000;

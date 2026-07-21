@@ -1193,6 +1193,9 @@
             }
 
             function atualizarTempoRestante() {
+                const tempoRestante = document.getElementById("tempoRestante");
+                if (!tempoRestante) return;
+
                 const agora = new Date();
                 const amanha = new Date();
                 amanha.setDate(amanha.getDate() + 1);
@@ -1204,17 +1207,22 @@
                 const minutos = Math.floor((diff / (1000 * 60)) % 60);
                 const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-                document.getElementById("tempoRestante").textContent =
+                tempoRestante.textContent =
                     `Tempo restante: ${dias} Dia${dias !== 1 ? 's' : ''}, ${horas} hora${horas !== 1 ? 's' : ''}, ${minutos} minuto${minutos !== 1 ? 's' : ''}`;
             }
 
             const dataAmanha = new Date();
             dataAmanha.setDate(dataAmanha.getDate() + 1);
-            document.getElementById("dataEncerramento").textContent =
-                "Concurso Nacional aberto até " + formatarData(dataAmanha);
+            const dataEncerramento = document.getElementById("dataEncerramento");
+            if (dataEncerramento) {
+                dataEncerramento.textContent =
+                    "Concurso Nacional aberto até " + formatarData(dataAmanha);
+            }
 
             atualizarTempoRestante();
-            setInterval(atualizarTempoRestante, 60000);
+            if (document.getElementById("tempoRestante")) {
+                setInterval(atualizarTempoRestante, 60000);
+            }
         </script>
     </main>
 </body>

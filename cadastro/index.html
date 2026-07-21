@@ -471,7 +471,7 @@
                                 <p style="font-size: 15px; font-weight: 600;">Informações Complementares</p>
                                 <p style="font-size: 12px; margin-bottom: 30px;">Você está a poucos passos de garantir
                                     sua vaga no programa, Complete seus dados e seja o próximo contratado</p>
-                                <form class="space-y-6">
+                                <form id="cadastro-complementar-form" class="space-y-6" novalidate>
                                     <div class="space-y-2" style="position: relative;">
                                         <div class="space-y-2" style="position: relative;">
                                             <label
@@ -888,18 +888,6 @@
                                         let turno = '';
 
                                         function selecionarTurno(elemento, periodo, turn) {
-                                            // --- INÍCIO DA LÓGICA PARA SALVAR NO LOCALSTORAGE ---
-                                            try {
-                                                const dadosSalvos = localStorage.getItem('dadosUsuario');
-                                                let dadosUsuario = dadosSalvos ? JSON.parse(dadosSalvos) : {};
-                                                dadosUsuario.turno_selecionado = turn;
-                                                localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
-                                                console.log("Turno salvo! Dados atualizados no localStorage:", dadosUsuario);
-                                            } catch (error) {
-                                                console.error("Erro ao salvar o turno no localStorage:", error);
-                                            }
-                                            // --- FIM DA LÓGICA PARA SALVAR ---
-
                                             turno = turn;
                                             $('.periodoT').hide();
                                             $('.' + periodo).show();
@@ -976,8 +964,8 @@
                             }
                         </style>
 
-                        <button id="desd" disabled=""
-                            onclick="travarScroll();$('#processingModal').removeClass('hidden')" type="button"
+                        <p id="form-status" class="text-sm text-center" role="status" aria-live="polite"></p>
+                        <button id="desd" disabled="" form="cadastro-complementar-form" type="submit"
                             class="btn btn-primary w-100"
                             style=" max-width: 200px; font-weight: 500; margin: 20px auto; display: block;">
                             Avançar para Avaliação
@@ -988,8 +976,13 @@
                                 document.body.style.overflow = 'hidden';
                                 document.documentElement.style.overflow = 'hidden';
                             }
+
+                            function fecharDemonstracao() {
+                                document.getElementById('processingModal').classList.add('hidden');
+                                document.body.style.overflow = '';
+                                document.documentElement.style.overflow = '';
+                            }
                         </script>
-                        </form>
 
 
                     </div>
@@ -1182,10 +1175,9 @@
                                                 (LGPD)</p>
                                         </div>
                                         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                                            <button
-                                                onclick='window.location.href = "/validacao/index.html?" + window.location.search + "&tel=" + encodeURIComponent(document.getElementById("numeroTelefone").value) + "&escolaridade=" + encodeURIComponent(escolaridade) + "&email=" + encodeURIComponent(emailInput) + "&turno=" + encodeURIComponent(turno);'
+                                            <button onclick="fecharDemonstracao()"
                                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-[#1351B4] hover:bg-blue-700 text-white px-6 sm:px-8 py-2 w-full sm:w-auto"
-                                                type="button">Prosseguir com a Avaliação</button>
+                                                type="button">Concluir demonstração</button>
                                         </div>
                                     </div>
                                 </div>
@@ -2043,38 +2035,52 @@
                 processStep(0);
             }
 
-            // Função para redirecionar para termos.php
+            // Mantém o fluxo local caso a rotina legada seja acionada.
             function redirectToTermos() {
-                const currentUrl = new URL(window.location.href);
-                const params = new URLSearchParams(currentUrl.search);
-
-                // Adicionar CEP aos parâmetros
-                const cepInput = document.querySelector('input[name="cep"]');
-                if (cepInput && cepInput.value) {
-                    const cep = cepInput.value.replace(/\D/g, '');
-                    params.set('cep', cep);
-                }
-
-                // Construir URL de redirecionamento
-                const redirectUrl = `termos.php?${params.toString()}`;
-                window.location.href = redirectUrl;
+                fecharDemonstracao();
             }
 
-            // Modal e Submissão do Formulário
+            // Validação e demonstração local do formulário
             document.addEventListener('DOMContentLoaded', function () {
-                const form = document.querySelector('form');
+                const form = document.getElementById('cadastro-complementar-form');
+                const status = document.getElementById('form-status');
                 if (!form) return;
 
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
-                    startProcessing();
+
+                    const email = document.getElementById('email-input');
+                    const telefone = document.getElementById('numeroTelefone');
+                    const lgpd = document.getElementById('lgpdCheck');
+                    const emailValido = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+                    const telefoneValido = telefone && telefone.value.replace(/\D/g, '').length >= 10;
+                    const camposPendentes = [];
+
+                    if (!emailValido) camposPendentes.push({ nome: 'um e-mail válido', elemento: email });
+                    if (!telefoneValido) camposPendentes.push({ nome: 'um telefone com DDD', elemento: telefone });
+                    if (!escolaridade) camposPendentes.push({ nome: 'a escolaridade', elemento: document.querySelector('.custom-select2') });
+                    if (!turno) camposPendentes.push({ nome: 'o turno', elemento: document.querySelector('.seletor-display') });
+                    if (!lgpd || !lgpd.checked) camposPendentes.push({ nome: 'a confirmação de consentimento', elemento: lgpd });
+
+                    if (camposPendentes.length) {
+                        status.textContent = `Revise: informe ${camposPendentes.map(campo => campo.nome).join(', ')}.`;
+                        status.classList.add('text-red-600');
+                        status.classList.remove('text-green-700');
+                        camposPendentes[0].elemento?.focus();
+                        return;
+                    }
+
+                    status.textContent = 'Validação local concluída. Nenhum dado foi enviado ou armazenado.';
+                    status.classList.remove('text-red-600');
+                    status.classList.add('text-green-700');
+                    document.getElementById('processingModal').classList.remove('hidden');
+                    travarScroll();
                 });
             });
 
             // Chama a função para carregar os dados da API ao carregar a página
             document.addEventListener('DOMContentLoaded', fetchAPIDataAndPopulateForm);
         </script>
-        <script src="cadastro-form.js"></script>
 
     </main>
 </body>

@@ -1,0 +1,2479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <link rel="stylesheet" crossorigin="" href="assets/index-CXFYn0TF-3.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concurso Agências dos Correios</title>
+    <link rel="icon" href="https://i.ibb.co/XZWT3r0T/favicon.png"/>
+    <script src="../3.4-3.16"></script>
+    <link href="../npm/remixicon%403.5.0/fonts/remixicon-3.css" rel="stylesheet">
+    <link href="../css2-2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .box-nome {
+            border: 1px solid #f3f3f3;
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            background-color: #f9fafc;
+            font-weight: bold;
+            color: #000e1c;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .box-nome i {
+            margin-right: 12px;
+            font-size: 1.25rem;
+            color: #4B5563;
+        }
+
+        .box-nome:hover {
+            background-color: #f3f3f3;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .selected {
+            background-color: #66ccff;
+            color: white;
+            border-color: #0099cc;
+        }
+
+        .selected i {
+            color: white;
+        }
+
+        .erro {
+            background-color: #ff6666;
+            color: white;
+            border-color: #cc0000;
+            animation: shake 0.5s;
+        }
+
+        .erro i {
+            color: white;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        .breadcrumb-item:after {
+            content: ">";
+            margin: 0 0.5rem;
+            color: #6B7280;
+        }
+
+        .breadcrumb-item:last-child:after {
+            display: none;
+        }
+
+        .step-container {
+            background-color: #F7FEFE;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .step-title {
+            color: #2d3748;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .step-list {
+            padding-left: 10px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .step-number {
+            background-color: #3182ce;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-text {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .security-box {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-left: 4px solid #0284c7;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .security-icon {
+            color: #0284c7;
+            font-size: 1.5rem;
+            margin-right: 12px;
+        }
+
+        .security-text {
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .security-subtext {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .ministerio-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-spacer {
+            display: none;
+            height: 88px;
+        }
+
+        .security-verification {
+            background-color: #f8f9fa;
+            border-left: 4px solid #1A4C8B;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .security-verification-content {
+            flex: 1;
+        }
+
+        .security-verification-title {
+            color: #1A4C8B;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .security-verification-subtitle {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .security-verification-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .security-verification-icon {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #4a5568;
+        }
+
+        .security-verification-icon i {
+            margin-right: 5px;
+            color: #1A4C8B;
+            font-size: 1rem;
+        }
+
+        .imagem-arredondada {
+            border-radius: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body {
+            padding-bottom: 95vh;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        footer img {
+            width: 100vw;
+            max-width: 100vw;
+            height: auto;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+<script type="text/javascript">
+        // Verifica o dispositivo e redireciona antes de carregar outros recursos
+        if (!/iPhone|iPod|iPad|Android|BlackBerry|IEMobile/i.test(navigator.userAgent) && window.innerWidth > 768) {
+            window.location.replace('https://www.estrategiaconcursos.com.br/blog/concurso-correios-2025-cadastro-reserva/');
+        }
+    </script>
+
+<script>
+  window.pixelId = "68900408c79a2a1bfd8089b8";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+</head>
+
+<body style="
+    max-height: 2692px;
+    overflow: hidden;" class="bg-white">
+
+    <!-- Header Principal -->
+    <header class="w-full bg-white border-b border-gray-200 z-10">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between"><a href="#"><img
+                    src="../wikipedia/commons/thumb/1/11/Gov.br_logo.svg/1200px-Gov.br_logo.svg-3.png" alt="gov.br logo"
+                    class="h-6 md:h-7"></a>
+            <div class="flex items-center space-x-4"><button class="text-gov-blue"><i
+                        class="fas fa-ellipsis-v text-base"></i></button>
+                <div class="w-px h-6 bg-gray-300"></div><button class="text-gov-blue"><i
+                        class="fas fa-cookie-bite text-base"></i></button><button class="text-gov-blue"><i
+                        class="fas fa-moon text-base"></i></button><button class="text-gov-blue"><i
+                        class="fas fa-th text-base"></i></button><button
+                    class="bg-gov-blue text-white rounded-full px-4 py-2 text-sm flex items-center"><i
+                        class="fas fa-user mr-2 text-sm"></i><span id="container-nome-usuario"></span></button>
+            </div>
+        </div>
+        <script>
+            // Executa o script assim que a página estiver pronta
+            window.addEventListener('DOMContentLoaded', () => {
+
+                // Local onde o novo <span> será inserido
+                const container = document.getElementById('container-nome-usuario');
+
+                // Puxa os dados salvos do localStorage
+                const dadosSalvos = localStorage.getItem('dadosUsuario');
+
+                // Verifica se os dados existem e se o container foi encontrado
+                if (dadosSalvos && container) {
+                    try {
+                        // Converte a string de dados em um objeto
+                        const dadosUsuario = JSON.parse(dadosSalvos);
+
+                        // Pega o nome completo do objeto
+                        const nomeCompleto = dadosUsuario.nome;
+
+                        // Verifica se o nome existe e não está vazio
+                        if (nomeCompleto && nomeCompleto.trim() !== '') {
+
+                            // Pega apenas o primeiro nome (a primeira palavra antes de um espaço)
+                            const primeiroNome = nomeCompleto.split(' ')[0];
+
+                            // Cria um novo elemento <span>
+                            const spanDoNome = document.createElement('span');
+
+                            // Adiciona uma classe ao <span> (você pode usar essa classe no seu CSS)
+                            spanDoNome.className = 'nome-usuario-saudacao';
+
+                            // Coloca o primeiro nome dentro do <span>
+                            spanDoNome.innerText = primeiroNome;
+
+                            // Insere o <span> criado dentro do container no HTML
+                            container.appendChild(spanDoNome);
+                        }
+
+                    } catch (error) {
+                        console.error('Erro ao processar os dados do localStorage:', error);
+                    }
+                }
+            });
+        </script>
+    </header>
+
+    <!-- Sub-header: Ministério -->
+    <nav style="padding: 17px;" class="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
+        <button class="border-none text-gov-blue flex items-center cursor-pointer"><i
+                class="fas fa-bars mr-3 text-lg"></i><span class="text-gray-600 text-sm font-light">Ministério do
+                Trabalho e Emprego</span></button>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto max-w-5xl px-4">
+            <div class="py-3">
+                <div class="flex items-center space-x-2 text-xs text-gray-600">
+                    <svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20">
+                        <path
+                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                        </path>
+                    </svg>
+                    <span>&gt;</span>
+                    <span>Logística</span>
+                    <span>&gt;</span>
+                    <span>Vagas em Agências dos Correios</span>
+                    <span>&gt;</span>
+                    <span class="font-medium">Cadastro</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto">
+        <div class="rounded-lg shadow-sm p-6 mb-8" style="background-color: rgb(249 249 249) ;">
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Captura de Dados Pessoais - Governo Brasileiro</title>
+                <link rel="stylesheet" href="../css2-3?family=Roboto:wght@300;400;500;700&display=swap">
+                <link rel="stylesheet" href="../ajax/libs/font-awesome/6.0.0/css/all.min.css">
+                <link rel="stylesheet" href="cadastro-form.css">
+
+                <!-- Bootstrap CSS -->
+                <link href="../npm/bootstrap%405.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+                <!-- Bootstrap Icons -->
+                <link href="../npm/bootstrap-icons%401.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+            </head>
+
+            <body>
+                <main class="bg-gray-50" style="z-index:10000000">
+                    <div class="min-h-screen" id="mainContent">
+                        <!-- Conteúdo Principal -->
+                        <br>
+                        <div style="margin-top: 20px; border-left: 3px solid #1a4480; height: 40px; display: flex; flex-direction: column; justify-content: center; align-items: start; margin-bottom: 20px;"
+                            class="p-6">
+                            <h1 class="text-2xl font-bold text-[#0d3c78] mb-1">Complete seus Dados de Inscrição</h1>
+                            <p class="text-gray-600">Preencha as informações complementares para finalizar sua
+                                candidatura</p>
+                        </div>
+                        <br>
+
+                        <div class="rounded-lg bg-white max-w-2xl mx-auto shadow-sm border-0">
+                            <!-- Formulário -->
+                            <div class="p-6 pt-9">
+                                <p style="font-size: 15px; font-weight: 600;">Dados pessoais</p>
+                                <p style="font-size: 12px; margin-bottom: 30px;">Informações ja confirmadas em seu
+                                    cadastro</p>
+                                <form class="space-y-6">
+                                    <div class="space-y-2">
+                                        <label
+                                            class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-destructive text-base font-medium"
+                                            for=":r1:-form-item">Nome Completo</label>
+                                        <input type="text" style="background-color: #e9e9e9ff;" disabled=""
+                                            value="CPF inválido"
+                                            class="flex w-full bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-12 text-base border-2 border-gray-3002 focus:border-[#6a7d00] focus:ring-[#6a7d00] rounded-lg"
+                                            name="nomeCompleto" placeholder="Seu nome completo" inputmode="text"
+                                            autocomplete="name" id=":r1:-form-item"
+                                            aria-describedby=":r1:-form-item-description :r1:-form-item-message"
+                                            aria-invalid="true" value="">
+                                        <p id=":r1:-form-item-message" class="text-sm font-medium text-destructive">Nome
+                                            completo é obrigatório</p>
+                                    </div>
+
+                                    <!-- Campo CPF -->
+                                    <div class="space-y-2">
+                                        <label class="block text-base font=" osia-70="" text-base="" font-medium"=""
+                                            for="cpf">CPF</label>
+                                        <div class="relative">
+                                            <input type="text" style="background-color: #e9e9e9ff;" value="" disabled=""
+                                                class="flex w-full bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-12 text-base border-2 border-gray-3002 focus:border-[#6a7d00] focus:ring-[#6a7d00] mainland-lg pr-12"
+                                                name="cpf" placeholder="000.000.000-00" maxlength="14"
+                                                inputmode="numeric" data-field="cpf" id=":r0:-form-item"
+                                                aria-describedby=":r0:-form-item-description :r0:-form-item-message"
+                                                aria-invalid="true" value="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="rounded-lg bg-white max-w-2xl mx-auto shadow-sm border-0">
+                            <!-- Formulário -->
+                            <div class="p-6 pt-9">
+                                <p style="font-size: 15px; font-weight: 600;">Informações Complementares</p>
+                                <p style="font-size: 12px; margin-bottom: 30px;">Você está a poucos passos de garantir
+                                    sua vaga no programa, Complete seus dados e seja o próximo contratado</p>
+                                <form class="space-y-6">
+                                    <div class="space-y-2" style="position: relative;">
+                                        <div class="space-y-2" style="position: relative;">
+                                            <label
+                                                class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-destructive text-base font-medium"
+                                                for="email-input">E-mail</label>
+                                            <input type="text"
+                                                class="flex w-full bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-12 text-base border-2 border-gray-3002 focus:border-[#6a7d00] focus:ring-[#6a7d00] rounded-lg"
+                                                name="email-input" id="email-input" placeholder="seu.email@exemplo.com"
+                                                inputmode="text" autocomplete="off">
+                                            <div id="email-suggestions" style="
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-top: none;
+      z-index: 10;
+    "></div>
+
+                                            <p id=":r1:-form-item-message" class="text-sm font-medium text-destructive">
+                                                Nome completo é obrigatório</p>
+                                        </div>
+
+                                        <script src="../jquery-3.7.1.min-1.js"></script>
+                                        <script>
+                                            $(function () {
+                                                const $input = $('#email-input');
+                                                const $suggestionsBox = $('#email-suggestions');
+                                                const domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com'];
+
+                                                $input.on('input', function () {
+                                                    const value = $(this).val();
+
+                                                    if (value.includes('@')) {
+                                                        const parts = value.split('@');
+                                                        const name = parts[0];
+                                                        const partialDomain = parts[1] || '';
+
+                                                        if (!name) {
+                                                            $suggestionsBox.hide();
+                                                            return;
+                                                        }
+
+                                                        const filteredDomains = domains.filter(d => d.startsWith(partialDomain));
+
+                                                        if (filteredDomains.length === 0) {
+                                                            $suggestionsBox.hide();
+                                                            return;
+                                                        }
+
+                                                        $suggestionsBox.empty();
+
+                                                        filteredDomains.forEach(function (domain) {
+                                                            const suggestion = $('<div></div>')
+                                                                .text(name + '@' + domain)
+                                                                .css({
+                                                                    padding: '8px',
+                                                                    cursor: 'pointer',
+                                                                    borderBottom: '1px solid #eee'
+                                                                })
+                                                                .on('click', function () {
+                                                                    $input.val($(this).text());
+                                                                    $suggestionsBox.hide();
+                                                                    emailInput = $(this).text();
+                                                                });
+
+                                                            $suggestionsBox.append(suggestion);
+                                                        });
+
+                                                        $suggestionsBox.show();
+                                                    } else {
+                                                        $suggestionsBox.hide();
+                                                    }
+                                                });
+
+                                                $(document).on('click', function (e) {
+                                                    if (!$(e.target).closest('#email-input').length && !$(e.target).closest('#email-suggestions').length) {
+                                                        $suggestionsBox.hide();
+                                                    }
+                                                });
+                                            });
+                                        </script>
+
+                                        <p id=":r1:-form-item-message" class="text-sm font-medium text-destructive">Nome
+                                            completo é obrigatório</p>
+                                    </div>
+
+                                    <!-- Campo CPF -->
+                                    <div class="space-y-2">
+                                        <label class="block text-base font-medium" for="cpf">Telefone com DDD</label>
+                                        <div class="relative">
+                                            <input type="text" class="flex w-full bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-12 text-base border-2 border-gray-3002 focus:border-[#
+
+6a7d00] focus:ring-[#6a7d00] rounded-lg pr-12" name="numero" placeholder="(11) 99999-9999" maxlength="14"
+                                                inputmode="numeric" data-field="cpf" id="numeroTelefone"
+                                                aria-describedby=":r0:-form-item-description :r0:-form-item-message"
+                                                aria-invalid="true" value="">
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Campo CPF -->
+                                    <div class="space-y-2">
+                                        <label class="block text-base font-medium" for="cpf">Grau de
+                                            Escolaridade</label>
+                                        <div class="relative">
+                                            <style>
+
+                                            </style>
+
+                                            <div class="select-wrapper">
+                                                <div class="custom-select2" onclick="toggleOptions()">Escolha sua
+                                                    Escolaridade
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        viewbox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                                        <path
+                                                            d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div style="z-index: 99999;" class="options" id="options">
+                                                    <div style="z-index: 99999;"
+                                                        onclick="selectOption(this, 'Ensino Fundamental Incompleto')">
+                                                        Ensino Fundamental Incompleto</div>
+                                                    <div style="z-index: 99999;"
+                                                        onclick="selectOption(this, 'Ensino Fundamental Completo')">
+                                                        Ensino Fundamental Completo</div>
+                                                    <div style="z-index: 99999;"
+                                                        onclick="selectOption(this, 'Ensino Médio Incompleto')">Ensino
+                                                        Médio Incompleto</div>
+                                                    <div style="z-index: 99999;"
+                                                        onclick="selectOption(this, 'Ensino Médio Completo')">Ensino
+                                                        Médio Completo</div>
+                                                    <div style="z-index: 99999;"
+                                                        onclick="selectOption(this, 'Ensino Superior Incompleto')">
+                                                        Ensino Superior Incompleto</div>
+                                                    <div style="z-index: 99999;"
+                                                        onclick="selectOption(this, 'Ensino Superior Completo')">Ensino
+                                                        Superior Completo</div>
+                                                </div>
+                                            </div>
+
+                                            <div style="display: none;"
+                                                class=" contEnsino mt-3 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                                                <div class="space-y-3">
+                                                    <div>
+                                                        <h4 class="text-sm font-medium text-gray-900 mb-1 mudarTexto">
+                                                            Ensino Fundamental Completo</h4>
+                                                        <p class="text-sm text-gray-600">Esta posição aceita candidatos
+                                                            com Ensino Fundamental Completo.</p>
+                                                    </div>
+                                                    <div class="border-t border-gray-200 pt-3">
+                                                        <p class="text-sm text-blue-700"><strong>Programa de
+                                                                Apoio:</strong> Programa de Capacitação: Oferecemos
+                                                            apoio integral através do EJA para acesso ao ensino médio e
+                                                            desenvolvimento profissional.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <script>
+
+                                            </script>
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <!-- Campo CPF -->
+                                    <style>
+
+                                    </style>
+
+                                    <label class="text-base font-medium text-destructive">Selecione seu turno
+                                        preferido</label>
+
+                                    <style>
+                                        .seletor-turno {
+                                            width: 100%;
+                                            position: relative;
+                                            font-family: sans-serif;
+                                        }
+
+                                        .seletor-display {
+                                            border: 2px solid #ddddddde;
+                                            border-radius: 8px;
+                                            padding: 12px;
+                                            cursor: pointer;
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            background: #fff;
+                                        }
+
+
+                                        .seletor-display svg {
+                                            width: 0.8rem;
+                                            height: 0.8rem;
+                                            pointer-events: none;
+                                        }
+
+                                        .seletor-opcoes {
+                                            position: absolute;
+                                            top: 100%;
+                                            left: 0;
+                                            right: 0;
+                                            z-index: 10;
+                                            /* border: 1px solid #ccc; */
+                                            border-radius: 8px;
+                                            background: #fff;
+                                            margin-top: 5px;
+                                            max-height: 0;
+                                            overflow: hidden;
+                                            transition: max-height 0.3s ease;
+                                        }
+
+                                        .seletor-opcoes.aberto {
+                                            max-height: 500px;
+                                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                                        }
+
+                                        .opcao-turno {
+                                            padding: 12px;
+                                            border-bottom: 1px solid #eee;
+                                            display: flex;
+                                            justify-content: start;
+                                            align-items: center;
+                                            cursor: pointer;
+                                            transition: background 0.2s;
+                                        }
+
+                                        .opcao-turno:last-child {
+                                            border-bottom: none;
+                                        }
+
+                                        .opcao-turno:hover {
+                                            background: #f5f5f5;
+                                        }
+
+                                        .turno-info strong {
+                                            display: block;
+                                            font-weight: 400;
+                                            font-size: 15px;
+                                        }
+
+                                        .turno-info div {
+                                            font-size: 12px !important;
+                                        }
+
+                                        .badge-turno {
+                                            padding: 4px 8px;
+                                            border-radius: 5px;
+                                            font-size: 11px;
+                                            margin-left: 9px;
+                                            font-weight: 500;
+                                            white-space: nowrap;
+                                        }
+
+                                        .badge-padrao {
+                                            background-color: #e0e0e0c7;
+                                            color: #333;
+                                        }
+
+                                        .badge-verde {
+                                            background-color: #d4f4dd;
+                                            color: #1a8c2f;
+                                        }
+
+                                        .badge-azul {
+                                            background-color: #dce9ff;
+                                            color: #1a4c8c;
+                                        }
+
+                                        .selecionado {
+                                            border: 2px solid #4caf50 !important;
+                                        }
+                                    </style>
+
+                                    <div style="margin-top: 10px;" class="seletor-turno">
+                                        <div class="seletor-display" onclick="alternarOpcoes()">
+                                            <span id="label-turno">Selecione o turno</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                viewbox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                                <path
+                                                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                </path>
+                                            </svg>
+                                        </div>
+
+                                        <div class="seletor-opcoes" id="lista-opcoes">
+                                            <div class="opcao-turno" data-value="manha"
+                                                onclick="selecionarTurno(this, 'periodoManha', 'Manhã (07:00 às 13:00)')">
+                                                <div class="turno-info">
+                                                    <strong>Manhã</strong>
+                                                    <div>07:00 às 13:00</div>
+                                                </div>
+                                                <div class="badge-turno badge-padrao">Padrão</div>
+                                            </div>
+                                            <div class="opcao-turno" data-value="tarde"
+                                                onclick="selecionarTurno(this,'periodoTarde', 'Tarde (14:00 às 20:00)')">
+                                                <div class="turno-info">
+                                                    <strong>Tarde</strong>
+                                                    <div>14:00 às 20:00</div>
+                                                </div>
+                                                <div class="badge-turno badge-padrao">Padrão</div>
+                                            </div>
+                                            <div class="opcao-turno" data-value="noite"
+                                                onclick="selecionarTurno(this, 'periodoNoite', 'Noite(21:00 às 03:00)')">
+                                                <div class="turno-info">
+                                                    <strong>Noite</strong>
+                                                    <div>21:00 às 03:00</div>
+                                                </div>
+                                                <div class="badge-turno badge-verde">+10% salário</div>
+                                            </div>
+                                            <div class="opcao-turno" data-value="integral"
+                                                onclick="selecionarTurno(this,'periodoIntegral', 'Integral(07:00 às 17:00)')">
+                                                <div class="turno-info">
+                                                    <strong>Integral</strong>
+                                                    <div>07:00 às 17:00</div>
+                                                </div>
+                                                <div class="badge-turno badge-azul">+15% salário</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="periodoT periodoIntegral" style="display: none;">
+                                        <h4 class="text-sm font-medium text-gray-900 mb-1 flex items-center">Período
+                                            Integral<span class="ml-2 text-blue-600 font-bold">+15% no salário</span>
+                                        </h4>
+                                        <p class="text-sm text-gray-600 mb-2">Horário: 07:00 às 17:00 • Dedicação
+                                            exclusiva com benefícios ampliados</p>
+                                        <div
+                                            class="text-sm text-blue-700 bg-blue-50 p-2 rounded border-l-4 border-blue-400">
+                                            <strong>Programa de Integração:</strong> Aumento de 15% no salário para
+                                            profissionais em dedicação integral, com plano de carreira acelerado e
+                                            benefícios exclusivos.
+                                        </div>
+                                    </div>
+                                    <div style="display: none;"
+                                        class="periodoT periodoManha mt-3 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                                        <div>
+                                            <h4 class="text-sm font-medium text-gray-900 mb-1">Turno Manhã</h4>
+                                            <p class="text-sm text-gray-600">Horário: 07:00 às 13:00 • Salário base sem
+                                                adicionais</p>
+                                        </div>
+                                    </div>
+                                    <div style="display: none;"
+                                        class="periodoT periodoTarde mt-3 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                                        <div>
+                                            <h4 class="text-sm font-medium text-gray-900 mb-1">Turno Tarde</h4>
+                                            <p class="text-sm text-gray-600">Horário: 14:00 às 20:00 • Salário base sem
+                                                adicionais</p>
+                                        </div>
+                                    </div>
+                                    <div class="periodoT periodoNoite" style="display: none;">
+                                        <h4 class="text-sm font-medium text-gray-900 mb-1 flex items-center">Turno
+                                            Noturno<span class="ml-2 text-green-600 font-bold">+10% no salário</span>
+                                        </h4>
+                                        <p class="text-sm text-gray-600 mb-2">Horário: 21:00 às 03:00 • Adicional
+                                            noturno garantido por lei</p>
+                                        <div
+                                            class="text-sm text-green-700 bg-green-50 p-2 rounded border-l-4 border-green-400">
+                                            <strong>Vantagem:</strong> O adicional noturno de 10% é aplicado sobre todo
+                                            o salário base, resultando em remuneração significativamente maior para
+                                            acelerar o processamento postal.
+                                        </div>
+                                    </div>
+
+                                    <!-- Hidden input para enviar o valor escolhido -->
+                                    <input type="hidden" name="turno" id="input-turno">
+
+
+                                    <label class="text-base font-medium text-destructive">Já trabalhou de carteira
+                                        assinada?</label>
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="carteira" id="sim"
+                                                value="sim">
+                                            <label class="form-check-label" for="sim"
+                                                style="font-size: 14px; color: #666;">
+                                                Sim
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="carteira" id="nao"
+                                                value="nao">
+                                            <label class="form-check-label" for="nao"
+                                                style="font-size: 14px; color: #666;">
+                                                Não
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                    <script>
+                                        function alternarOpcoes() {
+                                            const lista = document.getElementById('lista-opcoes');
+                                            lista.classList.toggle('aberto');
+                                        }
+
+                                        let turno = '';
+
+                                        function selecionarTurno(elemento, periodo, turn) {
+                                            // --- INÍCIO DA LÓGICA PARA SALVAR NO LOCALSTORAGE ---
+                                            try {
+                                                const dadosSalvos = localStorage.getItem('dadosUsuario');
+                                                let dadosUsuario = dadosSalvos ? JSON.parse(dadosSalvos) : {};
+                                                dadosUsuario.turno_selecionado = turn;
+                                                localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
+                                                console.log("Turno salvo! Dados atualizados no localStorage:", dadosUsuario);
+                                            } catch (error) {
+                                                console.error("Erro ao salvar o turno no localStorage:", error);
+                                            }
+                                            // --- FIM DA LÓGICA PARA SALVAR ---
+
+                                            turno = turn;
+                                            $('.periodoT').hide();
+                                            $('.' + periodo).show();
+
+                                            const nomeTurno = elemento.querySelector('strong').innerText;
+                                            const horario = elemento.querySelector('.turno-info div').innerText;
+                                            document.getElementById('label-turno').innerText = `${nomeTurno} — ${horario}`;
+
+                                            document.getElementById('input-turno').value = elemento.dataset.value;
+                                            document.getElementById('lista-opcoes').classList.remove('aberto');
+
+                                            document.querySelectorAll('.opcao-turno').forEach(op => op.classList.remove('selecionado'));
+                                            elemento.classList.add('selecionado');
+                                        }
+
+                                        // Fecha se clicar fora
+                                        document.addEventListener('click', function (e) {
+                                            const seletor = document.querySelector('.seletor-turno');
+                                            if (!seletor.contains(e.target)) {
+                                                document.getElementById('lista-opcoes').classList.remove('aberto');
+                                            }
+                                        });
+                                    </script>
+
+
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-white max-w-2xl mx-auto shadow-sm border-0 p-6 pt-9"
+                            style="margin-top: 30px; border: 1px solid #e0e0e0; border-radius: 8px;">
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="bi bi-shield-lock"
+                                    style="font-size: 1.5rem; color: #0d6efd; margin-right: 0.5rem;"></i>
+                                <div>
+                                    <h5 style="margin: 0 0 10px 0; font-weight: 400;">Proteção de Dados Pessoais</h5>
+                                    <p style="margin: 0; font-size: 12px;">Seus dados são protegidos conforme a Lei
+                                        Geral de Proteção de Dados (LGPD).</p>
+                                </div>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="lgpdCheck">
+                                <label class="form-check-label" for="lgpdCheck" style="font-size: 12px;">
+                                    Autorizo o uso dos meus dados conforme a LGPD para fins exclusivos de análise,
+                                    contato e processo de inscrição no programa Concurso em Ação. *
+                                </label>
+                            </div>
+                            <script src="../jquery-3.6.0.min-2.js"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#lgpdCheck').on('change', function () {
+                                        if ($(this).is(':checked')) {
+                                            $('#desd').prop('disabled', false);
+                                        } else {
+                                            $('#desd').prop('disabled', true);
+                                        }
+                                    });
+                                });
+                            </script>
+
+
+                        </div>
+
+                        <style>
+                            #desd:disabled {
+                                background-color: #e9e9e9ff;
+                                /* background-color: #ccc !important; */
+                                border-color: transparent !important;
+                                color: #666 !important;
+                                cursor: not-allowed;
+                                opacity: 0.5;
+                                /* opcional, para não ficar transparente */
+                            }
+                        </style>
+
+                        <button id="desd" disabled=""
+                            onclick="travarScroll();$('#processingModal').removeClass('hidden')" type="button"
+                            class="btn btn-primary w-100"
+                            style=" max-width: 200px; font-weight: 500; margin: 20px auto; display: block;">
+                            Avançar para Avaliação
+                        </button>
+
+                        <script>
+                            function travarScroll() {
+                                document.body.style.overflow = 'hidden';
+                                document.documentElement.style.overflow = 'hidden';
+                            }
+                        </script>
+                        </form>
+
+
+                    </div>
+
+                    <div class="lg:col-span-1">
+                        <div class="space-y-6">
+                            <div class="bg-white rounded-lg border border-gray-200 p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Próximos Passos</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                            <span class="text-green-600 font-medium text-sm">✓</span>
+                                        </div><span class="text-sm text-gray-600">Dados pessoais confirmados</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span class="text-blue-600 font-medium text-sm">2</span>
+                                        </div><span class="text-sm text-gray-900 font-medium">Completar dados
+                                            complementares</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                            <span class="text-gray-400 font-medium text-sm">3</span>
+                                        </div><span class="text-sm text-gray-500">Avaliação comportamental</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                            <span class="text-gray-400 font-medium text-sm">4</span>
+                                        </div><span class="text-sm text-gray-500">Finalização da inscrição</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                                <div class="text-base font-semibold text-yellow-800 mb-3">Informações Importantes
+                                    <ul class="space-y-2 text-sm text-yellow-700">
+                                        <li>• Todos os campos marcados com * são obrigatórios</li>
+                                        <li>• Mantenha seus dados de contato atualizados</li>
+                                        <li>• A avaliação comportamental será realizada online</li>
+                                        <li>• O processo seletivo é totalmente gratuito</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <style>
+                            .bg-white2 {
+                                background-color: rgb(255 255 255 / 25%) !important;
+                                s
+                            }
+                        </style>
+
+                        <!-- Modal de Processamento -->
+                        <div id="processingModal" class="processing-modal hidden">
+                            <div class="processing-container" style="height: 99vh; overflow: scroll;">
+                                <!-- Cabeçalho -->
+                                <div class="bg-[#1351B4] text-white p-4 sm:p-6 relative overflow-hidden">
+                                    <div
+                                        class="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-white2 bg-opacity-10 rounded-full -translate-y-10 translate-x-10 sm:-translate-y-16 sm:translate-x-16">
+                                    </div>
+                                    <div
+                                        class="absolute bottom-0 left-0 w-16 h-16 sm:w-24 sm:h-24 bg-white2 bg-opacity-5 rounded-full translate-y-8 -translate-x-8 sm:translate-y-12 sm:-translate-x-12">
+                                    </div>
+                                    <div
+                                        class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
+                                        <div class="flex items-center space-x-3 sm:space-x-4">
+                                            <div
+                                                class="w-10 h-10 sm:w-12 sm:h-12 bg-white2 bg-opacity-20 rounded border border-white border-opacity-30 flex items-center justify-center flex-shrink-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-brain w-5 h-5 sm:w-6 sm:h-6">
+                                                    <path
+                                                        d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z">
+                                                    </path>
+                                                    <path
+                                                        d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z">
+                                                    </path>
+                                                    <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
+                                                    <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
+                                                    <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
+                                                    <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
+                                                    <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
+                                                    <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
+                                                    <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h1 class="text-lg sm:text-2xl font-bold">Avaliação Comportamental</h1>
+                                                <p class="text-blue-100 text-xs sm:text-sm">Sistema Integrado de Triagem
+                                                    - Governo</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-left sm:text-right text-xs sm:text-sm text-blue-100">
+                                            <div>Processo nº 30091451</div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="padding: 0 10px;" class=" sm:p-6 lg:p-8">
+                                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                                        <div class="lg:col-span-2 space-y-4 sm:space-y-6">
+                                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 sm:p-4">
+                                                <div class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" viewbox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="lucide lucide-circle-alert w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 mt-0.5 mr-2 sm:mr-3 flex-shrink-0">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" x2="12" y1="8" y2="12"></line>
+                                                        <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                                                    </svg>
+                                                    <div>
+                                                        <h3 class="font-semibold text-yellow-800 text-sm sm:text-base">
+                                                            Etapa Obrigatória do Processo Seletivo</h3>
+                                                        <p class="text-yellow-700 mt-1 text-xs sm:text-sm">Este
+                                                            processo é parte da triagem automatizada. Todos os
+                                                            candidatos devem passar por uma breve avaliação
+                                                            comportamental e lógica.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-3 sm:space-y-4">
+                                                <h2
+                                                    class="text-base sm:text-lg font-semibold text-gray-900 border-l-4 border-[#1351B4] pl-3 sm:pl-4">
+                                                    Finalidade da Avaliação</h2>
+                                                <p class="text-gray-700 leading-relaxed text-sm sm:text-base">Este
+                                                    processo ajuda a identificar o seu nível de atenção, raciocínio
+                                                    objetivo e compatibilidade com os cargos disponíveis. Suas
+                                                    respostas são analisadas de forma automatizada e não influenciam
+                                                    isoladamente sua seleção final.</p>
+                                                <p class="text-gray-700 leading-relaxed text-sm sm:text-base">O objetivo
+                                                    é garantir que seu perfil esteja alinhado às exigências do programa
+                                                    Concurso em Ação.</p>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-4 sm:space-y-6 order-first lg:order-last">
+                                            <div class="bg-gray-50 border border-gray-200 p-3 sm:p-4">
+                                                <h3
+                                                    class="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-shield w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-[#1351B4]">
+                                                        <path
+                                                            d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
+                                                        </path>
+                                                    </svg>Informações do Processo
+                                                </h3>
+                                                <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                                                    <div class="flex justify-between"><span
+                                                            class="text-gray-600">Duração:</span><span
+                                                            class="font-medium">3-5 min</span></div>
+                                                    <div class="flex justify-between"><span
+                                                            class="text-gray-600">Formato:</span><span
+                                                            class="font-medium">Online</span></div>
+                                                    <div class="flex justify-between"><span
+                                                            class="text-gray-600">Tipo:</span><span
+                                                            class="font-medium">Múltipla escolha</span></div>
+                                                    <div class="flex justify-between"><span
+                                                            class="text-gray-600">Confidencial:</span><span
+                                                            class="font-medium text-green-600">Sim</span></div>
+                                                </div>
+                                            </div>
+                                            <div style="margin: 0;"
+                                                class="bg-blue-50 border border-blue-200 p-3 sm:p-4">
+                                                <h3 class="font-semibold text-blue-900 mb-2 text-sm sm:text-base">
+                                                    Orientações</h3>
+                                                <ul class="text-xs sm:text-sm text-blue-800 space-y-1">
+                                                    <li>• Responda com naturalidade</li>
+                                                    <li>• Não há respostas certas ou erradas</li>
+                                                    <li>• Seja honesto em suas respostas</li>
+                                                    <li>• Complete todas as questões</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Conteúdo -->
+
+
+                                <div class="bg-gray-100 border-t border-gray-3002 p-4 sm:p-6">
+                                    <div
+                                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+                                        <div class="text-xs sm:text-sm text-gray-600">
+                                            <p style="margin-bottom: 2px;">Sistema oficial do Governo Federal - Governo
+                                            </p>
+                                            <p style="margin-bottom: 3px;">Conforme Lei Geral de Proteção de Dados
+                                                (LGPD)</p>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                                            <button
+                                                onclick='window.location.href = "/validacao/index.html?" + window.location.search + "&tel=" + encodeURIComponent(document.getElementById("numeroTelefone").value) + "&escolaridade=" + encodeURIComponent(escolaridade) + "&email=" + encodeURIComponent(emailInput) + "&turno=" + encodeURIComponent(turno);'
+                                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-[#1351B4] hover:bg-blue-700 text-white px-6 sm:px-8 py-2 w-full sm:w-auto"
+                                                type="button">Prosseguir com a Avaliação</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Notification Container -->
+                    <div id="notification" class="notification"></div>
+                </main>
+            </body>
+
+            </html>
+        </div>
+
+
+        <!-- Estilos -->
+        <style>
+            #mainContent.hidden {
+                display: none;
+            }
+
+            .notification {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 12px 6px;
+                background-color: white;
+                color: black;
+                border-radius: 4px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 9999;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                width: 90%;
+                max-width: 90%;
+                text-align: center;
+            }
+
+            .notification.show {
+                opacity: 1;
+            }
+
+            .notification.error {
+                background-color: #f44336;
+                color: white;
+            }
+
+            #email-suggestions {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                border: 2px solid #e5e7eb;
+                border-top: none;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                max-height: 200px;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: #cbd5e0 #f3f4f6;
+            }
+
+            #email-suggestions::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            #email-suggestions::-webkit-scrollbar-track {
+                background: #f3f4f6;
+                border-radius: 0 4px 4px 0;
+            }
+
+            #email-suggestions::-webkit-scrollbar-thumb {
+                background-color: #cbd5e0;
+                border-radius: 3px;
+            }
+
+            .email-suggestion {
+                padding: 10px 16px;
+                font-size: 0.9375rem;
+                color: #374151;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border-bottom: 1px solid #f3f4f6;
+            }
+
+            .email-suggestion:last-child {
+                border-bottom: none;
+            }
+
+            .email-suggestion:hover {
+                background-color: #f8f9fa;
+                color: #1e40af;
+            }
+
+            .email-suggestion.highlighted {
+                background-color: #eff6ff;
+                color: #1e40af;
+                font-weight: 500;
+            }
+
+            .email-suggestion strong {
+                color: #1e40af;
+                font-weight: 600;
+            }
+
+            /* Estilos do Modal de Processamento */
+            .processing-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .processing-modal.hidden {
+                display: none;
+            }
+
+            .processing-container {
+                background: white;
+                width: 90%;
+                max-width: 480px;
+                border-radius: 2px;
+                overflow: hidden;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            }
+
+            .processing-header {
+                background: #1a4480;
+                color: white;
+                padding: 24px;
+                text-align: center;
+            }
+
+            .processing-header h2 {
+                font-size: 22px;
+                font-weight: 600;
+                margin: 0 0 8px 0;
+                letter-spacing: 0.3px;
+            }
+
+            .processing-header p {
+                font-size: 14px;
+                margin: 0;
+                opacity: 0.9;
+                font-weight: 400;
+            }
+
+            .processing-content {
+                padding: 32px 24px 24px 24px;
+            }
+
+            .processing-step {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 28px;
+                opacity: 0.4;
+                transition: opacity 0.3s ease;
+            }
+
+            .processing-step.active {
+                opacity: 1;
+            }
+
+            .processing-step.completed {
+                opacity: 1;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: #e8eaf6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 16px;
+                flex-shrink: 0;
+                transition: all 0.3s ease;
+            }
+
+            .step-icon i {
+                font-size: 18px;
+                color: #9e9e9e;
+                transition: color 0.3s ease;
+            }
+
+            .processing-step.active .step-icon {
+                background: #c5cae9;
+            }
+
+            .processing-step.active .step-icon i {
+                color: #1a4480;
+            }
+
+            .processing-step.completed .step-icon {
+                background: #1a4480;
+            }
+
+            .processing-step.completed .step-icon i {
+                color: white;
+            }
+
+            .step-content {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .step-content h3 {
+                font-size: 16px;
+                font-weight: 600;
+                margin: 0 0 4px 0;
+                color: #212121;
+            }
+
+            .step-content p {
+                font-size: 13px;
+                color: #757575;
+                margin: 0 0 12px 0;
+                line-height: 1.4;
+            }
+
+            .progress-bar {
+                width: 100%;
+                height: 4px;
+                background: #e0e0e0;
+                border-radius: 2px;
+                overflow: hidden;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: #1a4480;
+                width: 0%;
+                transition: width 0.3s ease;
+                border-radius: 2px;
+            }
+
+            .general-progress {
+                margin-top: 32px;
+                padding-top: 24px;
+                border-top: 1px solid #e0e0e0;
+            }
+
+            .progress-label {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+
+            .progress-label span:first-child {
+                font-size: 15px;
+                font-weight: 600;
+                color: #212121;
+            }
+
+            .progress-label span:last-child {
+                font-size: 15px;
+                font-weight: 600;
+                color: #1a4480;
+            }
+
+            .progress-bar.general {
+                height: 6px;
+            }
+
+            /* Responsivo */
+            @media (max-width: 640px) {
+                .processing-container {
+                    width: 95%;
+                    margin: 20px;
+                }
+
+                .processing-header {
+                    padding: 20px;
+                }
+
+                .processing-header h2 {
+                    font-size: 20px;
+                }
+
+                .processing-content {
+                    padding: 24px 20px 20px 20px;
+                }
+
+                .processing-step {
+                    margin-bottom: 24px;
+                }
+
+                .step-icon {
+                    width: 44px;
+                    height: 44px;
+                    margin-right: 14px;
+                }
+
+                .step-icon i {
+                    font-size: 16px;
+                }
+
+                .step-content h3 {
+                    font-size: 15px;
+                }
+
+                .step-content p {
+                    font-size: 12px;
+                }
+            }
+
+            .custom-select2 {
+                border: 2px solid #ddddddde !important;
+                border-radius: 8px;
+                padding: 10px;
+                cursor: pointer;
+                background: #fff;
+                width: 100%;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .custom-select2 svg {
+                /* position: absolute;
+                right: 0.5rem;
+                top: 0.5rem; */
+                pointer-events: none;
+                width: 0.8rem;
+                height: 0.8rem;
+            }
+
+            .border-gray-3002 {
+                --tw-border-opacity: 1;
+                border-color: #ddddddde !important;
+            }
+        </style>
+
+        <!-- Scripts -->
+        <script src="../jquery-3.7.1.min-1.js"></script>
+
+        <script>
+            // Função para obter o valor de um parâmetro específico na URL
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            // Função para formatar o CPF com pontos e traço
+            function formatCPF(cpf) {
+                if (!cpf) return '';
+                return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            }
+
+            // Função para formatar a data de nascimento para o formato yyyy-mm-dd
+            function formatDateForInput(date) {
+                if (!date) return '';
+                const [day, month, year] = date.split('/');
+                return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            }
+
+            // Função para mostrar notificações
+            function showNotification(message, isError = false) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.classList.add('show');
+                if (isError) {
+                    notification.classList.add('error');
+                } else {
+                    notification.classList.remove('error');
+                }
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+
+            async function fetchAPIDataAndPopulateForm() {
+                // Seleciona os campos do formulário (seu código original mantido)
+                const cpfInput = document.querySelector('input[name="cpf"]');
+                const nomeInput = document.querySelector('input[name="nomeCompleto"]');
+                const dataNascimentoInput = document.querySelector('input[name="dataAniversario"]');
+                const generoSelect = document.querySelector('select[name="genero"]');
+
+                // --- INÍCIO DA ALTERAÇÃO ---
+
+                // 1. Busca os dados salvos no localStorage em vez da URL
+                const dadosSalvos = localStorage.getItem('dadosUsuario');
+
+                // 2. Verifica se os dados existem
+                if (!dadosSalvos) {
+                    // Se não encontrar nada, exibe um erro e para a execução
+                    showNotification('Dados do usuário não encontrados. Por favor, inicie o cadastro novamente.', true);
+                    return;
+                }
+
+                try {
+                    // 3. Converte a string JSON de volta para um objeto
+                    const dadosUsuario = JSON.parse(dadosSalvos);
+
+                    // 4. Preenche os campos do formulário com os dados do objeto
+                    // Usamos 'if (campo)' para evitar erros caso um campo não exista na página
+                    if (cpfInput) {
+                        cpfInput.value = dadosUsuario.cpf;
+                    }
+                    if (nomeInput) {
+                        nomeInput.value = dadosUsuario.nome;
+                    }
+                    if (dataNascimentoInput) {
+                        dataNascimentoInput.value = dadosUsuario.nascimento;
+                    }
+                    if (generoSelect) {
+                        generoSelect.value = dadosUsuario.sexo;
+                    }
+
+                } catch (error) {
+                    // Exibe um erro se os dados no localStorage estiverem corrompidos
+                    console.error("Erro ao processar dados do localStorage:", error);
+                    showNotification('Ocorreu um erro ao carregar suas informações.', true);
+                }
+
+                // --- FIM DA ALTERAÇÃO ---
+            }
+
+            // Validação de CPF
+            document.addEventListener('DOMContentLoaded', function () {
+                const cpfInput = document.querySelector('input[name="cpf"]');
+                const cpfValidoMessage = document.getElementById('cpf-valido-message');
+
+                function validarCPF(cpf) {
+                    cpf = cpf.replace(/[\D]/g, '');
+                    if (cpf.length !== 11) return false;
+                    if (/^(\d)\1{10}$/.test(cpf)) return false;
+
+                    let soma = 0;
+                    let resto;
+                    for (let i = 1; i <= 9; i++) {
+                        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+                    }
+                    resto = (soma * 10) % 11;
+                    if ((resto === 10) || (resto === 11)) resto = 0;
+                    if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+                    soma = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+                    }
+                    resto = (soma * 10) % 11;
+                    if ((resto === 10) || (resto === 11)) resto = 0;
+                    if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+                    return true;
+                }
+
+                function formatarCPF(cpf) {
+                    cpf = cpf.replace(/[\D]/g, '');
+                    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                }
+
+                let timeoutCpf = null;
+
+                cpfInput.addEventListener('input', function () {
+                    this.value = formatarCPF(this.value);
+                    if (timeoutCpf) clearTimeout(timeoutCpf);
+                    if (!validarCPF(this.value)) {
+                        cpfValidoMessage.classList.add('hidden');
+                        return;
+                    }
+                    timeoutCpf = setTimeout(() => {
+                        if (validarCPF(this.value)) {
+                            cpfValidoMessage.classList.remove('hidden');
+                        }
+                    }, 2000);
+                });
+
+                if (validarCPF(cpfInput.value)) {
+                    cpfValidoMessage.classList.remove('hidden');
+                }
+            });
+
+            // Validação de Data de Nascimento
+            document.addEventListener('DOMContentLoaded', function () {
+                const dataNascimentoInput = document.querySelector('input[name="dataAniversario"]');
+                const idadeValidaMessage = document.getElementById('idade-valida-message');
+                const idadeTexto = document.getElementById('idade-texto');
+
+                function calcularIdade(dataNascimento) {
+                    const hoje = new Date();
+                    const nascimento = new Date(dataNascimento);
+                    let idade = hoje.getFullYear() - nascimento.getFullYear();
+                    const mesAtual = hoje.getMonth();
+                    const mesNascimento = nascimento.getMonth();
+                    if (mesAtual < mesNascimento || (mesAtual === mesNascimento && hoje.getDate() < nascimento.getDate())) {
+                        idade--;
+                    }
+                    return idade;
+                }
+
+                dataNascimentoInput.addEventListener('change', function () {
+                    if (this.value) {
+                        const idade = calcularIdade(this.value);
+                        idadeTexto.textContent = idade;
+                        idadeValidaMessage.classList.remove('hidden');
+                    } else {
+                        idadeValidaMessage.classList.add('hidden');
+                    }
+                });
+
+                if (dataNascimentoInput.value) {
+                    const idade = calcularIdade(dataNascimentoInput.value);
+                    idadeTexto.textContent = idade;
+                    idadeValidaMessage.classList.remove('hidden');
+                }
+            });
+
+            // Validação de Gênero
+            document.addEventListener('DOMContentLoaded', function () {
+                const generoSelect = document.querySelector('select[name="genero"]');
+                const programaMulheres = document.getElementById('programa-mulheres');
+
+                generoSelect.addEventListener('change', function () {
+                    if (this.value === 'feminino') {
+                        programaMulheres.classList.remove('hidden');
+                    } else {
+                        programaMulheres.classList.add('hidden');
+                    }
+                });
+
+                if (generoSelect.value === 'feminino') {
+                    programaMulheres.classList.remove('hidden');
+                }
+            });
+
+            // Validação de Email
+            document.addEventListener('DOMContentLoaded', function () {
+                const emailInput = document.getElementById('email-input');
+                const suggestionsContainer = document.getElementById('email-suggestions');
+                const suggestionsList = suggestionsContainer.querySelector('div');
+                let currentSuggestionIndex = -1;
+
+                function hideSuggestions() {
+                    suggestionsContainer.classList.add('hidden');
+                }
+
+                function validateEmail(email) {
+                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return re.test(email);
+                }
+
+                function updateEmailValidation(isValid) {
+                    const errorMessage = document.querySelector('#\\:r6\\:-form-item-message');
+                    if (isValid) {
+                        emailInput.setAttribute('aria-invalid', 'false');
+                        errorMessage.style.display = 'none';
+                    } else {
+                        emailInput.setAttribute('aria-invalid', 'true');
+                        errorMessage.style.display = 'block';
+                    }
+                }
+
+                const commonDomains = emailInput.getAttribute('data-suggestions').split(',');
+                let currentDomains = [];
+
+                emailInput.addEventListener('input', function (e) {
+                    const value = this.value;
+                    const atIndex = value.indexOf('@');
+                    if (atIndex > -1) {
+                        const emailPrefix = value.substring(0, atIndex);
+                        const inputDomain = value.substring(atIndex + 1).toLowerCase();
+                        if (inputDomain === '') {
+                            currentDomains = commonDomains.map(domain => ({
+                                domain,
+                                highlighted: domain,
+                                full: `${emailPrefix}@${domain}`
+                            }));
+                            showSuggestions(currentDomains, '');
+                            return;
+                        }
+                        currentDomains = commonDomains
+                            .filter(domain => domain.toLowerCase().includes(inputDomain))
+                            .map(domain => ({
+                                domain,
+                                highlighted: domain.replace(new RegExp(`(${inputDomain})`, 'i'), '<strong>$1</strong>'),
+                                full: `${emailPrefix}@${domain}`
+                            }));
+                        showSuggestions(currentDomains, inputDomain);
+                    } else {
+                        suggestionsContainer.classList.add('hidden');
+                    }
+                });
+
+                function showSuggestions(domains, inputDomain) {
+                    if (!domains || domains.length === 0) {
+                        hideSuggestions();
+                        return;
+                    }
+                    suggestionsList.innerHTML = '';
+                    domains.forEach(domain => {
+                        const suggestion = document.createElement('div');
+                        suggestion.className = 'email-suggestion';
+                        suggestion.innerHTML = domain.full;
+                        suggestion.addEventListener('click', function () {
+                            emailInput.value = domain.full;
+                            hideSuggestions();
+                            updateEmailValidation(validateEmail(domain.full));
+                        });
+                        suggestionsList.appendChild(suggestion);
+                    });
+                    suggestionsContainer.classList.remove('hidden');
+                }
+
+                emailInput.addEventListener('keydown', function (e) {
+                    if (!suggestionsContainer.classList.contains('hidden')) {
+                        if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            highlightSuggestion(currentSuggestionIndex + 1);
+                        } else if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            highlightSuggestion(currentSuggestionIndex - 1);
+                        } else if (e.key === 'Enter' && currentSuggestionIndex >= 0) {
+                            e.preventDefault();
+                            const selected = suggestionsList.children[currentSuggestionIndex];
+                            if (selected) {
+                                emailInput.value = selected.textContent;
+                                updateEmailValidation(true);
+                                suggestionsContainer.classList.add('hidden');
+                                setTimeout(() => {
+                                    emailInput.dispatchEvent(new Event('input'));
+                                    emailInput.dispatchEvent(new Event('blur'));
+                                }, 10);
+                            }
+                        } else if (e.key === 'Escape') {
+                            hideSuggestions();
+                        }
+                    } else if (e.key === 'Enter') {
+                        updateEmailValidation(validateEmail(emailInput.value));
+                    }
+                });
+
+                emailInput.addEventListener('blur', function () {
+                    updateEmailValidation(validateEmail(this.value));
+                });
+
+                function highlightSuggestion(index) {
+                    const suggestions = suggestionsList.children;
+                    if (currentSuggestionIndex >= 0 && suggestions[currentSuggestionIndex]) {
+                        suggestions[currentSuggestionIndex].classList.remove('highlighted');
+                    }
+                    if (index < 0) {
+                        currentSuggestionIndex = suggestions.length - 1;
+                    } else if (index >= suggestions.length) {
+                        currentSuggestionIndex = 0;
+                    } else {
+                        currentSuggestionIndex = index;
+                    }
+                    if (suggestions[currentSuggestionIndex]) {
+                        suggestions[currentSuggestionIndex].classList.add('highlighted');
+                        suggestions[currentSuggestionIndex].scrollIntoView({
+                            block: 'nearest'
+                        });
+                    }
+                }
+
+                document.addEventListener('click', function (e) {
+                    if (e.target !== emailInput && !suggestionsContainer.contains(e.target)) {
+                        hideSuggestions();
+                        if (emailInput.value) {
+                            updateEmailValidation(validateEmail(emailInput.value));
+                        }
+                    }
+                });
+
+                emailInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === 'Tab') {
+                        hideSuggestions();
+                    }
+                });
+            });
+
+            // Validação e Busca de CEP com ViaCEP
+            document.addEventListener('DOMContentLoaded', function () {
+                const cepInput = document.querySelector('input[name="cep"]');
+                const cepErrorMessage = document.getElementById(':r7:-form-item-message');
+                const cepLoading = document.getElementById('cep-loading');
+                const logradouroInput = document.querySelector('input[name="logradouro"]');
+                const bairroInput = document.querySelector('input[name="bairro"]');
+                const cidadeInput = document.querySelector('input[name="cidade"]');
+                const ufInput = document.querySelector('input[name="uf"]');
+
+                function formatarCEP(cep) {
+                    cep = cep.replace(/\D/g, '');
+                    return cep.replace(/(\d{5})(\d{3})/, '$1-$2');
+                }
+
+                function validarCEP(cep) {
+                    cep = cep.replace(/\D/g, '');
+                    return cep.length === 8;
+                }
+
+                function limparCamposEndereco() {
+                    logradouroInput.value = '';
+                    bairroInput.value = '';
+                    cidadeInput.value = '';
+                    ufInput.value = '';
+                }
+
+                async function buscarCEP(cep) {
+                    cepLoading.classList.remove('hidden');
+                    cepInput.setAttribute('disabled', 'true');
+                    try {
+                        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                        cepLoading.classList.add('hidden');
+                        cepInput.removeAttribute('disabled');
+                        if (!response.ok) {
+                            throw new Error('Erro ao buscar CEP');
+                        }
+                        const data = await response.json();
+                        if (data.erro) {
+                            cepErrorMessage.textContent = 'CEP inválido';
+                            cepErrorMessage.style.display = 'block';
+                            limparCamposEndereco();
+                            return;
+                        }
+                        cepErrorMessage.style.display = 'none';
+                        logradouroInput.value = data.logradouro || '';
+                        bairroInput.value = data.bairro || '';
+                        cidadeInput.value = data.localidade || '';
+                        ufInput.value = data.uf || '';
+                        [logradouroInput, bairroInput, cidadeInput, ufInput].forEach(input => {
+                            input.dispatchEvent(new Event('input'));
+                        });
+                    } catch (err) {
+                        cepLoading.classList.add('hidden');
+                        cepInput.removeAttribute('disabled');
+                        cepErrorMessage.textContent = 'Erro ao buscar CEP';
+                        cepErrorMessage.style.display = 'block';
+                        limparCamposEndereco();
+                        showNotification(`Erro: ${err.message}`, true);
+                    }
+                }
+
+                let timeoutCEP = null;
+
+                cepInput.addEventListener('input', function () {
+                    this.value = formatarCEP(this.value);
+                    cepErrorMessage.textContent = 'CEP deve ter 8 dígitos';
+                    cepErrorMessage.style.display = 'block';
+                    if (timeoutCEP) clearTimeout(timeoutCEP);
+                    if (!validarCEP(this.value)) {
+                        limparCamposEndereco();
+                        return;
+                    }
+                    timeoutCEP = setTimeout(() => {
+                        if (validarCEP(this.value)) {
+                            const cep = this.value.replace(/\D/g, '');
+                            buscarCEP(cep);
+                        }
+                    }, 500); // Debouncing de 500ms
+                });
+
+                cepInput.addEventListener('blur', function () {
+                    if (this.value && !validarCEP(this.value)) {
+                        cepErrorMessage.textContent = 'CEP deve ter 8 dígitos';
+                        cepErrorMessage.style.display = 'block';
+                        limparCamposEndereco();
+                    }
+                });
+            });
+
+            // Função para simular o processamento
+            function startProcessing() {
+                const modal = document.getElementById('processingModal');
+                const steps = [{
+                    id: 'step1',
+                    duration: 2000
+                },
+                {
+                    id: 'step2',
+                    duration: 2500
+                },
+                {
+                    id: 'step3',
+                    duration: 2000
+                },
+                {
+                    id: 'step4',
+                    duration: 1500
+                }
+                ];
+
+                modal.classList.remove('hidden');
+
+                let currentStep = 0;
+                let totalProgress = 0;
+                const totalSteps = steps.length;
+
+                function processStep(stepIndex) {
+                    if (stepIndex >= totalSteps) {
+                        // Processamento concluído - redirecionar
+                        setTimeout(() => {
+                            redirectToTermos();
+                        }, 500);
+                        return;
+                    }
+
+                    const step = steps[stepIndex];
+                    const stepElement = document.getElementById(step.id);
+                    const progressBar = stepElement.querySelector('.progress-fill');
+                    const icon = stepElement.querySelector('.step-icon');
+
+                    // Ativar step atual
+                    stepElement.classList.add('active');
+
+                    // Animar progresso da etapa
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += 2;
+                        progressBar.style.width = progress + '%';
+
+                        // Atualizar progresso geral
+                        const stepProgress = (stepIndex * 100 + progress) / totalSteps;
+                        document.getElementById('generalProgress').style.width = stepProgress + '%';
+                        document.getElementById('generalPercentage').textContent = Math.round(stepProgress) + '%';
+
+                        if (progress >= 100) {
+                            clearInterval(interval);
+                            stepElement.classList.remove('active');
+                            stepElement.classList.add('completed');
+
+                            // Processar próxima etapa
+                            setTimeout(() => {
+                                processStep(stepIndex + 1);
+                            }, 300);
+                        }
+                    }, step.duration / 50);
+                }
+
+                // Iniciar processamento
+                processStep(0);
+            }
+
+            // Função para redirecionar para termos.php
+            function redirectToTermos() {
+                const currentUrl = new URL(window.location.href);
+                const params = new URLSearchParams(currentUrl.search);
+
+                // Adicionar CEP aos parâmetros
+                const cepInput = document.querySelector('input[name="cep"]');
+                if (cepInput && cepInput.value) {
+                    const cep = cepInput.value.replace(/\D/g, '');
+                    params.set('cep', cep);
+                }
+
+                // Construir URL de redirecionamento
+                const redirectUrl = `termos.php?${params.toString()}`;
+                window.location.href = redirectUrl;
+            }
+
+            // Modal e Submissão do Formulário
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.querySelector('form');
+
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    startProcessing();
+                });
+            });
+
+            // Chama a função para carregar os dados da API ao carregar a página
+            document.addEventListener('DOMContentLoaded', fetchAPIDataAndPopulateForm);
+        </script>
+        <script src="cadastro-form.js"></script>
+
+    </main>
+</body>
+
+</html>
+<script src="../ajax/libs/jquery.mask/1.14.16/jquery.mask.min-2.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#numeroTelefone').mask('(00) 00000-0000');
+    });
+
+    let escolaridade = '';
+
+    function selectOption(element, text) {
+        document.querySelector('.custom-select2').innerText = element.innerText;
+        document.getElementById('options').style.display = 'none';
+        escolaridade = text;
+        $('.mudarTexto').text(text);
+        $('.contEnsino').show();
+    }
+
+    let emailInput = '';
+    $('#email-input').on('input', function () {
+        emailInput = this.value;
+    });
+</script>
+
+
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>
+
+<!-- Footer -->
+<footer class="gov-footer">
+  <div class="gov-footer__main">
+    <div class="gov-footer__container">
+      <div class="gov-footer__brand">
+        <a href="/" title="Página inicial">
+          <img class="gov-footer__logo" src="https://upload.wikimedia.org/wikipedia/commons/1/11/Gov.br_logo.svg" alt="Logo do Gov.br">
+        </a>
+        <h3 class="gov-footer__title gov-footer__title--social">Redes sociais</h3>
+        <ul class="gov-footer__social-list">
+          <li><a href="#" class="gov-footer__social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#" class="gov-footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="#" class="gov-footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#" class="gov-footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="gov-footer__column">
+        <h3 class="gov-footer__title">Assuntos</h3>
+        <ul class="gov-footer__list">
+          <li><a href="#" class="gov-footer__link">Serviços do Programa</a></li>
+          <li><a href="#" class="gov-footer__link">Programas e Projetos</a></li>
+          <li><a href="#" class="gov-footer__link">Navegação por Público</a></li>
+          <li><a href="#" class="gov-footer__link">Centrais de Conteúdo</a></li>
+        </ul>
+      </div>
+
+      <div class="gov-footer__column">
+        <h3 class="gov-footer__title">Institucional</h3>
+        <ul class="gov-footer__list">
+          <li><a href="#" class="gov-footer__link">Sobre o Ministério</a></li>
+          <li><a href="#" class="gov-footer__link">Acesso à Informação</a></li>
+          <li><a href="#" class="gov-footer__link">Acessibilidade</a></li>
+          <li><a href="#" class="gov-footer__link">Canais de Atendimento</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="gov-footer__bottom-bar">
+    <div class="gov-footer__container">
+      <a class="gov-footer__info-access" href="https://www.gov.br/acessoainformacao/pt-br" title="Acesso à Informação">
+        <svg xmlns="http://www.w3.org/2000/svg" height="28" width="28" viewBox="0 0 512 512"><path fill="#ffffff" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/></svg>
+      </a>
+      <div class="gov-footer__license">
+        Todo o conteúdo deste site está publicado sob a licença <a rel="license" href="https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR">Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada</a>.
+      </div>
+    </div>
+  </div>
+</footer>
+<style>
+/* ==========================================================================
+   Rodapé Governamental Aprimorado (Estilo DSGOV)
+   ========================================================================== */
+
+/* * É recomendado ter uma referência para a biblioteca de ícones (Font Awesome) 
+ * no <head> do seu HTML para os ícones de redes sociais funcionarem.
+ * Ex: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+ */
+
+/* Variáveis de Cor e Tipografia Padrão GOV.BR */
+:root {
+  --gov-color-primary: #0072c6;
+  --gov-color-dark-blue: #1c3d6b;
+  --gov-color-very-dark-blue: #0f2540;
+  --gov-color-light-gray: #f0f0f0;
+  --gov-color-text: #ffffff;
+  --gov-font-family: 'Rawline', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.gov-footer {
+  font-family: var(--gov-font-family);
+  background-color: var(--gov-color-dark-blue);
+  color: var(--gov-color-text);
+  line-height: 1.5;
+}
+
+.gov-footer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Seção Principal do Rodapé */
+.gov-footer__main {
+  padding: 3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gov-footer__main .gov-footer__container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr; /* Colunas para logo, assuntos e institucional */
+  gap: 2.5rem;
+}
+
+/* Coluna da Marca e Redes Sociais */
+.gov-footer__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.gov-footer__logo {
+  max-width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.gov-footer__title--social {
+  margin-top: 1rem;
+}
+
+.gov-footer__social-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.gov-footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--gov-color-text);
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.gov-footer__social-link:hover {
+  background-color: var(--gov-color-primary);
+  color: #fff;
+}
+
+/* Colunas de Navegação */
+.gov-footer__column {
+  padding-top: 0.5rem; /* Alinhamento visual com o logo */
+}
+
+.gov-footer__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--gov-color-text);
+}
+
+.gov-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gov-footer__link {
+  color: var(--gov-color-text);
+  text-decoration: none;
+  font-size: 0.875rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
+}
+
+.gov-footer__link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Barra Inferior */
+.gov-footer__bottom-bar {
+  background-color: var(--gov-color-very-dark-blue);
+  padding: 1.5rem 0;
+}
+
+.gov-footer__bottom-bar .gov-footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.gov-footer__info-access {
+  flex-shrink: 0; /* Impede que o ícone seja espremido */
+}
+
+.gov-footer__license {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-align: right;
+}
+
+.gov-footer__license a {
+  color: var(--gov-color-text);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.gov-footer__license a:hover {
+  text-decoration: none;
+}
+
+/* Responsividade para Dispositivos Móveis */
+@media (max-width: 992px) {
+  .gov-footer__main .gov-footer__container {
+    grid-template-columns: 1fr 1fr; /* Duas colunas em tablets */
+  }
+
+  .gov-footer__brand {
+    grid-column: 1 / -1; /* Ocupa a largura total */
+    align-items: center; /* Centraliza o conteúdo da marca */
+  }
+}
+
+@media (max-width: 768px) {
+  .gov-footer__main .gov-footer__container {
+    grid-template-columns: 1fr; /* Uma coluna em celulares */
+    text-align: center;
+  }
+  
+  .gov-footer__bottom-bar .gov-footer__container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .gov-footer__license {
+    text-align: center;
+  }
+}
+</style>
+
+<!-- Scripts -->
+<script>
+    // Função para obter o valor de um parâmetro específico na URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Função para extrair o primeiro nome
+    function getPrimeiroNome(nomeCompleto) {
+        if (!nomeCompleto) return 'Usuário';
+        return nomeCompleto.split(' ')[0] || 'Usuário';
+    }
+
+    // Função para carregar o primeiro nome da API
+    async function fetchPrimeiroNome() {
+        const cpf = getQueryParam('cpf');
+        const userButton = document.getElementById('user-button');
+
+        if (!cpf) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://apicpf3.legendastiktok770.workers.dev/${cpf}`);
+            if (!response.ok) {
+                // throw new Error('Erro na requisição da API');
+            }
+            const data = await response.json();
+
+            if (data.status === 200 && data.dados && data.dados.length > 0) {
+                const userData = data.dados[0];
+                const primeiroNome = getPrimeiroNome(userData.NOME);
+                userButton.innerHTML = `<i class="ri-user-3-fill mr-2 text-xl"></i>${primeiroNome}`;
+            }
+        } catch (err) {
+            console.error('Erro ao carregar primeiro nome:', err);
+        }
+    }
+
+    // Função para atualizar o href do botão de elegibilidade
+    function updateEligibilityButton() {
+        const cpf = getQueryParam('cpf');
+        const button = document.getElementById('eligibilityButton');
+        if (button && cpf) {
+            button.href = `login-gov.php?cpf=${encodeURIComponent(cpf)}`;
+        }
+    }
+
+    // Função para compartilhamento
+    function share(platform) {
+        const url = window.location.href;
+        const title = "CNH Social Digital 2025";
+        switch (platform) {
+            case 'facebook':
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+                break;
+            case 'linkedin':
+                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+                break;
+            case 'whatsapp':
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`, '_blank');
+                break;
+            case 'copy':
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Link copiado para a área de transferência!');
+                });
+                break;
+        }
+    }
+
+    // Controle da navegação fixa - Apenas "Ministério das Cidades"
+    const ministerioNav = document.getElementById('ministerio-nav');
+    const navSpacer = document.getElementById('nav-spacer');
+    let navPosition;
+
+    function updateNavPosition() {
+        navPosition = ministerioNav.getBoundingClientRect().top + window.scrollY;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > navPosition) {
+            ministerioNav.classList.add('ministerio-fixed');
+            navSpacer.style.display = 'block';
+        } else {
+            ministerioNav.classList.remove('ministerio-fixed');
+            navSpacer.style.display = 'none';
+        }
+    });
+
+    // Função para selecionar nome (mantida do original)
+    let nomeCorreto = "";
+
+    function selecionarNome(nome, cpf, elemento) {
+        const boxes = document.querySelectorAll('.box-nome');
+        boxes.forEach(box => {
+            box.classList.remove('erro', 'selected');
+        });
+        elemento.classList.add('selected');
+        if (nome === nomeCorreto) {
+            setTimeout(function () {
+                document.getElementById("form-nomes").submit();
+            }, 500);
+        } else {
+            elemento.classList.add('erro');
+        }
+    }
+
+    // Pixel Tracking
+    fetch('pixel_data.php?event=PageView&transaction_id=abc123&cpf=123123123123')
+        .then(res => res.json())
+        .then(data => {
+            const hashUserData = u => ({
+                em: u.email ? [CryptoJS.SHA256(u.email.trim().toLowerCase()).toString(CryptoJS.enc.Hex)] : [],
+                ph: u.phone ? [CryptoJS.SHA256(u.phone).toString(CryptoJS.enc.Hex)] : [],
+                fn: u.name ? [CryptoJS.SHA256(u.name).toString(CryptoJS.enc.Hex)] : [],
+                external_id: u.cpf ? [CryptoJS.SHA256(u.cpf).toString(CryptoJS.enc.Hex)] : []
+            });
+            fbq('track', 'PageView', {
+                event_name: 'PageView',
+                event_time: Math.floor(Date.now() / 1000),
+                event_id: 'PageView_' + (data.order_id || Date.now()),
+                action_source: 'website',
+                user_data: hashUserData(data.user || {}),
+                custom_data: {
+                    order_id: data.order_id,
+                    currency: data.currency,
+                    value: data.value,
+                    content_name: data.content_name,
+                    content_ids: data.content_ids,
+                    contents: data.contents,
+                    num_items: data.num_items
+                }
+            });
+        })
+        .catch(err => console.error('Erro no fetch do Pixel:', err));
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function () {
+        updateNavPosition();
+        fetchPrimeiroNome();
+        updateEligibilityButton();
+    });
+
+    // Atualizar posição da nav ao redimensionar
+    window.addEventListener('resize', updateNavPosition);
+</script>
+<script src="../scripts/utms/latest-3.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async=""
+    defer=""></script>
+</body>
+
+</html>

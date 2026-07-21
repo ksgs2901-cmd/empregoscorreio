@@ -1,0 +1,11 @@
+{
+  "name": "empregoscorreio-static-recovery",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check-static.mjs .",
+    "build": "node scripts/build-static.mjs",
+    "check:dist": "node scripts/check-static.mjs dist"
+  }
+}

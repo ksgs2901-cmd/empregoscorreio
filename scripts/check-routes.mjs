@@ -44,9 +44,11 @@ function checkHtml(file) {
     candidates.push(match[2]);
   }
   for (const match of source.matchAll(/(?:window\.)?location\.href\s*=\s*([\"'`])(.+?)\1/g)) {
+    if (isLineComment(source, match.index)) continue;
     candidates.push(match[2]);
   }
   for (const match of source.matchAll(/\bredirectUrl\s*=\s*([\"'`])(.+?)\1/g)) {
+    if (isLineComment(source, match.index)) continue;
     candidates.push(match[2]);
   }
 
@@ -78,4 +80,9 @@ function checkRoute(candidate, documentPath, relativeFile) {
 
 function hasFileExtension(pathname) {
   return /\/[^/]+\.[a-z0-9]+$/i.test(pathname);
+}
+
+function isLineComment(source, index) {
+  const lineStart = source.lastIndexOf('\n', index) + 1;
+  return source.slice(lineStart, index).includes('//');
 }
